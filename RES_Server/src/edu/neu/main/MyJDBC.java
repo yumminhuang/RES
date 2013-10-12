@@ -1,0 +1,47 @@
+package edu.neu.main;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+/**
+ * User: yummin
+ * Date: 13-10-12
+ */
+
+
+public abstract class MyJDBC {
+    /**
+     * Close connection to database
+     * @param conn
+     */
+    public static void closeConn(Connection conn){
+        try{
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Open connection to database
+     * @return
+     */
+    public static Connection openConnection(){
+        String driver = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/business?" + "useUnicode=true&characterEncoding=utf-8";
+        String user = "root";
+        String pass = "";
+        Connection con = null;
+        try{
+            // 将相关文件加载到内存之中。
+            Class.forName(driver);
+            con = DriverManager.getConnection(url, user, pass);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return con;
+    }
+}
+
