@@ -8,8 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * User: yummin
- * Date: 13-10-11
+ * @author Yummin
+ * Date: 10/12
  */
 public class ServerMain {
     private static final int PORT = 8006;

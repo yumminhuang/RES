@@ -1,5 +1,4 @@
-package edu.neu.main;
-
+package edu.neu.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,7 +34,7 @@ public abstract class MyJDBC {
         String pass = "";
         Connection con = null;
         try{
-            // 将相关文件加载到内存之中。
+            //load connection
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, pass);
         } catch (Exception e){
@@ -44,4 +43,3 @@ public abstract class MyJDBC {
         return con;
     }
 }
-
