@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    
+    <Button
+        android:text="设置IP"
+        android:id="@+id/BU_Login_setIp"
+        android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+        />
+    
+    <ImageView
+    	android:src="@drawable/ico_login"
+    	android:layout_width="wrap_content"
+    	android:layout_height="210px"
+    	android:layout_gravity="center"
+    	/>
+    
+    <TableLayout
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:stretchColumns="2"
+    	android:layout_gravity="center"
+    	>
+    	<TableRow>
+    		<TextView
+    			android:text="  用户账号： "
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"
+    		/>
+    		<EditText
+    			android:hint="请输入您的账号"
+    			android:id="@+id/ET_Login_userId"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"
+    			android:width="200px"
+    		/>
+    	</TableRow>
+    	<TableRow>
+    		<TextView
+    			android:text="  用户密码： "
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"
+    		/>
+    		<EditText
+    			android:hint="请输入您的密码"
+    			android:id="@+id/ET_Login_password"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"
+    			android:width="200px"
+    			android:password="true"
+    		/>
+    	</TableRow>
+    	<TableRow>
+    		<Button
+    			android:text="注册 "
+    			android:id="@+id/BU_Login_register"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"
+    		/>
+    		<Button
+    			android:text="登   陆 "
+    			android:id="@+id/BU_Login_login"
+    			android:layout_width="wrap_content" 
+    			android:layout_height="wrap_content"
+    			android:width="200px"
+    		/>
+    	</TableRow>
+    </TableLayout>
+   
+</LinearLayout>

@@ -4,5 +4,7 @@
     <string name="app_name">RES</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="exit">Exit</string>
+    <string name="about">About</string>
 
 </resources>

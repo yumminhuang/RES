@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout 
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent" 
+  android:layout_height="fill_parent">
+  
+	<LinearLayout 
+	  android:id="@+id/Meeting_layout_add"
+	  android:layout_width="fill_parent" 
+	  android:layout_height="fill_parent"
+	  android:gravity="center">
+	  <TableLayout 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content"
+          >
+             <TableRow>
+                <TextView 
+                   android:text=" 主题："
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   />
+                <EditText
+                   android:id="@+id/ET_Meeting_AdTopic" 
+                   android:text="如何增加用户体验"   
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   android:height="45px"
+    			   android:width="220px"
+    			   />      
+             </TableRow>
+             <TableRow>
+                <TextView 
+                   android:text=" 出席者："
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   />
+                <EditText
+                   android:id="@+id/ET_Meeting_AdStaff" 
+                   android:text="Tom, Jacket, Mary..." 
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   android:height="45px"
+    			   android:width="220px"
+    			   />      
+             </TableRow>
+             <TableRow>
+                <TextView 
+                   android:text=" 关键字："
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   />
+                <EditText
+                   android:id="@+id/ET_Meeting_AdKey" 
+                   android:text="用户体验"
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   android:height="45px"
+    			   android:width="220px"
+    			   />      
+             </TableRow>
+             <TableRow>
+                <TextView 
+                   android:text=" 内容："
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   />
+                <EditText
+                   android:id="@+id/ET_Meeting_AdText" 
+                   android:text="@string/MeetingText"
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   android:height="140px"
+    			   android:width="220px"
+    			   />      
+             </TableRow>
+             <TableRow>
+                <Button
+                   android:text=" 重置 "
+             	   android:id="@+id/BU_Meeting_AdReset"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                  />  
+                <Button
+                   android:text="添    加"
+             	   android:id="@+id/BU_Meeting_AdOk"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   />     
+             </TableRow>
+          </TableLayout>   
+	</LinearLayout>
+	
+	<LinearLayout 
+	   android:id="@+id/Meeting_layout_search"
+	   android:layout_width="fill_parent" 
+	   android:layout_height="fill_parent"
+	   android:orientation="vertical"
+	   android:gravity="center">
+	   <TableLayout 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             >     
+             <TableRow>
+                <TextView 
+                   android:text=" 关键字： "
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   />
+                <EditText
+                   android:id="@+id/ET_Meeting_ShKey" 
+                   android:text="用户体验"   
+                   android:layout_width="wrap_content" 
+                   android:layout_height="wrap_content"
+                   android:height="45px"
+    			   android:width="220px"
+                   />      
+             </TableRow>
+             <TableRow>
+                <Button
+    			   android:text=" 重置  "
+    			   android:id="@+id/BU_Meeting_ShReset"
+    			   android:layout_width="wrap_content" 
+    		   	   android:layout_height="wrap_content"
+    		   	   />
+    		    <Button
+    		       android:text="搜    索"
+                   android:id="@+id/BU_Meeting_ShOk"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   /> 
+    	     </TableRow> 
+       </TableLayout>         
+	</LinearLayout>
+	
+</FrameLayout>
