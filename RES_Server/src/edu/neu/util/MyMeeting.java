@@ -23,7 +23,6 @@ public class MyMeeting implements DBHandler{
      * Schedule a new meeting
      * @throws Exception
      */
-    @Override
     public void add() throws Exception {
         String secretkey, encodedMsg, md, CT, sql;
         System.out.println("Schedule a new meeting...");
@@ -62,7 +61,6 @@ public class MyMeeting implements DBHandler{
      *
      * @throws Exception
      */
-    @Override
     public void update() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -71,12 +69,13 @@ public class MyMeeting implements DBHandler{
      *
      * @throws Exception
      */
-    @Override
     public void search() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+    /**
+     * @throws Exception
+     */
     public void delete() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }

@@ -41,6 +41,77 @@ public class Login extends Activity {
     }
 
     /*
+     *  提示信息msg。
+     */
+    private void showDialog(String msg) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /*
+     * 创建登录界面的帮助菜单。
+     */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, "关于");
+        menu.add(0, 1, 1, "退出");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // 初始化帮助菜单选项。
+    public boolean onOptionsItemSelected(MenuItem item) {
+        super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case 0:
+                aboutOptionDialog();
+                break;
+            case 1:
+                exitOptionDialog();
+                break;
+        }
+        return true;
+    }
+
+    // 定义“关于”选项。
+    private void aboutOptionDialog() {
+        // TODO Auto-generated method stub
+        new AlertDialog.Builder(Login.this).setTitle(R.string.about).setMessage(R.string.About_Msg)
+                .setPositiveButton(R.string.yes,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                            }
+                        }).show();
+    }
+
+    // 定义“退出”选项。
+    private void exitOptionDialog() {
+        // TODO Auto-generated method stub
+        new AlertDialog.Builder(Login.this).setTitle(R.string.exit)
+                .setMessage("你确定退出吗？").setPositiveButton(R.string.yes,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
+    }
+
+    /*
      *  响应设置IP按钮单击事件。
      */
     class SetIpListener implements OnClickListener {
@@ -106,86 +177,5 @@ public class Login extends Activity {
             //	showDialog("连接不上服务器！"+e);
             //}
         }
-    }
-
-    /*
-     *  提示信息msg。
-     */
-    private void showDialog(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(msg)
-                .setCancelable(false)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-
-    /*
-     * 创建登录界面的帮助菜单。
-     */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "关于");
-        menu.add(0, 1, 1, "退出");
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // 初始化帮助菜单选项。
-    public boolean onOptionsItemSelected(MenuItem item) {
-        super.onOptionsItemSelected(item);
-        switch (item.getItemId()) {
-            case 0:
-                aboutOptionDialog();
-                break;
-            case 1:
-                exitOptionDialog();
-                break;
-        }
-        return true;
-    }
-
-    // 定义“关于”选项。
-    private void aboutOptionDialog() {
-        // TODO Auto-generated method stub
-        new AlertDialog.Builder(Login.this)
-                .setTitle("关于")
-                .setMessage(R.string.About_Msg)
-                        // 定义“确定：按钮。
-                .setPositiveButton("确定",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                // TODO Auto-generated method stub
-                            }
-                        }).show();
-    }
-
-    // 定义“退出”选项。
-    private void exitOptionDialog() {
-        // TODO Auto-generated method stub
-        new AlertDialog.Builder(Login.this).setTitle("退出").setMessage("你确定退出吗？")
-                        // 定义“确定”按钮。
-                .setPositiveButton("确定",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                // TODO Auto-generated method stub
-                                finish();
-                            }
-                        }).setNegativeButton("取消",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                // TODO Auto-generated method stub
-                            }
-                        }).show();
     }
 }

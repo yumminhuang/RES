@@ -17,5 +17,5 @@ College of Computer and Information Science, Northeastern University
 
 * Platform: Android 4.2
 * Database: MySQL
-* IDE: IntelliJ IDEA 12 CE, Android Studio
+* IDE: Eclipse Kepler, Android Studio
 * [OData4J](https://code.google.com/p/odata4j/)

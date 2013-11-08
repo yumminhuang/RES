@@ -10,7 +10,6 @@ public class MyUser implements DBHandler {
      *
      * @throws Exception
      */
-    @Override
     public void add() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -19,7 +18,6 @@ public class MyUser implements DBHandler {
      *
      * @throws Exception
      */
-    @Override
     public void update() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }
@@ -28,12 +26,14 @@ public class MyUser implements DBHandler {
      *
      * @throws Exception
      */
-    @Override
     public void search() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    @Override
+    /**
+    *
+    * @throws Exception
+    */
     public void delete() throws Exception {
         //To change body of implemented methods use File | Settings | File Templates.
     }
