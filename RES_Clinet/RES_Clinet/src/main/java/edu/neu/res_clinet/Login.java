@@ -34,14 +34,14 @@ public class Login extends Activity {
         passw_Edit = (EditText) findViewById(R.id.ET_Login_password);
         login = (Button) findViewById(R.id.BU_Login_login);
         register = (Button) findViewById(R.id.BU_Login_register);
-        // 设置注册和登录按钮。
+        // Set sign-up and login button
         setIp.setOnClickListener(new SetIpListener());
         register.setOnClickListener(new RegisterListener());
         login.setOnClickListener(new LoginListener());
     }
 
     /*
-     *  提示信息msg。
+     *  Show message in a dialog
      */
     private void showDialog(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -49,20 +49,17 @@ public class Login extends Activity {
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                    }
-                });
+                    public void onClick(DialogInterface dialog, int which) {}});
         AlertDialog alert = builder.create();
         alert.show();
     }
 
     /*
-     * 创建登录界面的帮助菜单。
+     * Create help menu for login
      */
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "关于");
-        menu.add(0, 1, 1, "退出");
+        menu.add(0, 0, 0, R.string.about);
+        menu.add(0, 1, 1, R.string.exit);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -83,7 +80,7 @@ public class Login extends Activity {
     // 定义“关于”选项。
     private void aboutOptionDialog() {
         // TODO Auto-generated method stub
-        new AlertDialog.Builder(Login.this).setTitle(R.string.about).setMessage(R.string.About_Msg)
+        new AlertDialog.Builder(Login.this).setTitle(R.string.about).setMessage(R.string.app_menu_surelogout)
                 .setPositiveButton(R.string.yes,
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -97,7 +94,7 @@ public class Login extends Activity {
     private void exitOptionDialog() {
         // TODO Auto-generated method stub
         new AlertDialog.Builder(Login.this).setTitle(R.string.exit)
-                .setMessage("你确定退出吗？").setPositiveButton(R.string.yes,
+                .setMessage(R.string.app_menu_surequit).setPositiveButton(R.string.yes,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -138,7 +135,7 @@ public class Login extends Activity {
      */
     class LoginListener implements OnClickListener {
         public void onClick(View v) {
-            // 获取用户的账号和密码。
+            // Get user's id and password。
             userId = id_Edit.getText().toString().trim();
             password = passw_Edit.getText().toString().trim();
             // 判断账号密码是否完整。
