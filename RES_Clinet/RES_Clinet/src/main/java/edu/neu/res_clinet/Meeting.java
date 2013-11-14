@@ -31,24 +31,26 @@ public class Meeting extends TabActivity {
     private TabHost myTabhost;
     private EditText AddTopic, AddKey, AddStaff, AddText, SearchKey;
     private Button AddReset, AddOk, SearchReset, SearchOk;
-    private String strAddTopic, strAddKey, strAddStaff,strAddText, strSearchKey;
+    private String strAddTopic, strAddKey, strAddStaff, strAddText, strSearchKey;
     private final static String PrKPath = "/sdcard/darkblue/";
     private final static int countMax = 1000;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         myTabhost = this.getTabHost();
         LayoutInflater.from(this).inflate(R.layout.meeting, myTabhost.getTabContentView(), true);
-		
+
 		/*
-		 *  添加会议记录界面： 
+		 *  Add Meeting：
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("One")
-                .setIndicator("Add",getResources().getDrawable(R.drawable.meeting_add))
+                .setIndicator("Add", getResources().getDrawable(R.drawable.meeting_add))
                 .setContent(R.id.Meeting_layout_add));
-        // 实例化添加界面的控件。
+        //widgets
         AddTopic = (EditText) findViewById(R.id.ET_Meeting_AdTopic);
         AddKey = (EditText) findViewById(R.id.ET_Meeting_AdKey);
         AddStaff = (EditText) findViewById(R.id.ET_Meeting_AdStaff);
@@ -60,10 +62,10 @@ public class Meeting extends TabActivity {
         AddOk.setOnClickListener(new AddOkListener());
 		
 		/*
-		 *  搜索会议记录界面：
+		 *  Search meeting
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Two")
-                .setIndicator("Search",getResources().getDrawable(R.drawable.search))
+                .setIndicator("Search", getResources().getDrawable(R.drawable.search))
                 .setContent(R.id.Meeting_layout_search));
         // 实例化搜索界面的控件。
         SearchKey = (EditText) findViewById(R.id.ET_Meeting_ShKey);
@@ -75,9 +77,9 @@ public class Meeting extends TabActivity {
     }
 
     /*
-     *  响应重置信息按钮(add)单击事件：
+     *  Reset button
      */
-    class AddResetListener implements OnClickListener{
+    class AddResetListener implements OnClickListener {
         public void onClick(View v) {
             AddTopic.setText("");
             AddKey.setText("");
@@ -89,7 +91,7 @@ public class Meeting extends TabActivity {
     /*
      *  响应添加记录按钮单击事件：
      */
-    class AddOkListener implements OnClickListener{
+    class AddOkListener implements OnClickListener {
         public void onClick(View v) {
             // 获取用户输入信息。
             strAddTopic = AddTopic.getText().toString().trim();
@@ -97,12 +99,12 @@ public class Meeting extends TabActivity {
             strAddStaff = AddStaff.getText().toString().trim();
             strAddText = AddText.getText().toString().trim();
             // 判断输入信息是否完整。
-            if(strAddTopic.equals("") || strAddKey.equals("") ||strAddText.equals("")){
+            if (strAddTopic.equals("") || strAddKey.equals("") || strAddText.equals("")) {
                 Toast.makeText(Meeting.this, "请将会议记录填写完整", Toast.LENGTH_LONG).show();
                 return;
             }
             // 连接服务器。
-            try{
+            try {
                 Socket server = util.getCon();
                 BufferedReader in = new BufferedReader(new
                         InputStreamReader(server.getInputStream()));
@@ -113,7 +115,7 @@ public class Meeting extends TabActivity {
                 out.println("add");
                 out.println(new String(Base64.encode("admin".getBytes())));
 
-                String msg = strAddTopic+"#"+strAddStaff+"#"+strAddKey+"#"+strAddText;
+                String msg = strAddTopic + "#" + strAddStaff + "#" + strAddKey + "#" + strAddText;
                 // 在服务器读回userId的公钥。
                 byte[] publickey = Base64.decode(in.readLine().getBytes());
                 // 在本机读回userId的私钥。
@@ -132,7 +134,7 @@ public class Meeting extends TabActivity {
                 out.println(new String(Base64.encode(CT)));
                 // 接收处理服务器返回的信息。
                 msg = in.readLine();
-                if(msg.equals("success")){
+                if (msg.equals("success")) {
                     showDialog(R.string.add_mesage);
                 } else {
                     showDialog(R.string.add_error);
@@ -143,14 +145,14 @@ public class Meeting extends TabActivity {
             } catch (UnknownHostException e) {
                 Toast.makeText(Meeting.this, R.string.connect_error, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 Toast.makeText(Meeting.this, R.string.network_error, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
-            } catch (InvalidKeySpecException e){
-                showDialog("Invalid:"+e);
+            } catch (InvalidKeySpecException e) {
+                showDialog("Invalid:" + e);
                 e.printStackTrace();
             } catch (Exception e) {
-                Toast.makeText(Meeting.this, "解密失败！"+e, Toast.LENGTH_LONG).show();
+                Toast.makeText(Meeting.this, "解密失败！" + e, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
         }
@@ -159,7 +161,7 @@ public class Meeting extends TabActivity {
     /*
      *  响应重置信息按钮(search)单击事件：
      */
-    class SearchResetListener implements OnClickListener{
+    class SearchResetListener implements OnClickListener {
         public void onClick(View v) {
             SearchKey.setText("");
         }
@@ -168,17 +170,17 @@ public class Meeting extends TabActivity {
     /*
      *  响应搜索按钮单击事件：
      */
-    class SearchOkListener implements OnClickListener{
+    class SearchOkListener implements OnClickListener {
         public void onClick(View v) {
             // 获取用户输入的关键字。
             strSearchKey = SearchKey.getText().toString().trim();
             // 判断输入的关键字是否为空。
-            if(strSearchKey.equals("")){
+            if (strSearchKey.equals("")) {
                 Toast.makeText(Meeting.this, "请填写关键字", Toast.LENGTH_LONG).show();
                 return;
             }
             // 连接服务器。
-            try{
+            try {
                 Socket server = util.getCon();
                 BufferedReader in = new BufferedReader(new
                         InputStreamReader(server.getInputStream()));
@@ -197,24 +199,24 @@ public class Meeting extends TabActivity {
                 String[] text = new String[countMax];
                 // 接收服务器返回的信息。
                 msg = in.readLine();
-                while(msg.equals("add")){
+                while (msg.equals("add")) {
                     // 从服务器读入匹配正确的会议记录。
                     byte[] encodedSecretkey = Base64.decode(in.readLine().getBytes());
                     byte[] encodedMsg = Base64.decode(in.readLine().getBytes());
                     byte[] md = Base64.decode(in.readLine().getBytes());
                     // 对匹配正确的会议记录进行解密。
                     byte[] secretKey = RSACoder.privateKeyDecrypt(encodedSecretkey, privateKey);
-                    byte[] byteMsg   = AESCoder.Decrypt(encodedMsg, secretKey);
+                    byte[] byteMsg = AESCoder.Decrypt(encodedMsg, secretKey);
                     // 对解密完的会议记录添加到meeting数组中。
-                    if(AESCoder.validate(byteMsg, md)){
+                    if (AESCoder.validate(byteMsg, md)) {
                         text[cnt] = new String(byteMsg);
-                        msg = text[cnt ++];
-                    }else{
+                        msg = text[cnt++];
+                    } else {
                         msg = "error!";
                     }
                     msg = in.readLine();
                 }
-                if(cnt == 0){
+                if (cnt == 0) {
                     showDialog(R.string.not_find_error);
                 } else {
                     Intent intent = new Intent();
@@ -232,10 +234,10 @@ public class Meeting extends TabActivity {
             } catch (UnknownHostException e) {
                 Toast.makeText(Meeting.this, R.string.connect_error, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
-            } catch (IOException e){
+            } catch (IOException e) {
                 Toast.makeText(Meeting.this, R.string.network_error, Toast.LENGTH_LONG).show();
                 e.printStackTrace();
-            } catch (InvalidKeySpecException e){
+            } catch (InvalidKeySpecException e) {
                 Toast.makeText(Meeting.this, "InvalidKey！", Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             } catch (Exception e) {
@@ -248,8 +250,8 @@ public class Meeting extends TabActivity {
     /*
      *  在本机读取用户userId的私钥。
      */
-    private byte[] readPrK(String userId){
-        File file = new File(PrKPath+userId+"_PrK.key");
+    private byte[] readPrK(String userId) {
+        File file = new File(PrKPath + userId + "_PrK.key");
         try {
             InputStream in = new FileInputStream(file);
             byte[] Prk = new byte[(int) file.length()];
@@ -264,13 +266,14 @@ public class Meeting extends TabActivity {
     /*
      *  提示信息msg。
      */
-    private void showDialog(String msg){
+    private void showDialog(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
                 .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {}
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
                 });
         AlertDialog alert = builder.create();
         alert.show();

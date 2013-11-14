@@ -1,85 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout 
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent" 
-  android:layout_height="fill_parent">
-	<LinearLayout 
-	  android:id="@+id/Meeting_layout_add"
-	  android:layout_width="fill_parent" 
-	  android:layout_height="fill_parent"
-	  android:gravity="center">
-	  <TableLayout 
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content">
-             <TableRow>
-                <TextView 
-                   android:text=" 主题："
-                   android:layout_width="wrap_content" 
-                   android:layout_height="wrap_content"
-                   />
-                <EditText
-                   android:id="@+id/ET_Meeting_AdTopic" 
-                   android:text="如何增加用户体验"   
-                   android:layout_width="wrap_content" 
-                   android:layout_height="wrap_content"
-                   android:height="45px"
-    			   android:width="220px"
-    			   />      
-             </TableRow>
-             <TableRow>
-                <TextView 
-                   android:text=" 出席者："
-                   android:layout_width="wrap_content" 
-                   android:layout_height="wrap_content"
-                   />
-                <EditText
-                   android:id="@+id/ET_Meeting_AdStaff"
-                   android:layout_width="wrap_content" 
-                   android:layout_height="wrap_content"
-                   android:height="45px"
-    			   android:width="220px"
-    			   />      
-             </TableRow>
-             <TableRow>
-                <TextView 
-                   android:text=" 内容："
-                   android:layout_width="wrap_content" 
-                   android:layout_height="wrap_content"
-                   />
-                <EditText
-                   android:id="@+id/ET_Meeting_AdText"
-                   android:layout_width="fill_parent"
-                   android:layout_height="wrap_content"
-                   android:height="140px"
-    			   android:width="220px"
-    			   />      
-             </TableRow>
-             <TableRow>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/Meeting_layout_add"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:stretchColumns="1">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <TextView
-                  android:text=" 内容："
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
+                    android:text=" 主题："
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
                 <EditText
-                  android:id="@+id/ET_Meeting_AdText"
-                  android:layout_width="fill_parent"
-                  android:layout_height="wrap_content"
-                  android:height="140px"
-                  android:width="220px"/>
-             </TableRow>
-             <TableRow>
+                    android:id="@+id/ET_Meeting_AdTopic"
+                    android:hintText="Input the meeting subject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text=" 出席者："
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Meeting_AdStaff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="45px"
+                    android:width="220px" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text=" 内容："
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Meeting_AdText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="140px"
+                    android:width="220px" />
+            </TableRow>
+
+            <TableRow>
+
                 <Button
-                   android:text="@string/reset"
-             	   android:id="@+id/BU_Meeting_AdReset"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                  />  
+                    android:text="@string/reset"
+                    android:id="@+id/BU_Meeting_AdReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
                 <Button
-                   android:text="@string/add"
-             	   android:id="@+id/BU_Meeting_AdOk"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   />     
-             </TableRow>
-          </TableLayout>   
-	</LinearLayout>
+                    android:text="@string/add"
+                    android:id="@+id/BU_Meeting_AdOk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
 </FrameLayout>

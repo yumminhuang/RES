@@ -10,10 +10,9 @@
 	  android:layout_height="fill_parent"
 	  android:gravity="center"
 	  >
-	  <TableLayout 
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          >
+	  <TableLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent">
     	  <TableRow>
     	     <TextView
     			android:text=" 收件人: "
@@ -66,7 +65,6 @@
     			android:layout_height="wrap_content"
     		/>
     		<EditText
-    			android:text="@string/EmailText"
     			android:id="@+id/ET_Email_SdText"
     			android:layout_width="wrap_content" 
     			android:layout_height="wrap_content"
@@ -97,10 +95,9 @@
 	   android:layout_height="fill_parent"
 	   android:orientation="vertical"
 	   android:gravity="center">
-	   <TableLayout 
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          >
+	   <TableLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
     	  <TableRow>
     	     <TextView
     			android:text=" 关键字: "

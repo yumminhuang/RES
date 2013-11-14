@@ -14,4 +14,7 @@
 
     <string name="add_mesage">Add record successfully!</string>
 
+    <string name="input_acc">Please input your account</string>
+    <string name="input_pwd">Your password</string>
+
 </resources>

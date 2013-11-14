@@ -15,16 +15,18 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 public class HomePage extends Activity {
-    private String[] itemName = new String[] {
-            "会议记录", "邮件", "公告通知",
-            "通讯录", "资源下载","薪资信息",
-            "待办任务", "部门信息", "财务报表" };
+    private String[] itemName = new String[]{
+            "House", "Meeting", "Message",
+            "Calendar", "Account", "Search",
+            "Map", "Setting", "Favorites"};
     private Integer[] mIcons = {
-            R.drawable.meeting_record, R.drawable.email,R.drawable.announcement,
-            R.drawable.address_list, R.drawable.download,R.drawable.compensation,
-            R.drawable.assignment, R.drawable.department_information,R.drawable.report_forms };
+            R.drawable.house, R.drawable.meeting, R.drawable.message,
+            R.drawable.calendar, R.drawable.user, R.drawable.search,
+            R.drawable.map, R.drawable.setting, R.drawable.favorites};
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +34,8 @@ public class HomePage extends Activity {
         GridView marketMainView = (GridView) findViewById(R.id.gridview);
 
         SimpleAdapter IconAdapter = new SimpleAdapter(this, fillMap(),
-                R.layout.griditem, new String[] { "imageView", "imageTitle" },
-                new int[] { R.id.imageView, R.id.imageTitle });
+                R.layout.griditem, new String[]{"imageView", "imageTitle"},
+                new int[]{R.id.imageView, R.id.imageTitle});
         marketMainView.setAdapter(IconAdapter);
         marketMainView.setOnItemClickListener(new GridView.OnItemClickListener() {
             @Override
@@ -47,19 +49,19 @@ public class HomePage extends Activity {
                     Intent intent1 = new Intent(HomePage.this, Email.class);
                     startActivity(intent1);
                 } else if (arg2 == 2) {
-                    Toast.makeText(HomePage.this, "公告通知",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Message", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 3) {
-                    Toast.makeText(HomePage.this, "通讯录",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Calendar", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 4) {
-                    Toast.makeText(HomePage.this, "资源下载",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Account", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 5) {
-                    Toast.makeText(HomePage.this, "薪资信息",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Search", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 6) {
-                    Toast.makeText(HomePage.this, "代办任务",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Map", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 7) {
-                    Toast.makeText(HomePage.this, "部门信息",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Settings", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(HomePage.this, "财务报表",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Favorites", Toast.LENGTH_SHORT).show();
                 }
             }
         });

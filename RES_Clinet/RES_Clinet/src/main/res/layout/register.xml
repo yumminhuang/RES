@@ -1,106 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<LinearLayout 
-      xmlns:android="http://schemas.android.com/apk/res/android"
-	  android:layout_width="fill_parent" 
-	  android:layout_height="fill_parent"
-	  android:orientation="vertical"
-	  android:gravity="center"
-	  android:stretchColumns="1"
-	  >
-	  
-<TableLayout 
-   android:layout_width="wrap_content" 
-   android:layout_height="wrap_content"
-   >
-   <TableRow>
-        <TextView
-          android:text=" 姓名："
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          />
-        <EditText
-          android:id="@+id/ET_Register_name" 
-          android:hint="请输入您的姓名"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          android:height="45px"
-    	  android:width="200px"
-          />      
-    </TableRow>
-    <TableRow>
-        <TextView 
-          android:text=" 部门："
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          />
-        <Spinner 
-          android:id="@+id/SP_Register_department" 
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          android:height="45px"
-    	  android:width="200px"
-          />             
-    </TableRow>
-    <TableRow>
-        <TextView 
-          android:text=" 职务："
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          />
-        <Spinner 
-          android:id="@+id/SP_Register_job" 
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          />             
-    </TableRow>
-    <TableRow>
-        <TextView 
-          android:text=" 帐号："
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          />
-        <EditText
-          android:id="@+id/ET_Register_userId" 
-          android:hint="请输入帐号"
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          android:height="45px"
-    	  android:width="200px"
-          />      
-    </TableRow>
-    <TableRow>
-        <TextView 
-          android:text=" 密码："
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          />
-        <EditText
-          android:id="@+id/ET_Register_password" 
-          android:hint="请输入密码"
-          android:inputType="textPassword"  
-          android:layout_width="wrap_content" 
-          android:layout_height="wrap_content"
-          android:height="45px"
-    	  android:width="200px"
-          />
-    </TableRow> 
-    <TableRow>  
-        <Button
-    	  android:text=" 重置 "
-    	  android:id="@+id/BU_Register_reset"
-    	  android:layout_width="wrap_content" 
-    	  android:layout_height="wrap_content"
-    	  />
-        <Button
-    	  android:text="注    册 "
-    	  android:id="@+id/BU_Register_register"
-    	  android:layout_width="wrap_content" 
-    	  android:layout_height="wrap_content"
-    	  />
-    </TableRow>
-</TableLayout>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:stretchColumns="1">
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/ET_Register_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="45px"
+                android:width="200px" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text=" 部门："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/SP_Register_department"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="45px"
+                android:width="200px" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/ET_Register_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="45px"
+                android:width="200px" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text=" 帐号："
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/ET_Register_userId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="45px"
+                android:width="200px" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:text="@string/pwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/ET_Register_password"
+                android:inputType="textPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:height="45px"
+                android:width="200px" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:text="@string/reset"
+                android:id="@+id/BU_Register_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:text="@string/sign_up"
+                android:id="@+id/BU_Register_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </TableRow>
+    </TableLayout>
 
 </LinearLayout>
   
