@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/Email_layout_outbox"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:text="admin"
+                    android:id="@+id/ET_Email_SdReceiver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="30dp"
+                    android:width="146dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/subject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Email_SdTopic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="30dp"
+                    android:width="146dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Email_SdText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="300dp"
+                    android:width="146dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:text="@string/reset"
+                    android:id="@+id/BU_Email_SdReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:text="@string/send"
+                    android:id="@+id/BU_Email_SdSend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Email_layout_search"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/keyword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Email_ShKey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="30dp"
+                    android:width="146dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:text="@string/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Email_ShSender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="30dp"
+                    android:width="146dp" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:text="@string/reset"
+                    android:id="@+id/BU_Email_ShReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:text="@string/search"
+                    android:id="@+id/BU_Email_ShSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+</FrameLayout>

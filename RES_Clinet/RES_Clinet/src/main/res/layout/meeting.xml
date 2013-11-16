@@ -7,13 +7,11 @@
         android:id="@+id/Meeting_layout_add"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:gravity="center"
-        android:orientation="vertical"
         android:stretchColumns="1">
 
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_weight="1">
 
             <TableRow
@@ -21,7 +19,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:text=" 主题："
+                    android:text="@string/subject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -37,7 +35,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:text=" 出席者："
+                    android:text="With"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -52,7 +50,7 @@
             <TableRow>
 
                 <TextView
-                    android:text=" 内容："
+                    android:text="@string/content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -62,6 +60,38 @@
                     android:layout_height="wrap_content"
                     android:height="140px"
                     android:width="220px" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:text="@string/date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <DatePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/meeting_datePicker"
+                    android:layout_column="1" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:text="@string/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TimePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/meeting_timePicker"
+                    android:layout_column="1" />
             </TableRow>
 
             <TableRow>
@@ -79,5 +109,12 @@
                     android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Meeting_layout_search"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="1">
     </LinearLayout>
 </FrameLayout>

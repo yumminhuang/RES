@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -9,8 +8,8 @@
     android:stretchColumns="1">
 
     <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <TableRow>
 
@@ -23,23 +22,23 @@
                 android:id="@+id/ET_Register_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="45px"
-                android:width="200px" />
+                android:height="30dp"
+                android:width="146dp" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:text=" 部门："
+                android:text="@string/identity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <Spinner
-                android:id="@+id/SP_Register_department"
+                android:id="@+id/SP_Register_identity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="45px"
-                android:width="200px" />
+                android:height="30dp"
+                android:width="146dp" />
         </TableRow>
 
         <TableRow>
@@ -53,23 +52,23 @@
                 android:id="@+id/ET_Register_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="45px"
-                android:width="200px" />
+                android:height="30dp"
+                android:width="146dp" />
         </TableRow>
 
         <TableRow>
 
             <TextView
-                android:text=" 帐号："
+                android:text="@string/phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <EditText
-                android:id="@+id/ET_Register_userId"
+                android:id="@+id/ET_Register_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="45px"
-                android:width="200px" />
+                android:height="30dp"
+                android:width="146dp" />
         </TableRow>
 
         <TableRow>
@@ -84,8 +83,8 @@
                 android:inputType="textPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:height="45px"
-                android:width="200px" />
+                android:height="30dp"
+                android:width="146dp" />
         </TableRow>
 
         <TableRow>
@@ -105,4 +104,3 @@
     </TableLayout>
 
 </LinearLayout>
-  

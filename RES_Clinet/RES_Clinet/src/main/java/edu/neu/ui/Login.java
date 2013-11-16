@@ -1,4 +1,4 @@
-package edu.neu.res_clinet;
+package edu.neu.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+
+import edu.neu.res_clinet.R;
 
 /**
  * Created by yummin on 13-11-6.

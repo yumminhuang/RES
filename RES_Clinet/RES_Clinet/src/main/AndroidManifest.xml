@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name="edu.neu.res_clinet.Login"
+            android:name="edu.neu.ui.Login"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,13 +20,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="HomePage"></activity>
-        <activity android:name="Register"></activity>
-        <activity android:name="Email"></activity>
-        <activity android:name="EmailInbox"></activity>
-        <activity android:name="Meeting"></activity>
-        <activity android:name="MeetingSearchResult"></activity>
-        <activity android:name="SetServerIp"></activity>
+        <activity android:name="edu.neu.ui.HomePage"></activity>
+        <activity android:name="edu.neu.ui.Register"></activity>
+        <activity android:name="edu.neu.ui.Email"></activity>
+        <activity android:name="edu.neu.ui.EmailInbox"></activity>
+        <activity android:name="edu.neu.ui.Meeting"></activity>
+        <activity android:name="edu.neu.ui.MeetingSearchResult"></activity>
+        <activity android:name="edu.neu.ui.SetServerIp"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
