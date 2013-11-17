@@ -1,7 +1,5 @@
 package edu.neu.ui;
 
-import com.Other.util;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import edu.neu.res_clinet.R;
 
 public class SetServerIp extends Activity {
     private String Ip;
@@ -73,8 +73,6 @@ public class SetServerIp extends Activity {
                 Toast.makeText(SetServerIp.this, "请填写好服务器的IP地址", Toast.LENGTH_LONG).show();
                 return;
             }
-            util.setIp(Ip);
-            SetIpDialog("已经设置好新的IP，点击确定返回登录界面。");
         }
     }
 }

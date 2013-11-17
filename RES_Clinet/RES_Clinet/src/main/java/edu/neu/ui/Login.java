@@ -82,8 +82,8 @@ public class Login extends Activity {
     // 定义“关于”选项。
     private void aboutOptionDialog() {
         // TODO Auto-generated method stub
-        new AlertDialog.Builder(Login.this).setTitle(R.string.about).setMessage(R.string.app_menu_surelogout)
-                .setPositiveButton(R.string.yes,
+        new AlertDialog.Builder(Login.this).setTitle(R.string.about).setMessage(R.string.app_about)
+                .setPositiveButton(R.string.ok,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,

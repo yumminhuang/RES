@@ -3,12 +3,11 @@
     <string name="app_menu_surequit">Are you sure to quit?</string>
     <string name="app_menu_surelogout">Are you sure to logout?</string>
 
-    <string name="app_about">This is the Oh!data's Project for CS5200.</string>
+    <string name="app_about">This is the Oh!data\'s Project for CS5200.</string>
 
     <string name="add_error">Cannot add the record.</string>
     <string name="connect_error">Cannot connect to the server.</string>
     <string name="not_find_error">Cannot find the record.</string>
-    <string name="connect_error">Cannot connect to the server.</string>
     <string name="network_error">There is error in network.</string>
     <string name="error">Oops! There is a error.</string>
 

@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import edu.neu.res_clinet.R;
+
 public class MeetingSearchResult extends ListActivity {
     private final static int countMax = 1000;
     private int count;

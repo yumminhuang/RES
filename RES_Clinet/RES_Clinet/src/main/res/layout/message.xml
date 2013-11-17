@@ -56,7 +56,7 @@
                     android:id="@+id/ET_Email_SdText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:height="300dp"
+                    android:height="200dp"
                     android:width="146dp" />
             </TableRow>
 

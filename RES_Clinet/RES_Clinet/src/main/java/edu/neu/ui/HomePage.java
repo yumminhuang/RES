@@ -45,13 +45,13 @@ public class HomePage extends Activity {
                                     int arg2, long arg3) {
                 // TODO Auto-generated method stub
                 if (arg2 == 0) {
+                    Toast.makeText(HomePage.this, "House", Toast.LENGTH_SHORT).show();
+                } else if (arg2 == 1) {
                     Intent intent0 = new Intent(HomePage.this, Meeting.class);
                     startActivity(intent0);
-                } else if (arg2 == 1) {
+                } else if (arg2 == 2) {
                     Intent intent1 = new Intent(HomePage.this, Email.class);
                     startActivity(intent1);
-                } else if (arg2 == 2) {
-                    Toast.makeText(HomePage.this, "Message", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 3) {
                     Toast.makeText(HomePage.this, "Calendar", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 4) {

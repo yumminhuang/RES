@@ -1,17 +1,5 @@
 package edu.neu.ui;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
-
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
@@ -29,12 +17,9 @@ import edu.neu.res_clinet.R;
 
 public class Email extends TabActivity{
     private TabHost myTabhost;
-    private EditText SendReceiver, SendTopic, SendKey, SendText, SearchKey, SearchSender;
+    private EditText SendReceiver, SendTopic, SendText, SearchKey, SearchSender;
     private Button SendReset, SendSend, SearchReset, SearchSearch;
-    private String strSendReceiver, strSendTopic, strSendKey, strSendText, strSearchKey, strSearchSender;
-    private final static String PrKPath = "/sdcard/darkblue/";
-    private final static int countMax = 1000;
-
+    private String strSendReceiver, strSendTopic, strSendText, strSearchKey, strSearchSender;
 
     /** Called when the activity is first created. */
     @Override
@@ -44,22 +29,21 @@ public class Email extends TabActivity{
         LayoutInflater.from(this).inflate(R.layout.message, myTabhost.getTabContentView(), true);
 		
 		/*
-		 * 送信箱界面： 
+		 * Inbox
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("One")
-                .setIndicator("Inbox",getResources().getDrawable(R.drawable.email_inbox))
+                .setIndicator("Inbox",getResources().getDrawable(R.drawable.inbox))
                 .setContent(initInbox()));
 		
 		/*
-		 * 发送邮件界面：
+		 * Outbox
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Two")
-                .setIndicator("Outbox",getResources().getDrawable(R.drawable.email_outbox))
+                .setIndicator("Outbox",getResources().getDrawable(R.drawable.outbox))
                 .setContent(R.id.Email_layout_outbox));
         // 实例化添加界面的控件。
         SendReceiver = (EditText) findViewById(R.id.ET_Email_SdReceiver);
         SendTopic = (EditText) findViewById(R.id.ET_Email_SdTopic);
-        SendKey = (EditText) findViewById(R.id.ET_Email_SdKey);
         SendText = (EditText) findViewById(R.id.ET_Email_SdText);
         SendReset = (Button) findViewById(R.id.BU_Email_SdReset);
         SendSend = (Button) findViewById(R.id.BU_Email_SdSend);
@@ -71,7 +55,7 @@ public class Email extends TabActivity{
 		 * 搜索邮件界面：
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Three")
-                .setIndicator("Search",getResources().getDrawable(R.drawable.email_search))
+                .setIndicator("Search",getResources().getDrawable(R.drawable.search))
                 .setContent(R.id.Email_layout_search));
         // 实例化搜索界面的控件。
         SearchKey = (EditText) findViewById(R.id.ET_Email_ShKey);
@@ -99,13 +83,29 @@ public class Email extends TabActivity{
     }
 
     /*
+     *  提示信息msg。
+     */
+    private void showDialog(String msg){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    /*
      *  响应重置信息按钮(outbox)单击事件：
      */
     class SendResetListener implements OnClickListener{
         public void onClick(View v) {
             SendReceiver.setText("");
             SendTopic.setText("");
-            SendKey.setText("");
             SendText.setText("");
         }
     }
@@ -118,10 +118,10 @@ public class Email extends TabActivity{
             // 获取用户输入信息。
             strSendReceiver = SendReceiver.getText().toString().trim();
             strSendTopic = SendTopic.getText().toString().trim();
-            strSendKey = SendKey.getText().toString().trim();
             strSendText = SendText.getText().toString().trim();
 
-            if(strSendReceiver.equals("") || strSendKey.equals("")){
+            if(strSendReceiver.equals("") || strSendTopic.equals("")
+                    || strSendReceiver.equals("")){
                 Toast.makeText(Email.this, "请将发送的信息填写完整", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -151,23 +151,6 @@ public class Email extends TabActivity{
                 return;
             }
         }
-    }
-
-    /*
-     *  提示信息msg。
-     */
-    private void showDialog(String msg){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(msg)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
 }
