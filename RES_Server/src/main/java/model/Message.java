@@ -20,12 +20,18 @@ public class Message implements Serializable {
 	@Lob
 	private String content;
 
-	private int messagefrom;
-
 	@Temporal(TemporalType.DATE)
 	private Date messagetime;
 
-	private int messageto;
+	//bi-directional many-to-one association to FromUser
+	@ManyToOne
+	@JoinColumn(name="messagefrom")
+	private FromUser fromUser;
+
+	//bi-directional many-to-one association to ToUser
+	@ManyToOne
+	@JoinColumn(name="messageto")
+	private ToUser toUser;
 
 	public Message() {
 	}
@@ -46,14 +52,6 @@ public class Message implements Serializable {
 		this.content = content;
 	}
 
-	public int getMessagefrom() {
-		return this.messagefrom;
-	}
-
-	public void setMessagefrom(int messagefrom) {
-		this.messagefrom = messagefrom;
-	}
-
 	public Date getMessagetime() {
 		return this.messagetime;
 	}
@@ -62,12 +60,20 @@ public class Message implements Serializable {
 		this.messagetime = messagetime;
 	}
 
-	public int getMessageto() {
-		return this.messageto;
+	public FromUser getFromUser() {
+		return this.fromUser;
 	}
 
-	public void setMessageto(int messageto) {
-		this.messageto = messageto;
+	public void setFromUser(FromUser fromUser) {
+		this.fromUser = fromUser;
+	}
+
+	public ToUser getToUser() {
+		return this.toUser;
+	}
+
+	public void setToUser(ToUser toUser) {
+		this.toUser = toUser;
 	}
 
 }

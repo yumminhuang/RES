@@ -24,15 +24,24 @@ public class Reply implements Serializable {
 
 	private String image2;
 
+	private int post;
+
+	private int postby;
+
 	@Temporal(TemporalType.DATE)
-	private Date time;
+	private Date replytime;
 
 	private int userId;
 
 	//bi-directional many-to-one association to Topic
 	@ManyToOne
 	@JoinColumn(name="topicId")
-	private Topic topic;
+	private Topic topic1;
+
+	//bi-directional many-to-one association to Topic
+	@ManyToOne
+	@JoinColumn(name="topicId")
+	private Topic topic2;
 
 	public Reply() {
 	}
@@ -69,12 +78,28 @@ public class Reply implements Serializable {
 		this.image2 = image2;
 	}
 
-	public Date getTime() {
-		return this.time;
+	public int getPost() {
+		return this.post;
 	}
 
-	public void setTime(Date time) {
-		this.time = time;
+	public void setPost(int post) {
+		this.post = post;
+	}
+
+	public int getPostby() {
+		return this.postby;
+	}
+
+	public void setPostby(int postby) {
+		this.postby = postby;
+	}
+
+	public Date getReplytime() {
+		return this.replytime;
+	}
+
+	public void setReplytime(Date replytime) {
+		this.replytime = replytime;
 	}
 
 	public int getUserId() {
@@ -85,12 +110,20 @@ public class Reply implements Serializable {
 		this.userId = userId;
 	}
 
-	public Topic getTopic() {
-		return this.topic;
+	public Topic getTopic1() {
+		return this.topic1;
 	}
 
-	public void setTopic(Topic topic) {
-		this.topic = topic;
+	public void setTopic1(Topic topic1) {
+		this.topic1 = topic1;
+	}
+
+	public Topic getTopic2() {
+		return this.topic2;
+	}
+
+	public void setTopic2(Topic topic2) {
+		this.topic2 = topic2;
 	}
 
 }

@@ -122,7 +122,7 @@ public class Email extends TabActivity{
 
             if(strSendReceiver.equals("") || strSendTopic.equals("")
                     || strSendReceiver.equals("")){
-                Toast.makeText(Email.this, "请将发送的信息填写完整", Toast.LENGTH_LONG).show();
+                Toast.makeText(Email.this, R.string.message_error , Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -147,7 +147,7 @@ public class Email extends TabActivity{
             strSearchKey = SearchKey.getText().toString().trim();
             strSearchSender = SearchSender.getText().toString().trim();
             if(strSearchKey.equals("") || strSearchSender.equals("")){
-                Toast.makeText(Email.this, "请填写完整", Toast.LENGTH_LONG).show();
+                Toast.makeText(Email.this, R.string.message_error, Toast.LENGTH_LONG).show();
                 return;
             }
         }

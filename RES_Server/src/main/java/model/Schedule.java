@@ -20,12 +20,18 @@ public class Schedule implements Serializable {
 	@Lob
 	private String content;
 
-	private int schedulefrom;
-
 	@Temporal(TemporalType.DATE)
 	private Date scheduletime;
 
-	private int scheduleto;
+	//bi-directional many-to-one association to FromUser
+	@ManyToOne
+	@JoinColumn(name="schedulefrom")
+	private FromUser fromUser;
+
+	//bi-directional many-to-one association to ToUser
+	@ManyToOne
+	@JoinColumn(name="scheduleto")
+	private ToUser toUser;
 
 	public Schedule() {
 	}
@@ -46,14 +52,6 @@ public class Schedule implements Serializable {
 		this.content = content;
 	}
 
-	public int getSchedulefrom() {
-		return this.schedulefrom;
-	}
-
-	public void setSchedulefrom(int schedulefrom) {
-		this.schedulefrom = schedulefrom;
-	}
-
 	public Date getScheduletime() {
 		return this.scheduletime;
 	}
@@ -62,12 +60,20 @@ public class Schedule implements Serializable {
 		this.scheduletime = scheduletime;
 	}
 
-	public int getScheduleto() {
-		return this.scheduleto;
+	public FromUser getFromUser() {
+		return this.fromUser;
 	}
 
-	public void setScheduleto(int scheduleto) {
-		this.scheduleto = scheduleto;
+	public void setFromUser(FromUser fromUser) {
+		this.fromUser = fromUser;
+	}
+
+	public ToUser getToUser() {
+		return this.toUser;
+	}
+
+	public void setToUser(ToUser toUser) {
+		this.toUser = toUser;
 	}
 
 }

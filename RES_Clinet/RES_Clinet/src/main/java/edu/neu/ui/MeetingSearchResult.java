@@ -82,4 +82,3 @@ public class MeetingSearchResult extends ListActivity {
         alert.show();
     }
 }
-
