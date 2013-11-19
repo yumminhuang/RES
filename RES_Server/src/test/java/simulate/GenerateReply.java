@@ -3,7 +3,6 @@ package simulate;
 import jdbc.MyJDBC;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -67,7 +66,6 @@ public class GenerateReply {
 
 	public Date generateDate() {
 		Random rand = new Random();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
 		Calendar cal = Calendar.getInstance();
 		cal.set(2013, 10, 1);
 		long start = cal.getTimeInMillis();
@@ -79,12 +77,11 @@ public class GenerateReply {
 
 	public void Insert(int num) {
 		Connection con = MyJDBC.openConnection();
-		Statement stm = null;
 		try {
 			for (int i = 0; i < num; i++) {
-				stm = con.createStatement();
+				Statement stm = con.createStatement();
 				String content = generateContent(20), image_path = "./image.jpg";
-				String sql = "insert into Reply (userid, topicid, content, postby, replytime, image1, image2) values ('"
+				String sql = "insert into Reply (userid, topicid, content, replytime, image1, image2) values ('"
 						+ getUserID()
 						+ "', '"
 						+ getTopicID()
@@ -94,8 +91,8 @@ public class GenerateReply {
 						+ generateDate()
 						+ "', '"
 						+ image_path + "', '" + image_path + "');";
-				System.out.println(sql);
-				// stm.executeUpdate(sql);
+				//System.out.println(sql);
+				stm.executeUpdate(sql);
 			}
 			con.close();
 		} catch (SQLException e) {
@@ -105,6 +102,6 @@ public class GenerateReply {
 
 	public static void main(String[] args) {
 		GenerateReply gu = new GenerateReply();
-		gu.Insert(5);
+		gu.Insert(50);
 	}
 }

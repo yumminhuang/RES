@@ -3,7 +3,6 @@ package simulate;
 import jdbc.MyJDBC;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,7 +25,6 @@ public class GenerateMessage {
 
 	public Date generateDate() {
 		Random rand = new Random();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd ");
 		Calendar cal = Calendar.getInstance();
 		cal.set(2013, 10, 1);
 		long start = cal.getTimeInMillis();

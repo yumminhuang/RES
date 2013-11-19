@@ -41,7 +41,6 @@ public class GenerateUser {
 		int j = r.nextInt(70);
 		try {
 			reader = new FileReader(file);
-
 			BufferedReader br = new BufferedReader(reader);
 			String s1 = null;
 			int i = 0;
@@ -126,8 +125,7 @@ public class GenerateUser {
 
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace(); // To change body of catch statement use File |
-									// Settings | File Templates.
+			e.printStackTrace();
 		}
 	}
 }

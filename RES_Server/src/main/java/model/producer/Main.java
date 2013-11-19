@@ -20,7 +20,7 @@ public class Main extends AbstractExample {
 
 	  private void run(String[] args) {
 
-	    String endpointUri = "http://localhost:8886/test.svc/";
+	    String endpointUri = "http://localhost:8886/res.svc/";
 
 	    // this example assumes you have an appropriate persistence.xml containing a valid persistence unit definition
 	    // (in this case named NorthwindServiceEclipseLink) mapping your jpa entity classes, etc
@@ -28,7 +28,7 @@ public class Main extends AbstractExample {
 	    // create a JPAProducer by giving it a EntityManagerFactory
 	    // String persistenceUnitName = "NorthwindService" + JPAProvider.JPA_PROVIDER.caption;
 	    String persistenceUnitName = "RES_SERVER";
-	    String namespace = "Northwind";
+	    String namespace = "Oh!Data";
 	    EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);
 
 	    JPAProducer producer = new JPAProducer(emf, namespace, 50);
@@ -39,5 +39,4 @@ public class Main extends AbstractExample {
 	    new ODataServerFactory(JERSEY).hostODataServer(endpointUri);
 
 	  }
-
 }

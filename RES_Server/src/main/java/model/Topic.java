@@ -1,10 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import java.util.Set;
 
 
 /**
@@ -17,7 +14,6 @@ public class Topic implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	private int id;
 
 	@Lob
@@ -27,20 +23,9 @@ public class Topic implements Serializable {
 
 	private String image2;
 
+	private int postby;
+
 	private String title;
-
-	//bi-directional many-to-one association to Reply
-	@OneToMany(mappedBy="topic1", fetch=FetchType.EAGER)
-	private Set<Reply> replies1;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="postby")
-	private User user;
-
-	//bi-directional many-to-one association to Reply
-	@OneToMany(mappedBy="topic2", fetch=FetchType.EAGER)
-	private Set<Reply> replies2;
 
 	public Topic() {
 	}
@@ -77,64 +62,20 @@ public class Topic implements Serializable {
 		this.image2 = image2;
 	}
 
+	public int getPostby() {
+		return this.postby;
+	}
+
+	public void setPostby(int postby) {
+		this.postby = postby;
+	}
+
 	public String getTitle() {
 		return this.title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public Set<Reply> getReplies1() {
-		return this.replies1;
-	}
-
-	public void setReplies1(Set<Reply> replies1) {
-		this.replies1 = replies1;
-	}
-
-	public Reply addReplies1(Reply replies1) {
-		getReplies1().add(replies1);
-		replies1.setTopic1(this);
-
-		return replies1;
-	}
-
-	public Reply removeReplies1(Reply replies1) {
-		getReplies1().remove(replies1);
-		replies1.setTopic1(null);
-
-		return replies1;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Set<Reply> getReplies2() {
-		return this.replies2;
-	}
-
-	public void setReplies2(Set<Reply> replies2) {
-		this.replies2 = replies2;
-	}
-
-	public Reply addReplies2(Reply replies2) {
-		getReplies2().add(replies2);
-		replies2.setTopic2(this);
-
-		return replies2;
-	}
-
-	public Reply removeReplies2(Reply replies2) {
-		getReplies2().remove(replies2);
-		replies2.setTopic2(null);
-
-		return replies2;
 	}
 
 }

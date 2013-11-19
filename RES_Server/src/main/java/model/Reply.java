@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -17,7 +15,6 @@ public class Reply implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	private int id;
 
 	@Lob
@@ -27,24 +24,12 @@ public class Reply implements Serializable {
 
 	private String image2;
 
-	private int post;
-
-	private int postby;
-
 	@Temporal(TemporalType.DATE)
 	private Date replytime;
 
+	private int topicId;
+
 	private int userId;
-
-	//bi-directional many-to-one association to Topic
-	@ManyToOne
-	@JoinColumn(name="topicId")
-	private Topic topic1;
-
-	//bi-directional many-to-one association to Topic
-	@ManyToOne
-	@JoinColumn(name="topicId")
-	private Topic topic2;
 
 	public Reply() {
 	}
@@ -81,22 +66,6 @@ public class Reply implements Serializable {
 		this.image2 = image2;
 	}
 
-	public int getPost() {
-		return this.post;
-	}
-
-	public void setPost(int post) {
-		this.post = post;
-	}
-
-	public int getPostby() {
-		return this.postby;
-	}
-
-	public void setPostby(int postby) {
-		this.postby = postby;
-	}
-
 	public Date getReplytime() {
 		return this.replytime;
 	}
@@ -105,28 +74,20 @@ public class Reply implements Serializable {
 		this.replytime = replytime;
 	}
 
+	public int getTopicId() {
+		return this.topicId;
+	}
+
+	public void setTopicId(int topicId) {
+		this.topicId = topicId;
+	}
+
 	public int getUserId() {
 		return this.userId;
 	}
 
 	public void setUserId(int userId) {
 		this.userId = userId;
-	}
-
-	public Topic getTopic1() {
-		return this.topic1;
-	}
-
-	public void setTopic1(Topic topic1) {
-		this.topic1 = topic1;
-	}
-
-	public Topic getTopic2() {
-		return this.topic2;
-	}
-
-	public void setTopic2(Topic topic2) {
-		this.topic2 = topic2;
 	}
 
 }

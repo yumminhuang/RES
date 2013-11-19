@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -17,24 +15,17 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	private int id;
 
 	@Lob
 	private String content;
 
+	private int messagefrom;
+
 	@Temporal(TemporalType.DATE)
 	private Date messagetime;
 
-	//bi-directional many-to-one association to FromUser
-	@ManyToOne
-	@JoinColumn(name="messagefrom")
-	private FromUser fromUser;
-
-	//bi-directional many-to-one association to ToUser
-	@ManyToOne
-	@JoinColumn(name="messageto")
-	private ToUser toUser;
+	private int messageto;
 
 	public Message() {
 	}
@@ -55,6 +46,14 @@ public class Message implements Serializable {
 		this.content = content;
 	}
 
+	public int getMessagefrom() {
+		return this.messagefrom;
+	}
+
+	public void setMessagefrom(int messagefrom) {
+		this.messagefrom = messagefrom;
+	}
+
 	public Date getMessagetime() {
 		return this.messagetime;
 	}
@@ -63,20 +62,12 @@ public class Message implements Serializable {
 		this.messagetime = messagetime;
 	}
 
-	public FromUser getFromUser() {
-		return this.fromUser;
+	public int getMessageto() {
+		return this.messageto;
 	}
 
-	public void setFromUser(FromUser fromUser) {
-		this.fromUser = fromUser;
-	}
-
-	public ToUser getToUser() {
-		return this.toUser;
-	}
-
-	public void setToUser(ToUser toUser) {
-		this.toUser = toUser;
+	public void setMessageto(int messageto) {
+		this.messageto = messageto;
 	}
 
 }

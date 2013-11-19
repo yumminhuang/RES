@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
 
 
 /**
@@ -15,7 +14,6 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
 	private int id;
 
 	private String address;
@@ -27,23 +25,6 @@ public class User implements Serializable {
 	private int telphone;
 
 	private String type;
-
-	//bi-directional many-to-one association to Apartment
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Set<Apartment> apartments;
-
-	//bi-directional many-to-one association to Topic
-	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	private Set<Topic> topics;
-
-	//bi-directional one-to-one association to FromUser
-	@OneToOne
-	@JoinColumn(name="id")
-	private FromUser fromUser;
-
-	//bi-directional one-to-one association to ToUser
-	@OneToOne(mappedBy="user")
-	private ToUser toUser;
 
 	public User() {
 	}
@@ -94,66 +75,6 @@ public class User implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public Set<Apartment> getApartments() {
-		return this.apartments;
-	}
-
-	public void setApartments(Set<Apartment> apartments) {
-		this.apartments = apartments;
-	}
-
-	public Apartment addApartment(Apartment apartment) {
-		getApartments().add(apartment);
-		apartment.setUser(this);
-
-		return apartment;
-	}
-
-	public Apartment removeApartment(Apartment apartment) {
-		getApartments().remove(apartment);
-		apartment.setUser(null);
-
-		return apartment;
-	}
-
-	public Set<Topic> getTopics() {
-		return this.topics;
-	}
-
-	public void setTopics(Set<Topic> topics) {
-		this.topics = topics;
-	}
-
-	public Topic addTopic(Topic topic) {
-		getTopics().add(topic);
-		topic.setUser(this);
-
-		return topic;
-	}
-
-	public Topic removeTopic(Topic topic) {
-		getTopics().remove(topic);
-		topic.setUser(null);
-
-		return topic;
-	}
-
-	public FromUser getFromUser() {
-		return this.fromUser;
-	}
-
-	public void setFromUser(FromUser fromUser) {
-		this.fromUser = fromUser;
-	}
-
-	public ToUser getToUser() {
-		return this.toUser;
-	}
-
-	public void setToUser(ToUser toUser) {
-		this.toUser = toUser;
 	}
 
 }
