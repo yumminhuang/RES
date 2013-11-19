@@ -20,7 +20,7 @@ public class Main extends AbstractExample {
 
 	  private void run(String[] args) {
 
-	    String endpointUri = "http://localhost:8866/test.svc/";
+	    String endpointUri = "http://localhost:8886/test.svc/";
 
 	    // this example assumes you have an appropriate persistence.xml containing a valid persistence unit definition
 	    // (in this case named NorthwindServiceEclipseLink) mapping your jpa entity classes, etc

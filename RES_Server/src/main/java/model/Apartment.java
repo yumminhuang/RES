@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -14,6 +15,7 @@ public class Apartment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	private int id;
 
 	private String address;
