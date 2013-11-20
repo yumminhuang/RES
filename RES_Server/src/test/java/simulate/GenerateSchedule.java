@@ -41,7 +41,6 @@ public class GenerateSchedule {
 				ids.add(rs.getInt(1));
 			}
 			con.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

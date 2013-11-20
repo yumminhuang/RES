@@ -5,13 +5,12 @@ import static org.odata4j.examples.JaxRsImplementation.JERSEY;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.odata4j.examples.AbstractExample;
 import org.odata4j.examples.ODataServerFactory;
 import org.odata4j.examples.producer.jpa.DatabaseUtils;
 import org.odata4j.producer.jpa.JPAProducer;
 import org.odata4j.producer.resources.DefaultODataProducerProvider;
 
-public class Main extends AbstractExample {
+public class Main{
 	
 	public static void main(String[] args) {
 	    Main example = new Main();
@@ -20,13 +19,8 @@ public class Main extends AbstractExample {
 
 	  private void run(String[] args) {
 
-	    String endpointUri = "http://localhost:8886/res.svc/";
-
-	    // this example assumes you have an appropriate persistence.xml containing a valid persistence unit definition
-	    // (in this case named NorthwindServiceEclipseLink) mapping your jpa entity classes, etc
-
-	    // create a JPAProducer by giving it a EntityManagerFactory
-	    // String persistenceUnitName = "NorthwindService" + JPAProvider.JPA_PROVIDER.caption;
+	    String endpointUri = "http://localhost:8866/res.svc/";
+	    
 	    String persistenceUnitName = "RES_SERVER";
 	    String namespace = "Oh!Data";
 	    EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistenceUnitName);

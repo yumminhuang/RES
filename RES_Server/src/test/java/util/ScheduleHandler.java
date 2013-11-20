@@ -10,7 +10,7 @@ import org.odata4j.core.OProperties;
 import org.odata4j.examples.AbstractExample;
 import org.odata4j.format.FormatType;
 
-public class Schedule extends AbstractExample {
+public class ScheduleHandler extends AbstractExample {
 
 	private static final String serviceURL = "http://localhost:8886/res.svc/";
 	private static String entitySet = "Schedule";
@@ -33,7 +33,7 @@ public class Schedule extends AbstractExample {
 	}
 
 	/**
-	 * 
+	 * TODO : add return
 	 * @param id
 	 */
 	public static void getMyMeeting(int id) {

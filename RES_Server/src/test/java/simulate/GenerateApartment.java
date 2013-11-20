@@ -69,7 +69,7 @@ public class GenerateApartment {
             con.close();
 
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
         Random random = new Random();
         return ids.get(random.nextInt(ids.size()));
@@ -88,7 +88,7 @@ public class GenerateApartment {
             }
             con.close();
         } catch (SQLException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
