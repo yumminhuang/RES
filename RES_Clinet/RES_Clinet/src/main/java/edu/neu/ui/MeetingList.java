@@ -15,7 +15,7 @@ import android.widget.SimpleAdapter;
 
 import edu.neu.res_clinet.R;
 
-public class MeetingSearchResult extends ListActivity {
+public class MeetingList extends ListActivity {
     private final static int countMax = 1000;
     private int count;
     private String[] tmp = new String[10];
@@ -32,7 +32,7 @@ public class MeetingSearchResult extends ListActivity {
         count = bundle.getInt("count");
         text = bundle.getStringArray("msg");
 
-        for(int i = 0; i < count; i ++){
+        for (int i = 0; i < count; i++) {
             tmp = text[i].split("#");
             topic[i] = tmp[0];
             staff[i] = tmp[1];
@@ -41,18 +41,17 @@ public class MeetingSearchResult extends ListActivity {
         }
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
-                R.layout.resultlist, new String[] { "mainList", "subList" },
-                new int[] { R.id.meeting_list_mainList, R.id.meeting_list_subList });
+                R.layout.resultlist, new String[]{"mainList", "subList"},
+                new int[]{R.id.meeting_list_mainList, R.id.meeting_list_subList});
         setListAdapter(adapter);
     }
 
     @Override
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
-        showDialog("会议主题："+topic[pos]+"\n\n"+
-                "关键字："+key[pos]+"\n\n"+
-                "出席人员："+staff[pos]+"\n\n"+
-                "会议内容：\n"+text[pos]+"\n");
+        showDialog(R.string.topic + topic[pos] + "\n\n" +
+                R.string.with + staff[pos] + "\n\n" +
+                R.string.content + text[pos] + "\n");
     }
 
     private List<Map<String, Object>> getData() {
@@ -60,22 +59,21 @@ public class MeetingSearchResult extends ListActivity {
         Map<String, Object> map = new HashMap<String, Object>();
         for (int i = 0; i < count; i++) {
             map = new HashMap<String, Object>();
-            map.put("mainList", "会议"+(i+1)+"："+topic[i]);
-            map.put("subList", "出席人员："+staff[i]);
+            map.put("mainList", R.string.meeting + (i + 1) + "：" + topic[i]);
+            map.put("subList", R.string.with + staff[i]);
             list.add(map);
         }
         return list;
     }
 
     // 提示信息msg。
-    private void showDialog(String msg){
+    private void showDialog(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
                 .setCancelable(false)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
                     }
                 });
         AlertDialog alert = builder.create();

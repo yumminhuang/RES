@@ -11,6 +11,7 @@
     <string name="network_error">There is error in network.</string>
     <string name="error">Oops! There is a error.</string>
     <string name="message_error">Please complete the message.</string>
+    <string name="ip_error">Please provide server's ip</string>
 
     <string name="add_mesage">Add record successfully!</string>
 

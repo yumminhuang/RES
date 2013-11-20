@@ -19,7 +19,7 @@ import edu.neu.res_clinet.R;
 public class HomePage extends Activity {
     private String[] itemName = new String[]{
             "House", "Meeting", "Message",
-            "Calendar", "Account", "Search",
+            "Forum", "Account", "Search",
             "Map", "Setting", "Favorites"};
     private Integer[] mIcons = {
             R.drawable.house, R.drawable.meeting, R.drawable.message,
@@ -53,7 +53,7 @@ public class HomePage extends Activity {
                     Intent intent1 = new Intent(HomePage.this, Email.class);
                     startActivity(intent1);
                 } else if (arg2 == 3) {
-                    Toast.makeText(HomePage.this, "Calendar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomePage.this, "Forum", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 4) {
                     Toast.makeText(HomePage.this, "Account", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 5) {

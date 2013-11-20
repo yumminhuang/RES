@@ -25,7 +25,7 @@
         <activity android:name="edu.neu.ui.Email"></activity>
         <activity android:name="edu.neu.ui.EmailInbox"></activity>
         <activity android:name="edu.neu.ui.Meeting"></activity>
-        <activity android:name="edu.neu.ui.MeetingSearchResult"></activity>
+        <activity android:name="edu.neu.ui.MeetingList"></activity>
         <activity android:name="edu.neu.ui.SetServerIp"></activity>
     </application>
 

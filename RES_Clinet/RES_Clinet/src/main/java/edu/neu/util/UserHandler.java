@@ -1,19 +1,16 @@
-package util;
+package edu.neu.util;
 
 import org.odata4j.consumer.ODataConsumer;
 import org.odata4j.consumer.ODataConsumers;
 import org.odata4j.core.OEntity;
 import org.odata4j.core.OProperties;
 import org.odata4j.core.OProperty;
-import org.odata4j.edm.EdmSimpleType;
-import org.odata4j.examples.AbstractExample;
 import org.odata4j.format.FormatType;
 
-import pattern.User;
+import edu.neu.pattern.User;
 
-public class UserHandler extends AbstractExample {
+public class UserHandler extends AbstractHandler {
 
-	private static final String serviceURL = "http://localhost:8866/res.svc/";
 	private static String entitySet = "User";
 
 	/**

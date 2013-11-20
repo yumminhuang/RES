@@ -64,8 +64,7 @@ public class UserHandler extends AbstractExample {
 	 * @return
 	 */
 	public static User findUser(int id) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL)
-				.setFormatType(FormatType.JSON).build();
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity userEntity = c.getEntity(entitySet, id).execute();
 		User user = new User();
 		user.setId(id);
@@ -86,10 +85,8 @@ public class UserHandler extends AbstractExample {
 	}
 
 	public static int getIDFromName(String name) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL)
-				.setFormatType(FormatType.JSON).build();
-		OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'")
-				.select("id").execute().first();
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+		OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'").select("id").execute().first();
 		return (Integer) id.getProperties().get(0).getValue();
 	}
 

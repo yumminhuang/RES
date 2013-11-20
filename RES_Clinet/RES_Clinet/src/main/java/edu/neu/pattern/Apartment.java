@@ -1,7 +1,7 @@
-package pattern;
+package edu.neu.pattern;
 
 public class Apartment {
-	
+
 	private int id;
 
 	private String address;

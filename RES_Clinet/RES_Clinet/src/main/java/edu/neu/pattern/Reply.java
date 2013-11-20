@@ -1,4 +1,4 @@
-package pattern;
+package edu.neu.pattern;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ public class Reply {
 	private String image1;
 
 	private String image2;
-	
+
 	private Date replytime;
 
 	private int topicId;

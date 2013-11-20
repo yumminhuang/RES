@@ -1,4 +1,4 @@
-package util;
+package edu.neu.util;
 
 import org.joda.time.LocalDateTime;
 import org.odata4j.consumer.ODataConsumer;
@@ -9,10 +9,10 @@ import org.odata4j.examples.AbstractExample;
 import org.odata4j.format.FormatType;
 
 public class ReplyHandler extends AbstractExample {
-	
+
 	private static final String serviceURL = "http://localhost:8886/res.svc/";
 	private static String entitySet = "Reply";
-	
+
 	public static void addReply(int uid, int topic, String content){
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity newReply = c.createEntity(entitySet)

@@ -1,4 +1,4 @@
-package util;
+package edu.neu.util;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class ScheduleHandler extends AbstractExample {
 	private static String entitySet = "Schedule";
 
 	/**
-	 * 
+	 *
 	 * @param from
 	 * @param to
 	 * @param content

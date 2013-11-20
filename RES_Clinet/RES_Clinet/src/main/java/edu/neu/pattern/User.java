@@ -1,4 +1,4 @@
-package pattern;
+package edu.neu.pattern;
 
 public class User{
 
@@ -61,7 +61,7 @@ public class User{
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		sb.append("id:" + id + "\n");

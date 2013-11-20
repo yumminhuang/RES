@@ -1,4 +1,4 @@
-package util;
+package edu.neu.util;
 
 import org.core4j.Enumerable;
 import org.joda.time.LocalDateTime;
@@ -10,12 +10,12 @@ import org.odata4j.examples.AbstractExample;
 import org.odata4j.format.FormatType;
 
 public class MessageHandler extends AbstractExample {
-	
+
 	private static final String serviceURL = "http://localhost:8886/res.svc/";
 	private static String entitySet = "Message";
-	
+
 	/**
-	 * 
+	 *
 	 * @param from
 	 * @param to
 	 * @param content
@@ -29,7 +29,7 @@ public class MessageHandler extends AbstractExample {
 				.properties(OProperties.datetime("messagetime", new LocalDateTime())).execute();
 		reportEntity("created", newMessage);
 	}
-	
+
 	/**
 	 * TODO : add return
 	 * @param to

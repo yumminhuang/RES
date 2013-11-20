@@ -50,10 +50,9 @@ public class EmailInbox extends ListActivity {
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
 
-        showDialog("邮件主题：" + topic[pos] + "\n\n" +
-                "发信人：" + sender[pos] + "\n\n" +
-                "关键字：" + key[pos] + "\n\n" +
-                "正文：\n" + text[pos] + "\n");
+        showDialog(R.string.topic + topic[pos] + "\n\n" +
+                R.string.from + sender[pos] + "\n\n" +
+                R.string.content + text[pos] + "\n");
     }
 
     private List<Map<String, Object>> getData() {
@@ -61,8 +60,8 @@ public class EmailInbox extends ListActivity {
         Map<String, Object> map = new HashMap<String, Object>();
         for (int i = 0; i < count; i++) {
             map = new HashMap<String, Object>();
-            map.put("mainList", "邮件" + (i + 1) + "：" + topic[i]);
-            map.put("subList", "发信人：" + sender[i]);
+            map.put("mainList", R.string.message + (i + 1) + "：" + topic[i]);
+            map.put("subList", R.string.from + sender[i]);
             list.add(map);
         }
         return list;
@@ -73,10 +72,9 @@ public class EmailInbox extends ListActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
                 .setCancelable(false)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
                     }
                 });
         AlertDialog alert = builder.create();

@@ -25,11 +25,9 @@ public class SetServerIp extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setip);
-        // 实例化各个控件。
         ip_Edit = (EditText) findViewById(R.id.ET_SetIp_Ip);
         reset = (Button) findViewById(R.id.BU_SetIp_Reset);
         ok = (Button) findViewById(R.id.BU_SetIp_Ok);
-        // 设置注册和登录按钮。
         reset.setOnClickListener(new ResetListener());
         ok.setOnClickListener(new OkListener());
     }
@@ -41,10 +39,9 @@ public class SetServerIp extends Activity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(msg)
                 .setCancelable(false)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // TODO Auto-generated method stub
                         Intent intent = new Intent();
                         intent.setClass(SetServerIp.this, Login.class);
                         startActivity(intent);
@@ -54,8 +51,8 @@ public class SetServerIp extends Activity {
         alert.show();
     }
 
-    /*
-     *  响应重置按钮单击事件。
+    /**
+     *
      */
     class ResetListener implements OnClickListener {
         public void onClick(View v) {
@@ -63,14 +60,14 @@ public class SetServerIp extends Activity {
         }
     }
 
-    /*
-    *  响应确定按钮单击事件。
-    */
+    /**
+     *
+     */
     class OkListener implements OnClickListener {
         public void onClick(View v) {
             Ip = ip_Edit.getText().toString().trim();
             if (Ip.equals("")) {
-                Toast.makeText(SetServerIp.this, "请填写好服务器的IP地址", Toast.LENGTH_LONG).show();
+                Toast.makeText(SetServerIp.this, R.string.ip_error, Toast.LENGTH_LONG).show();
                 return;
             }
         }

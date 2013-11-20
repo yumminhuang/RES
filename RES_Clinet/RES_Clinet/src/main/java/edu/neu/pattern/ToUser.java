@@ -1,4 +1,4 @@
-package pattern;
+package edu.neu.pattern;
 
 public class ToUser {;
 

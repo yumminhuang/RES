@@ -17,19 +17,23 @@
     <string name="action_settings">Settings</string>
     <string name="exit">Exit</string>
     <string name="about">About</string>
-    <string name="acc">Account</string>
-    <string name="pwd">Password</string>
-    <string name="name">Name</string>
-    <string name="email">Email</string>
-    <string name="content">Content</string>
-    <string name="phone">Phone</string>
-    <string name="to">To</string>
-    <string name="from">From</string>
-    <string name="keyword">KeyWord</string>
-    <string name="subject">Subject</string>
-    <string name="identity">Identity</string>
-    <string name="date">Date</string>
-    <string name="time">Time</string>
+    <string name="acc">Account: </string>
+    <string name="pwd">Password: </string>
+    <string name="name">Name: </string>
+    <string name="email">Email: </string>
+    <string name="content">Content: </string>
+    <string name="phone">Phone: </string>
+    <string name="to">To: </string>
+    <string name="from">From: </string>
+    <string name="keyword">KeyWord: </string>
+    <string name="subject">Subject: </string>
+    <string name="identity">Identity: </string>
+    <string name="date">Date: </string>
+    <string name="time">Time: </string>
+    <string name="meeting">Meeting</string>
+    <string name="topic">Topic: </string>
+    <string name="with">With: </string>
+    <string name="message">Message</string>
 
 
 </resources>

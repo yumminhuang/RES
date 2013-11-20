@@ -13,13 +13,12 @@
         >     
         <TableRow>
             <TextView 
-                android:text=" 服务器IP： "
+                android:text="Server's IP "
                 android:layout_width="wrap_content" 
                 android:layout_height="wrap_content"
                 />
             <EditText
-                android:id="@+id/ET_SetIp_Ip" 
-                android:hint="请输入服务器的IP地址"   
+                android:id="@+id/ET_SetIp_Ip"
                 android:layout_width="wrap_content" 
                 android:layout_height="wrap_content"
                 android:height="45px"
@@ -28,13 +27,13 @@
          </TableRow>
          <TableRow>
              <Button
-    		    android:text=" 重置  "
+    		    android:text="@string/reset"
     		    android:id="@+id/BU_SetIp_Reset"
     			android:layout_width="wrap_content" 
     		   	android:layout_height="wrap_content"
     		   	/>
     		 <Button
-    		    android:text="确  定"
+    		    android:text="@string/yes"
                 android:id="@+id/BU_SetIp_Ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
