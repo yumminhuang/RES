@@ -64,12 +64,12 @@ public class User{
 	
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
-		sb.append("id:" + id + "\n");
-		sb.append("name:" + name + "\n");
-		sb.append("address:" + address + "\n");
-		sb.append("tel:" + telphone + "\n");
-		sb.append("email:" + email + "\n");
-		sb.append("type:" + type + "\n");
+		sb.append("id:" + id + "\n")
+		.append("name:" + name + "\n")
+		.append("address:" + address + "\n")
+		.append("tel:" + telphone + "\n")
+		.append("email:" + email + "\n")
+		.append("type:" + type + "\n");
 		return sb.toString();
 	}
 

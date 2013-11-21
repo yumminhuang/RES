@@ -1,6 +1,6 @@
 package pattern;
 
-import java.util.Date;
+import org.joda.time.LocalDateTime;
 
 public class Message {
 
@@ -10,7 +10,7 @@ public class Message {
 
 	private int messagefrom;
 
-	private Date messagetime;
+	private LocalDateTime messagetime;
 
 	private int messageto;
 
@@ -38,11 +38,11 @@ public class Message {
 		this.messagefrom = messagefrom;
 	}
 
-	public Date getMessagetime() {
+	public LocalDateTime getMessagetime() {
 		return this.messagetime;
 	}
 
-	public void setMessagetime(Date messagetime) {
+	public void setMessagetime(LocalDateTime messagetime) {
 		this.messagetime = messagetime;
 	}
 
@@ -52,6 +52,16 @@ public class Message {
 
 	public void setMessageto(int messageto) {
 		this.messageto = messageto;
+	}
+	
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("id:" + id + "\n")
+		.append("content:" + content + "\n")
+		.append("From:" + messagefrom + "\n")
+		.append("To:" + messageto + "\n")
+		.append("Time:" + messagetime + "\n");
+		return sb.toString();
 	}
 
 }

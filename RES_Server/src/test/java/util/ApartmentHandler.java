@@ -3,7 +3,6 @@ package util;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.core4j.Enumerable;
 import org.odata4j.consumer.ODataConsumer;
 import org.odata4j.consumer.ODataConsumers;
 import org.odata4j.core.OEntity;
@@ -78,9 +77,14 @@ public class ApartmentHandler extends AbstractExample {
 		return a;
 	}
 	
-	public static List<Apartment> findApartment(String address){
+	/**
+	 * TODO: fix problem, seems caused by substringof
+	 * @param address
+	 * @return
+	 */
+	public static List<Apartment> findApartments(String address){
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> apartmentEntities = c.getEntities(entitySet).filter("substringof(¡®" + address + "¡¯, address) eq true").execute();
+		List<OEntity> apartmentEntities = c.getEntities(entitySet).filter("substringof('" + address + "',address)").execute().toList();
 		List<Apartment> apartments = new ArrayList<Apartment>();
 		for (OEntity e : apartmentEntities) {
 			Apartment a = new Apartment();
@@ -101,13 +105,17 @@ public class ApartmentHandler extends AbstractExample {
 		return apartments;
 	}
 	
-	public static List<Apartment> findApartment(double area){
+	/**
+	 * 
+	 * @param area
+	 * @return
+	 */
+	public static List<Apartment> findApartments(int area){
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> apartmentEntities = c.getEntities(entitySet).filter("address ge ¡®" + area + "¡¯").execute();
+		List<OEntity> apartmentEntities = c.getEntities(entitySet).filter("area ge " + area).execute().toList();
 		List<Apartment> apartments = new ArrayList<Apartment>();
 		for (OEntity e : apartmentEntities) {
 			Apartment a = new Apartment();
-			a.setArea(area);
 			for (OProperty<?> p : e.getProperties()) {
 				if (p.getName().equals("id")) {
 					a.setId((Integer) p.getValue());
@@ -117,6 +125,8 @@ public class ApartmentHandler extends AbstractExample {
 					a.setAddress((String)p.getValue());
 				} else if(p.getName().equals("owner")) {
 					a.setOwner((Integer)p.getValue());
+				} else if (p.getName().equals("area")) {
+					a.setArea((Double)p.getValue());
 				}
 			}
 			apartments.add(a);
@@ -124,11 +134,17 @@ public class ApartmentHandler extends AbstractExample {
 		return apartments;
 	}
 	
-	public static List<Apartment> findApartment(String address, double area){
-		String cond1 = "address ge ¡®" + area + "¡¯";
-		String cond2 = "substringof(¡®" + address + "¡¯, address) eq true";
+	/**
+	 * TODO: fix problem
+	 * @param address
+	 * @param area
+	 * @return
+	 */
+	public static List<Apartment> findApartments(String address, int area){
+		String cond1 = "area ge " + area;
+		String cond2 = "substringof('" + address + "', address)";
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> apartmentEntities = c.getEntities(entitySet).filter(cond1 + " and " + cond2).execute();
+		List<OEntity> apartmentEntities = c.getEntities(entitySet).filter(cond1 + " and " + cond2).execute().toList();
 		List<Apartment> apartments = new ArrayList<Apartment>();
 		for (OEntity e : apartmentEntities) {
 			Apartment a = new Apartment();
@@ -139,8 +155,12 @@ public class ApartmentHandler extends AbstractExample {
 					a.setId((Integer) p.getValue());
 				} else if (p.getName().equals("number")) {
 					a.setNumber((String)p.getValue());
+				} else if (p.getName().equals("address")) {
+					a.setAddress((String)p.getValue());
 				} else if(p.getName().equals("owner")) {
 					a.setOwner((Integer)p.getValue());
+				} else if (p.getName().equals("area")) {
+					a.setArea((Double)p.getValue());
 				}
 			}
 			apartments.add(a);
@@ -149,7 +169,12 @@ public class ApartmentHandler extends AbstractExample {
 	} 
 
 	public static void main(String[] args) {
-
+		//System.out.println(findApartment(10).toString());
+		List<Apartment> aps = findApartments("jwjbdin Ave. 544"); 
+		//List<Apartment> aps = findApartments(1900);
+		//List<Apartment> aps = findApartments("Ave.", 1700);
+		for(Apartment a : aps) 
+			System.out.println(a.toString());
 	}
 
 }

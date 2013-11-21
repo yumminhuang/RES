@@ -1,11 +1,17 @@
 package util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import pattern.Message;
+
 import org.core4j.Enumerable;
 import org.joda.time.LocalDateTime;
 import org.odata4j.consumer.ODataConsumer;
 import org.odata4j.consumer.ODataConsumers;
 import org.odata4j.core.OEntity;
 import org.odata4j.core.OProperties;
+import org.odata4j.core.OProperty;
 import org.odata4j.examples.AbstractExample;
 import org.odata4j.format.FormatType;
 
@@ -31,17 +37,67 @@ public class MessageHandler extends AbstractExample {
 	}
 	
 	/**
-	 * TODO : add return
+	 * 
 	 * @param to
+	 * @return
 	 */
-	public static void getInbox(int to){
+	public static List<Message> getInbox(int to) {
+		List<Message> mess = new ArrayList<Message>();
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("messageto eq '" + to +"'").execute();
-	    reportEntities("Inbox", inbox);
+		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("messageto eq " + to).execute();
+		for (OEntity e : inbox) {
+			Message m = new Message();
+			m.setMessageto(to);
+			for (OProperty<?> p : e.getProperties()) {
+				if (p.getName().equals("messgaefrom")) {
+					m.setMessagefrom((Integer) p.getValue());
+				} else if (p.getName().equals("messagetime")) {
+					m.setMessagetime((LocalDateTime) p.getValue());
+				} else if (p.getName().equals("content")) {
+					m.setContent((String) p.getValue());
+				} else if (p.getName().equals("id"))
+					m.setId((Integer) p.getValue());
+			}
+			mess.add(m);
+		}
+		return mess;
+	}
+	
+	/**
+	 * 
+	 * @param from
+	 * @return
+	 */
+	public static List<Message> getOutbox(int from) {
+		List<Message> mess = new ArrayList<Message>();
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("messagefrom eq " + from).execute();
+		for (OEntity e : inbox) {
+			Message m = new Message();
+			m.setMessagefrom(from);
+			for (OProperty<?> p : e.getProperties()) {
+				if (p.getName().equals("messgaeto")) {
+					m.setMessageto((Integer) p.getValue());
+				} else if (p.getName().equals("messagetime")) {
+					m.setMessagetime((LocalDateTime) p.getValue());
+				} else if (p.getName().equals("content")) {
+					m.setContent((String) p.getValue());
+				} else if (p.getName().equals("id"))
+					m.setId((Integer) p.getValue());
+			}
+			mess.add(m);
+		}
+		return mess;
 	}
 
 	public static void main(String[] args) {
-		getInbox(40);
+		List<Message> inbox = getInbox(16);
+		List<Message> outbox = getOutbox(46);
+		for(Message m : inbox)
+			System.out.println(m.toString());
+		System.out.println("======");
+		for(Message m : outbox)
+			System.out.println(m.toString());
 	}
 
 }

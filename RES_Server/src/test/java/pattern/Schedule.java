@@ -1,6 +1,6 @@
 package pattern;
 
-import java.util.Date;
+import org.joda.time.LocalDateTime;
 
 public class Schedule{
 
@@ -10,7 +10,7 @@ public class Schedule{
 
 	private int schedulefrom;
 
-	private Date scheduletime;
+	private LocalDateTime scheduletime;
 
 	private int scheduleto;
 
@@ -38,11 +38,11 @@ public class Schedule{
 		this.schedulefrom = schedulefrom;
 	}
 
-	public Date getScheduletime() {
+	public LocalDateTime getScheduletime() {
 		return this.scheduletime;
 	}
 
-	public void setScheduletime(Date scheduletime) {
+	public void setScheduletime(LocalDateTime scheduletime) {
 		this.scheduletime = scheduletime;
 	}
 
@@ -52,6 +52,16 @@ public class Schedule{
 
 	public void setScheduleto(int scheduleto) {
 		this.scheduleto = scheduleto;
+	}
+	
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("id:" + id + "\n")
+		.append("content:" + content + "\n")
+		.append("From:" + schedulefrom + "\n")
+		.append("To:" + scheduleto + "\n")
+		.append("Time:" + scheduletime + "\n");
+		return sb.toString();
 	}
 
 }

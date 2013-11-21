@@ -1,6 +1,6 @@
 package pattern;
 
-import java.util.Date;
+import org.joda.time.LocalDateTime;
 
 public class Reply {
 
@@ -12,7 +12,7 @@ public class Reply {
 
 	private String image2;
 	
-	private Date replytime;
+	private LocalDateTime replytime;
 
 	private int topicId;
 
@@ -50,11 +50,11 @@ public class Reply {
 		this.image2 = image2;
 	}
 
-	public Date getReplytime() {
+	public LocalDateTime getReplytime() {
 		return this.replytime;
 	}
 
-	public void setReplytime(Date replytime) {
+	public void setReplytime(LocalDateTime replytime) {
 		this.replytime = replytime;
 	}
 
@@ -72,6 +72,16 @@ public class Reply {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("id:" + id + "\n")
+		.append("content:" + content + "\n")
+		.append("Topic:" + topicId + "\n")
+		.append("User:" + userId + "\n")
+		.append("Time:" + replytime + "\n");
+		return sb.toString();
 	}
 
 }

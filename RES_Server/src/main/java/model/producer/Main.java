@@ -19,7 +19,7 @@ public class Main{
 
 	  private void run(String[] args) {
 
-	    String endpointUri = "http://localhost:8866/res.svc/";
+	    String endpointUri = "http://localhost:8886/res.svc/";
 	    
 	    String persistenceUnitName = "RES_SERVER";
 	    String namespace = "Oh!Data";

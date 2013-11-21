@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Set;
 
 
 /**
@@ -25,6 +26,10 @@ public class User implements Serializable {
 	private int telphone;
 
 	private String type;
+
+	//bi-directional many-to-one association to Apartment
+	@OneToMany(mappedBy="user")
+	private Set<Apartment> apartments;
 
 	public User() {
 	}
@@ -75,6 +80,28 @@ public class User implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public Set<Apartment> getApartments() {
+		return this.apartments;
+	}
+
+	public void setApartments(Set<Apartment> apartments) {
+		this.apartments = apartments;
+	}
+
+	public Apartment addApartment(Apartment apartment) {
+		getApartments().add(apartment);
+		apartment.setUser(this);
+
+		return apartment;
+	}
+
+	public Apartment removeApartment(Apartment apartment) {
+		getApartments().remove(apartment);
+		apartment.setUser(null);
+
+		return apartment;
 	}
 
 }
