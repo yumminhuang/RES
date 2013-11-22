@@ -14,23 +14,23 @@ public class UserHandler extends AbstractHandler {
 	private static String entitySet = "User";
 
 	/**
-	 * 
+	 * TODO: Add user id to Fromuser and Touser table. Can we use a trigger to implement this?
 	 * @param name
 	 * @param address
 	 * @param phone
 	 * @param email
 	 * @param type
 	 */
-	public static void addUser(String name, String address, String phone,
+	public static void addUser(String name, String address, int phone,
 			String email, String type) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL)
-				.setFormatType(FormatType.JSON).build();
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity newUser = c.createEntity(entitySet)
 				.properties(OProperties.string("name", name))
-				.properties(OProperties.string("telphone", phone))
+				.properties(OProperties.int32("telphone", phone))
 				.properties(OProperties.string("Address", address))
 				.properties(OProperties.string("email", email))
-				.properties(OProperties.string("type", type)).execute();
+				.properties(OProperties.string("type", type))
+				.execute();
 		reportEntity("created", newUser);
 	}
 
@@ -44,14 +44,14 @@ public class UserHandler extends AbstractHandler {
 	 * @param type
 	 */
 	public static void updateUser(OEntity user, String name, String address,
-			String phone, String email, String type) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL)
-				.setFormatType(FormatType.JSON).build();
+			int phone, String email, String type) {
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		c.updateEntity(user).properties(OProperties.string("name", name))
-				.properties(OProperties.string("telphone", phone))
+				.properties(OProperties.int32("telphone", phone))
 				.properties(OProperties.string("Address", address))
 				.properties(OProperties.string("email", email))
-				.properties(OProperties.string("type", type)).execute();
+				.properties(OProperties.string("type", type))
+				.execute();
 	}
 
 	/**
@@ -61,8 +61,7 @@ public class UserHandler extends AbstractHandler {
 	 * @return
 	 */
 	public static User findUser(int id) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL)
-				.setFormatType(FormatType.JSON).build();
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity userEntity = c.getEntity(entitySet, id).execute();
 		User user = new User();
 		user.setId(id);
@@ -82,17 +81,22 @@ public class UserHandler extends AbstractHandler {
 		return user;
 	}
 
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public static int getIDFromName(String name) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL)
-				.setFormatType(FormatType.JSON).build();
-		OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'")
-				.select("id").execute().first();
+		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+		OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'").select("id").execute().first();
 		return (Integer) id.getProperties().get(0).getValue();
 	}
 
 	public static void main(String[] args) {
-		User u = findUser(17);
-		System.out.println(u.toString());
+//		User u = findUser(17);
+//		System.out.println(u.toString());
+//		System.out.println("Johnson's ID is" + getIDFromName("Johnson"));
+		addUser("name", "address", 110, "a@m", "T");
 	}
 
 }

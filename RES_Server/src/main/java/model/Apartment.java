@@ -14,11 +14,12 @@ public class Apartment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String address;
 
-	private double area;
+	private int area;
 
 	private String number;
 
@@ -46,11 +47,11 @@ public class Apartment implements Serializable {
 		this.address = address;
 	}
 
-	public double getArea() {
+	public int getArea() {
 		return this.area;
 	}
 
-	public void setArea(double area) {
+	public void setArea(int area) {
 		this.area = area;
 	}
 

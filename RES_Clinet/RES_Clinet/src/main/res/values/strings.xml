@@ -34,6 +34,9 @@
     <string name="topic">Topic: </string>
     <string name="with">With: </string>
     <string name="message">Message</string>
+    <string name="address">Address</string>
+    <string name="number">Number</string>
+    <string name="area">Area</string>
 
 
 </resources>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/Apartment_layout_add"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:stretchColumns="1">
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="@string/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Apartment_AdAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="@string/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Apartment_AdNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="45px"
+                    android:width="220px" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="@string/area"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Apartment_AdArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:height="45px"
+                    android:width="220px" />
+            </TableRow>
+
+            <TableRow>
+
+                <Button
+                    android:text="@string/reset"
+                    android:id="@+id/BU_Apartment_AdReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:text="@string/add"
+                    android:id="@+id/BU_Apartment_AdOk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Apartment_layout_search"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <TableRow>
+                <TextView
+                    android:text="With"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <EditText
+                    android:id="@+id/ET_Apartment_ShStaff"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="45px"
+                    android:width="220px"
+                    />
+            </TableRow>
+            <TableRow>
+                <Button
+                    android:text="@string/reset"
+                    android:id="@+id/BU_Apartment_ShReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+                <Button
+                    android:text="@string/search"
+                    android:id="@+id/BU_Apartment_ShOk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -62,4 +62,10 @@ public class Topic {
 		this.title = title;
 	}
 
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("Topic ID:" + id).append("\nTitle:" + title).
+		append("\nContent:" + content).append("\nPostby:" + postby);
+		return sb.toString();
+	}
 }

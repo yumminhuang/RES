@@ -10,7 +10,7 @@ public class User{
 
 	private String name;
 
-	private int telphone;
+	private String phone;
 
 	private String type;
 
@@ -46,12 +46,12 @@ public class User{
 		this.name = name;
 	}
 
-	public int getTelphone() {
-		return this.telphone;
+	public String getPhone() {
+		return this.phone;
 	}
 
-	public void setTelphone(int telphone) {
-		this.telphone = telphone;
+	public void setPhone(String telephone) {
+		this.phone = telephone;
 	}
 
 	public String getType() {
@@ -67,7 +67,7 @@ public class User{
 		sb.append("id:" + id + "\n")
 		.append("name:" + name + "\n")
 		.append("address:" + address + "\n")
-		.append("tel:" + telphone + "\n")
+		.append("tel:" + phone + "\n")
 		.append("email:" + email + "\n")
 		.append("type:" + type + "\n");
 		return sb.toString();

@@ -1,7 +1,10 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.Set;
 
 
 /**
@@ -14,6 +17,7 @@ public class Topic implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	@Lob
@@ -23,9 +27,16 @@ public class Topic implements Serializable {
 
 	private String image2;
 
-	private int postby;
-
 	private String title;
+
+	//bi-directional many-to-one association to Reply
+	@OneToMany(mappedBy="topic")
+	private Set<Reply> replies;
+
+	//bi-directional many-to-one association to User
+	@ManyToOne
+	@JoinColumn(name="uid")
+	private User user;
 
 	public Topic() {
 	}
@@ -62,20 +73,42 @@ public class Topic implements Serializable {
 		this.image2 = image2;
 	}
 
-	public int getPostby() {
-		return this.postby;
-	}
-
-	public void setPostby(int postby) {
-		this.postby = postby;
-	}
-
 	public String getTitle() {
 		return this.title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Set<Reply> getReplies() {
+		return this.replies;
+	}
+
+	public void setReplies(Set<Reply> replies) {
+		this.replies = replies;
+	}
+
+	public Reply addReply(Reply reply) {
+		getReplies().add(reply);
+		reply.setTopic(this);
+
+		return reply;
+	}
+
+	public Reply removeReply(Reply reply) {
+		getReplies().remove(reply);
+		reply.setTopic(null);
+
+		return reply;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

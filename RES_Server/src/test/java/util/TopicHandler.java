@@ -30,7 +30,7 @@ public class TopicHandler extends AbstractExample {
 		OEntity newTopic = c.createEntity(entitySet)
 				.properties(OProperties.string("title", titles))
 				.properties(OProperties.string("content", content))
-				.properties(OProperties.int32("postby", uid)).execute();
+				.properties(OProperties.int32("uid", uid)).execute();
 		reportEntity("created", newTopic);
 	}
 	
@@ -52,7 +52,7 @@ public class TopicHandler extends AbstractExample {
 					t.setId((Integer) p.getValue());
 				else if (p.getName().equals("content"))
 					t.setContent((String) p.getValue());
-				else if (p.getName().equals("postby"))
+				else if (p.getName().equals("uid"))
 					t.setPostby((Integer) p.getValue());
 				else if (p.getName().equals("image1"))
 					t.setImage1((String) p.getValue());
@@ -70,7 +70,7 @@ public class TopicHandler extends AbstractExample {
 	 */
 	public static List<Topic> findTopicByUser(int uid) {
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> topicEntities = c.getEntities(entitySet).filter("postby eq " + uid).execute();
+		Enumerable<OEntity> topicEntities = c.getEntities(entitySet).filter("uid eq " + uid).execute();
 		List<Topic> topics = new ArrayList<Topic>();
 		for (OEntity e : topicEntities) {
 			Topic t = new Topic();

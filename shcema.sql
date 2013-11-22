@@ -1,56 +1,68 @@
 create table User(
        id int primary key AUTO_INCREMENT,
        name varchar(255) not null,
-       telphone int not null,
-       Address varchar(255),
+       phone varchar(255) not null,
+       address varchar(255),
        email varchar(255),
        type enum('Landlord','Tenant','Agent')
 );
 create table Apartment (
-     id int primary key AUTO_INCREMENT,
-	 number varchar(31) not null,
-	 address varchar(255),
-	 area double not null,
-	 owner int references User(id)
+        id int primary key AUTO_INCREMENT,
+        number varchar(255) not null,
+        address varchar(255),
+        area int not null,
+        owner int references User(id)
 );
 
 create table Topic(
        id int primary key AUTO_INCREMENT,
        title varchar(255) not null,
+       uid int references User(id),
        content text,
        image1 varchar(255),
-       image2 varchar(255),
-       postby int references User(id)
+       image2 varchar(255)
 );
 create table Reply(
        id int primary key AUTO_INCREMENT,
-       userId int references User(id),
-       topicId int references Topic(id),
+       uid int references User(id),
+       tid int references Topic(id),
        content text not null,
-       postby int references User(id),
-       replytime date not null,
+       rtime date not null,
        image1 varchar(255),
        image2 varchar(255)
 );
 
 create table FromUser(
-	id int primary key references User(id)
+       id int primary key references User(id)
 );
 create table ToUser(
-	id int primary key references User(id)
+       id int primary key references User(id)
 );
 create table Message(
        id int primary key AUTO_INCREMENT,
-       messagefrom  int references FromUser(id),
-       messageto  int references ToUser(id),
+       mfrom  int references FromUser(id),
+       mto  int references ToUser(id),
        content text not null,
-       messagetime date not null
+       mtime date not null
 );
 
 create table Schedule(
        id int primary key AUTO_INCREMENT,
-       schedulefrom int references FromUser(id),
-       scheduleto int references ToUser(id),
-       scheduletime date not null,
-       content text not null
+       sfrom int references FromUser(id),
+       sto int references ToUser(id),
+       content text not null,
+       stime date not null
 );
+
+DELIMITER |
+create trigger grant_access after insert on User
+ for each row begin
+ insert into FromUser set id = new.id;
+ insert into ToUser set id = new.id;
+ end
+ |
+ create trigger revoke_access after delete on User
+ for each row begin
+ delete from FromUser where FromUser.`id` = old.`id`;
+ delete from ToUser where ToUser.`id` = old.`id`;
+ end|

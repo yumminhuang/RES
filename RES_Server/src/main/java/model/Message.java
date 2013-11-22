@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -15,17 +17,18 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	@Lob
 	private String content;
 
-	private int messagefrom;
+	private int mfrom;
 
 	@Temporal(TemporalType.DATE)
-	private Date messagetime;
+	private Date mtime;
 
-	private int messageto;
+	private int mto;
 
 	public Message() {
 	}
@@ -46,28 +49,28 @@ public class Message implements Serializable {
 		this.content = content;
 	}
 
-	public int getMessagefrom() {
-		return this.messagefrom;
+	public int getMfrom() {
+		return this.mfrom;
 	}
 
-	public void setMessagefrom(int messagefrom) {
-		this.messagefrom = messagefrom;
+	public void setMfrom(int mfrom) {
+		this.mfrom = mfrom;
 	}
 
-	public Date getMessagetime() {
-		return this.messagetime;
+	public Date getMtime() {
+		return this.mtime;
 	}
 
-	public void setMessagetime(Date messagetime) {
-		this.messagetime = messagetime;
+	public void setMtime(Date mtime) {
+		this.mtime = mtime;
 	}
 
-	public int getMessageto() {
-		return this.messageto;
+	public int getMto() {
+		return this.mto;
 	}
 
-	public void setMessageto(int messageto) {
-		this.messageto = messageto;
+	public void setMto(int mto) {
+		this.mto = mto;
 	}
 
 }

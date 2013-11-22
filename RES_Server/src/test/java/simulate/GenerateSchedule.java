@@ -69,7 +69,7 @@ public class GenerateSchedule {
 				do {
 					to = getUserID();
 				} while (from == to);
-				String sql = "insert into Schedule (schedulefrom, scheduleto, scheduletime, content) values ("
+				String sql = "insert into Schedule (sfrom, sto, stime, content) values ("
 						+ from
 						+ ", "
 						+ to

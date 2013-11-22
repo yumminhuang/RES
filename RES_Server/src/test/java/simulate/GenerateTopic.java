@@ -53,7 +53,7 @@ public class GenerateTopic {
 			for (int i = 0; i < num; i++) {
 				stm = con.createStatement();
 				String title = generateContent(10), content = generateContent(20), image_path = "./image.jpg";
-				String sql = "insert into Topic (title, content, image1, image2, postby) values ('"
+				String sql = "insert into Topic (title, content, image1, image2, uid) values ('"
 						+ title
 						+ "', '"
 						+ content
@@ -65,8 +65,7 @@ public class GenerateTopic {
 			}
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace(); // To change body of catch statement use File |
-									// Settings | File Templates.
+			e.printStackTrace(); 
 		}
 	}
 

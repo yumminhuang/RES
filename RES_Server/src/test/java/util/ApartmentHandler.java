@@ -25,12 +25,12 @@ public class ApartmentHandler extends AbstractExample {
 	 * @param area
 	 * @param owner
 	 */
-	public static void addApartment(String number, String address, double area, int owner){
+	public static void addApartment(String number, String address, int area, int owner){
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity newApartment = c.createEntity(entitySet)
 				.properties(OProperties.string("number", number))
 				.properties(OProperties.string("address", address))
-				.properties(OProperties.decimal("area", area))
+				.properties(OProperties.int32("area", area))
 				.properties(OProperties.int32("owner", owner)).execute();
 		reportEntity("created", newApartment);
 	}
@@ -43,13 +43,13 @@ public class ApartmentHandler extends AbstractExample {
 	 * @param area
 	 * @param owner
 	 */
-	public void updateApartment(OEntity apartment, int apartmentid,String number, String address, double area, int owner){
+	public void updateApartment(OEntity apartment, int apartmentid,String number, String address, int area, int owner){
 		
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		c.updateEntity(apartment)
 		.properties(OProperties.string("number", number))
 		.properties(OProperties.string("address", address))
-		.properties(OProperties.decimal("area", area))
+		.properties(OProperties.int32("area", area))
 		.properties(OProperties.int32("owner", owner)).execute();
 	}
 	
@@ -69,7 +69,7 @@ public class ApartmentHandler extends AbstractExample {
 			} else if (p.getName().equals("number")) {
 				a.setNumber((String)p.getValue());
 			} else if (p.getName().equals("area")) {
-				a.setArea((Double)p.getValue());
+				a.setArea((Integer)p.getValue());
 			} else if(p.getName().equals("owner")) {
 				a.setOwner((Integer)p.getValue());
 			}
@@ -95,7 +95,7 @@ public class ApartmentHandler extends AbstractExample {
 				} else if (p.getName().equals("number")) {
 					a.setNumber((String)p.getValue());
 				} else if (p.getName().equals("area")) {
-					a.setArea((Double)p.getValue());
+					a.setArea((Integer)p.getValue());
 				} else if(p.getName().equals("owner")) {
 					a.setOwner((Integer)p.getValue());
 				}
@@ -126,7 +126,7 @@ public class ApartmentHandler extends AbstractExample {
 				} else if(p.getName().equals("owner")) {
 					a.setOwner((Integer)p.getValue());
 				} else if (p.getName().equals("area")) {
-					a.setArea((Double)p.getValue());
+					a.setArea((Integer)p.getValue());
 				}
 			}
 			apartments.add(a);
@@ -160,7 +160,7 @@ public class ApartmentHandler extends AbstractExample {
 				} else if(p.getName().equals("owner")) {
 					a.setOwner((Integer)p.getValue());
 				} else if (p.getName().equals("area")) {
-					a.setArea((Double)p.getValue());
+					a.setArea((Integer)p.getValue());
 				}
 			}
 			apartments.add(a);

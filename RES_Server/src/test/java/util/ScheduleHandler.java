@@ -31,9 +31,9 @@ public class ScheduleHandler extends AbstractExample{
 	public static void addMeeting(int from, int to, String content, Date time) {
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity newMeeting = c.createEntity(entitySet)
-				.properties(OProperties.int32("schedulefrom", from))
-				.properties(OProperties.int32("scheduleto", to))
-				.properties(OProperties.datetime("messagetime", time))
+				.properties(OProperties.int32("sfrom", from))
+				.properties(OProperties.int32("sto", to))
+				.properties(OProperties.datetime("stime", time))
 				.properties(OProperties.string("content", content)).execute();
 		reportEntity("created", newMeeting);
 	}
@@ -45,7 +45,7 @@ public class ScheduleHandler extends AbstractExample{
 	public static List<Schedule> getMeetingById(int id) {
 		List<Schedule> schedule = new ArrayList<Schedule>();
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> myMeeting = c.getEntities(entitySet).filter("scheduleto eq " + id + " or schedulefrom eq " + id).execute();
+		Enumerable<OEntity> myMeeting = c.getEntities(entitySet).filter("sto eq " + id + " or sfrom eq " + id).execute();
 		for (OEntity e : myMeeting) {
 			Schedule s = new Schedule();
 			s.setId(id);
@@ -72,14 +72,14 @@ public class ScheduleHandler extends AbstractExample{
 	public static List<Schedule> getMeetingByTime(LocalDateTime date) {
 		List<Schedule> schedule = new ArrayList<Schedule>();
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> myMeeting = c.getEntities(entitySet).filter("scheduletime ge '" + date + "'").execute();
+		Enumerable<OEntity> myMeeting = c.getEntities(entitySet).filter("stime ge '" + date + "'").execute();
 		for (OEntity e : myMeeting) {
 			Schedule s = new Schedule();
 			s.setScheduletime(date);
 			for (OProperty<?> p : e.getProperties()) {
-				if (p.getName().equals("schedulefrom"))
+				if (p.getName().equals("sfrom"))
 					s.setSchedulefrom((Integer) p.getValue());
-				else if (p.getName().equals("scheduleto"))
+				else if (p.getName().equals("sto"))
 					s.setScheduleto((Integer) p.getValue());
 				else if (p.getName().equals("id"))
 					s.setId((Integer) p.getValue());

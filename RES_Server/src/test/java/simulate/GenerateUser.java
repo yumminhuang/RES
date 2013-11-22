@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class GenerateUser {
 
-	private String file = "/Users/yummin/Program/Java/RES/RES_SERVER/src/test/name.txt";
+	private String file = "/Users/yummin/Program/Java/RES/RES_SERVER/src/test/resources/name.txt";
 	private String[] type = { "Landlord", "Tenant", "Agent" };
 
 	public static void main(String[] args) {
@@ -109,7 +109,7 @@ public class GenerateUser {
 		try {
 			for (int i = 0; i < num; i++) {
 				stm = con.createStatement();
-				String sql = "insert into User (name, telphone, Address, email, type) values ('"
+				String sql = "insert into User (name, phone, address, email, type) values ('"
 						+ generateName()
 						+ "', "
 						+ generatePhone()

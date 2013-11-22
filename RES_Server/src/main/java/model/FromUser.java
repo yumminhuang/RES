@@ -16,6 +16,11 @@ public class FromUser implements Serializable {
 	@Id
 	private int id;
 
+	//bi-directional one-to-one association to User
+	@OneToOne
+	@JoinColumn(name="id")
+	private User user;
+
 	public FromUser() {
 	}
 
@@ -25,6 +30,14 @@ public class FromUser implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

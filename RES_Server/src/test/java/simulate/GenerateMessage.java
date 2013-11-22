@@ -75,7 +75,7 @@ public class GenerateMessage {
 				do {
 					to = getUserID();
 				} while (from == to);
-				String sql = "insert into Message (messagefrom, messageto, content, messagetime) values ("
+				String sql = "insert into Message (mfrom, mto, content, mtime) values ("
 						+ from
 						+ ", "
 						+ to

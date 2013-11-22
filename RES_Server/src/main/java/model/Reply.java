@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -15,6 +17,7 @@ public class Reply implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	@Lob
@@ -25,11 +28,14 @@ public class Reply implements Serializable {
 	private String image2;
 
 	@Temporal(TemporalType.DATE)
-	private Date replytime;
+	private Date rtime;
 
-	private int topicId;
+	private int uid;
 
-	private int userId;
+	//bi-directional many-to-one association to Topic
+	@ManyToOne
+	@JoinColumn(name="tid")
+	private Topic topic;
 
 	public Reply() {
 	}
@@ -66,28 +72,28 @@ public class Reply implements Serializable {
 		this.image2 = image2;
 	}
 
-	public Date getReplytime() {
-		return this.replytime;
+	public Date getRtime() {
+		return this.rtime;
 	}
 
-	public void setReplytime(Date replytime) {
-		this.replytime = replytime;
+	public void setRtime(Date rtime) {
+		this.rtime = rtime;
 	}
 
-	public int getTopicId() {
-		return this.topicId;
+	public int getUid() {
+		return this.uid;
 	}
 
-	public void setTopicId(int topicId) {
-		this.topicId = topicId;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public Topic getTopic() {
+		return this.topic;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 }

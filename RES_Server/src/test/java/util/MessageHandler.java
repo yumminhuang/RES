@@ -29,10 +29,10 @@ public class MessageHandler extends AbstractExample {
 	public static void addMessage(int from, int to, String content){
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity newMessage = c.createEntity(entitySet)
-				.properties(OProperties.int32("messagefrom", from))
-				.properties(OProperties.int32("messageto", to))
+				.properties(OProperties.int32("mfrom", from))
+				.properties(OProperties.int32("mto", to))
 				.properties(OProperties.string("content", content))
-				.properties(OProperties.datetime("messagetime", new LocalDateTime())).execute();
+				.properties(OProperties.datetime("mtime", new LocalDateTime())).execute();
 		reportEntity("created", newMessage);
 	}
 	
@@ -44,14 +44,14 @@ public class MessageHandler extends AbstractExample {
 	public static List<Message> getInbox(int to) {
 		List<Message> mess = new ArrayList<Message>();
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("messageto eq " + to).execute();
+		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("mto eq " + to).execute();
 		for (OEntity e : inbox) {
 			Message m = new Message();
 			m.setMessageto(to);
 			for (OProperty<?> p : e.getProperties()) {
-				if (p.getName().equals("messgaefrom")) {
+				if (p.getName().equals("mfrom")) {
 					m.setMessagefrom((Integer) p.getValue());
-				} else if (p.getName().equals("messagetime")) {
+				} else if (p.getName().equals("mtime")) {
 					m.setMessagetime((LocalDateTime) p.getValue());
 				} else if (p.getName().equals("content")) {
 					m.setContent((String) p.getValue());
@@ -71,14 +71,14 @@ public class MessageHandler extends AbstractExample {
 	public static List<Message> getOutbox(int from) {
 		List<Message> mess = new ArrayList<Message>();
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("messagefrom eq " + from).execute();
+		Enumerable<OEntity> inbox = c.getEntities(entitySet).filter("mfrom eq " + from).execute();
 		for (OEntity e : inbox) {
 			Message m = new Message();
 			m.setMessagefrom(from);
 			for (OProperty<?> p : e.getProperties()) {
-				if (p.getName().equals("messgaeto")) {
+				if (p.getName().equals("mto")) {
 					m.setMessageto((Integer) p.getValue());
-				} else if (p.getName().equals("messagetime")) {
+				} else if (p.getName().equals("mtime")) {
 					m.setMessagetime((LocalDateTime) p.getValue());
 				} else if (p.getName().equals("content")) {
 					m.setContent((String) p.getValue());

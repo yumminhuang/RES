@@ -1,7 +1,7 @@
 package edu.neu.pattern;
 
 public class Apartment {
-
+	
 	private int id;
 
 	private String address;
@@ -52,4 +52,13 @@ public class Apartment {
 		this.owner = owner;
 	}
 
+	public String toString(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("id:" + id + "\n")
+		.append("Address:" + address + "\n")
+		.append("Area:" + area + "\n")
+		.append("number:" + number + "\n")
+		.append("owner:" + owner + "\n");
+		return sb.toString();
+	}
 }

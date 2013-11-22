@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.util.Date;
 
 
@@ -15,17 +17,18 @@ public class Schedule implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	@Lob
 	private String content;
 
-	private int schedulefrom;
+	private int sfrom;
 
 	@Temporal(TemporalType.DATE)
-	private Date scheduletime;
+	private Date stime;
 
-	private int scheduleto;
+	private int sto;
 
 	public Schedule() {
 	}
@@ -46,28 +49,28 @@ public class Schedule implements Serializable {
 		this.content = content;
 	}
 
-	public int getSchedulefrom() {
-		return this.schedulefrom;
+	public int getSfrom() {
+		return this.sfrom;
 	}
 
-	public void setSchedulefrom(int schedulefrom) {
-		this.schedulefrom = schedulefrom;
+	public void setSfrom(int sfrom) {
+		this.sfrom = sfrom;
 	}
 
-	public Date getScheduletime() {
-		return this.scheduletime;
+	public Date getStime() {
+		return this.stime;
 	}
 
-	public void setScheduletime(Date scheduletime) {
-		this.scheduletime = scheduletime;
+	public void setStime(Date stime) {
+		this.stime = stime;
 	}
 
-	public int getScheduleto() {
-		return this.scheduleto;
+	public int getSto() {
+		return this.sto;
 	}
 
-	public void setScheduleto(int scheduleto) {
-		this.scheduleto = scheduleto;
+	public void setSto(int sto) {
+		this.sto = sto;
 	}
 
 }
