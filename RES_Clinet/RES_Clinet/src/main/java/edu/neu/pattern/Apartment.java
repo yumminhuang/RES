@@ -6,7 +6,7 @@ public class Apartment {
 
 	private String address;
 
-	private double area;
+	private int area;
 
 	private String number;
 
@@ -28,11 +28,11 @@ public class Apartment {
 		this.address = address;
 	}
 
-	public double getArea() {
+	public int getArea() {
 		return this.area;
 	}
 
-	public void setArea(double area) {
+	public void setArea(int area) {
 		this.area = area;
 	}
 

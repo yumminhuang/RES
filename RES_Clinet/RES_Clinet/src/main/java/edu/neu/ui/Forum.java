@@ -14,15 +14,19 @@ import java.util.List;
 import java.util.Map;
 
 import edu.neu.res_clinet.R;
+import edu.neu.util.UserHandler;
 
-public class MeetingList extends ListActivity {
+/**
+ * Created by yummin on 13-11-22.
+ */
+public class Forum extends ListActivity {
+
     private final static int countMax = 1000;
     private int count;
     private String[] tmp = new String[10];
-    private String[] topic = new String[countMax];
-    private String[] staff = new String[countMax];
-    private String[] time = new String[countMax];
     private String[] text = new String[countMax];
+    private String[] topic = new String[countMax];
+    private String[] user = new String[countMax];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,9 +39,7 @@ public class MeetingList extends ListActivity {
         for (int i = 0; i < count; i++) {
             tmp = text[i].split("#");
             topic[i] = tmp[0];
-            staff[i] = tmp[1];
-            time[i] = tmp[2];
-            text[i] = tmp[3];
+            user[i] = UserHandler.getNameFromID(Integer.parseInt(tmp[1]));
         }
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
@@ -50,25 +52,26 @@ public class MeetingList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
         showDialog(R.string.topic + topic[pos] + "\n\n" +
-                R.string.with + staff[pos] + "\n\n" +
-                R.string.time + staff[pos] + "\n\n" +
-                R.string.content + text[pos] + "\n");
+                   R.string.postby + user[pos] + "\n");
     }
 
+    /**
+     * @return
+     */
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
         for (int i = 0; i < count; i++) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.meeting + (i + 1) + "：" + time[i]);
-            map.put("subList", R.string.with + staff[i]);
+            map.put("mainList", R.string.topic + (i + 1) + "：" + topic[i]);
+            map.put("subList", R.string.postby + user[i]);
             list.add(map);
         }
         return list;
     }
 
     /**
-     * Show meeting information message
+     * Show apartment information message
      *
      * @param msg
      */

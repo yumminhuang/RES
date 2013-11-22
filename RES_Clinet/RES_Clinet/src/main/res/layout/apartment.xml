@@ -86,38 +86,56 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         android:gravity="center">
+
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <TableRow>
+
                 <TextView
-                    android:text="With"
+                    android:text="@string/address"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
+
                 <EditText
-                    android:id="@+id/ET_Apartment_ShStaff"
+                    android:id="@+id/ET_Apartment_ShAddress"
                     android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:height="45px"
-                    android:width="220px"
-                    />
+                    android:width="220px" />
             </TableRow>
+
             <TableRow>
+
+                <TextView
+                    android:text="@string/area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/ET_Apartment_ShArea"
+                    android:text=""
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="45px"
+                    android:width="220px" />
+            </TableRow>
+
+            <TableRow>
+
                 <Button
                     android:text="@string/reset"
                     android:id="@+id/BU_Apartment_ShReset"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
+
                 <Button
                     android:text="@string/search"
                     android:id="@+id/BU_Apartment_ShOk"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
     </LinearLayout>

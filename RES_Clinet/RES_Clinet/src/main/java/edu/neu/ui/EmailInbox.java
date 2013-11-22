@@ -20,7 +20,6 @@ public class EmailInbox extends ListActivity {
     private int count;
     private String[] tmp = new String[10];
     private String[] sender = new String[countMax];
-    private String[] key = new String[countMax];
     private String[] topic = new String[countMax];
     private String[] text = new String[countMax];
 
@@ -35,14 +34,13 @@ public class EmailInbox extends ListActivity {
         for (int i = 0; i < count; i++) {
             tmp = text[i].split("#");
             sender[i] = tmp[0];
-            key[i] = tmp[1];
             topic[i] = tmp[2];
             text[i] = tmp[3];
         }
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
                 R.layout.resultlist, new String[]{"mainList", "subList"},
-                new int[]{R.id.meeting_list_mainList, R.id.meeting_list_subList});
+                new int[]{R.id.list_mainList, R.id.list_subList});
         setListAdapter(adapter);
     }
 

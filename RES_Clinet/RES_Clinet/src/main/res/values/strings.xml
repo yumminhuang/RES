@@ -37,6 +37,8 @@
     <string name="address">Address</string>
     <string name="number">Number</string>
     <string name="area">Area</string>
+    <string name="apt">Apartment</string>
+    <string name="postby">Post by:</string>
 
 
 </resources>

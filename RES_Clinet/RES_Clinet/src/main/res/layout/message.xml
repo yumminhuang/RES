@@ -4,7 +4,7 @@
     android:layout_height="fill_parent">
 
     <LinearLayout
-        android:id="@+id/Email_layout_outbox"
+        android:id="@+id/Email_layout_send"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:gravity="center">
@@ -76,62 +76,4 @@
             </TableRow>
         </TableLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/Email_layout_search"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:stretchColumns="1">
-
-            <TableRow>
-
-                <TextView
-                    android:text="@string/keyword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:id="@+id/ET_Email_ShKey"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:height="30dp"
-                    android:width="146dp" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:text="@string/from"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:id="@+id/ET_Email_ShSender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:height="30dp"
-                    android:width="146dp" />
-            </TableRow>
-
-            <TableRow>
-
-                <Button
-                    android:text="@string/reset"
-                    android:id="@+id/BU_Email_ShReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:text="@string/search"
-                    android:id="@+id/BU_Email_ShSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
-
 </FrameLayout>

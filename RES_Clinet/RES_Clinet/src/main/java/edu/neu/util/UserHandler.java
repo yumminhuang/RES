@@ -13,90 +13,96 @@ public class UserHandler extends AbstractHandler {
 
 	private static String entitySet = "User";
 
-	/**
-	 * TODO: Add user id to Fromuser and Touser table. Can we use a trigger to implement this?
-	 * @param name
-	 * @param address
-	 * @param phone
-	 * @param email
-	 * @param type
-	 */
-	public static void addUser(String name, String address, int phone,
-			String email, String type) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		OEntity newUser = c.createEntity(entitySet)
-				.properties(OProperties.string("name", name))
-				.properties(OProperties.int32("telphone", phone))
-				.properties(OProperties.string("Address", address))
-				.properties(OProperties.string("email", email))
-				.properties(OProperties.string("type", type))
-				.execute();
-		reportEntity("created", newUser);
-	}
+    /**
+     * TODO fix
+     * @param name
+     * @param address
+     * @param phone
+     * @param email
+     * @param type
+     */
+    public static void addUser(String name, String address, String phone,
+                               String email, String type) {
+        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        OEntity newUser = c.createEntity(entitySet)
+                .properties(OProperties.string("name", name))
+                .properties(OProperties.string("phone", phone))
+                .properties(OProperties.string("address", address))
+                .properties(OProperties.string("email", email))
+                .properties(OProperties.string("type", type))
+                .execute();
+        reportEntity("created", newUser);
+    }
 
-	/**
-	 * 
-	 * @param user
-	 * @param name
-	 * @param address
-	 * @param phone
-	 * @param email
-	 * @param type
-	 */
-	public static void updateUser(OEntity user, String name, String address,
-			int phone, String email, String type) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		c.updateEntity(user).properties(OProperties.string("name", name))
-				.properties(OProperties.int32("telphone", phone))
-				.properties(OProperties.string("Address", address))
-				.properties(OProperties.string("email", email))
-				.properties(OProperties.string("type", type))
-				.execute();
-	}
+    /**
+     *
+     * @param id
+     * @param name
+     * @param address
+     * @param phone
+     * @param email
+     * @param type
+     */
+    public static void updateUser(int id, String name, String address,
+                                  String phone, String email, String type) {
+        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        c.mergeEntity(entitySet, id).properties(OProperties.string("name", name))
+                .properties(OProperties.string("phone", phone))
+                .properties(OProperties.string("address", address))
+                .properties(OProperties.string("email", email))
+                .properties(OProperties.string("type", type))
+                .execute();
+    }
 
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 * @return
-	 */
-	public static User findUser(int id) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		OEntity userEntity = c.getEntity(entitySet, id).execute();
-		User user = new User();
-		user.setId(id);
-		for (OProperty<?> p : userEntity.getProperties()) {
-			if (p.getName().equals("address")) {
-				user.setAddress((String) p.getValue());
-			} else if (p.getName().equals("telphone")) {
-				user.setTelphone((Integer) p.getValue());
-			} else if (p.getName().equals("name")) {
-				user.setName((String) p.getValue());
-			} else if (p.getName().equals("email")) {
-				user.setEmail((String) p.getValue());
-			} else if (p.getName().equals("type")) {
-				user.setType((String) p.getValue());
-			}
-		}
-		return user;
-	}
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public static User findUser(int id) {
+        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        OEntity userEntity = c.getEntity(entitySet, id).execute();
+        User user = new User();
+        user.setId(id);
+        for (OProperty<?> p : userEntity.getProperties()) {
+            if (p.getName().equals("address")) {
+                user.setAddress((String) p.getValue());
+            } else if (p.getName().equals("phone")) {
+                user.setPhone((String) p.getValue());
+            } else if (p.getName().equals("name")) {
+                user.setName((String) p.getValue());
+            } else if (p.getName().equals("email")) {
+                user.setEmail((String) p.getValue());
+            } else if (p.getName().equals("type")) {
+                user.setType((String) p.getValue());
+            }
+        }
+        return user;
+    }
 
-	/**
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public static int getIDFromName(String name) {
-		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
-		OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'").select("id").execute().first();
-		return (Integer) id.getProperties().get(0).getValue();
-	}
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public static int getIDFromName(String name) {
+        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'").select("id").execute().first();
+        return (Integer) id.getProperties().get(0).getValue();
+    }
+
+
+    public static String getNameFromID(int id){
+        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        OEntity userEntity = c.getEntity(entitySet, id).execute();
+        return (String) userEntity.getProperty("name").getValue();
+    }
 
 	public static void main(String[] args) {
 //		User u = findUser(17);
 //		System.out.println(u.toString());
 //		System.out.println("Johnson's ID is" + getIDFromName("Johnson"));
-		addUser("name", "address", 110, "a@m", "T");
+		addUser("name", "address", "110", "a@m", "T");
 	}
 
 }

@@ -51,7 +51,9 @@ public class Login extends Activity {
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {}});
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
         AlertDialog alert = builder.create();
         alert.show();
     }
@@ -97,12 +99,12 @@ public class Login extends Activity {
         // TODO Auto-generated method stub
         new AlertDialog.Builder(Login.this).setTitle(R.string.exit)
                 .setMessage(R.string.app_menu_surequit).setPositiveButton(R.string.yes,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        }).setNegativeButton(R.string.cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

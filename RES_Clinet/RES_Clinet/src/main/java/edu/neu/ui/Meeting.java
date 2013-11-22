@@ -11,12 +11,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TabHost;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -24,10 +20,8 @@ import edu.neu.res_clinet.R;
 
 
 public class Meeting extends TabActivity {
-    private TabHost myTabhost;
     private EditText AddTopic, AddStaff, AddText, SearchStaff;
     private DatePicker AddDate;
-    private TimePicker AddTime;
     private Button AddReset, AddOk, SearchReset, SearchOk;
     private String strAddTopic, strAddStaff, strAddText, strSearchKey;
     private Date date;
@@ -38,11 +32,11 @@ public class Meeting extends TabActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myTabhost = this.getTabHost();
+        TabHost myTabhost = this.getTabHost();
         LayoutInflater.from(this).inflate(R.layout.meeting, myTabhost.getTabContentView(), true);
 
 		/*
-		 *  Add Meeting：
+         *  Add Meeting：
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("One")
                 .setIndicator("Add", getResources().getDrawable(R.drawable.add))
@@ -52,7 +46,6 @@ public class Meeting extends TabActivity {
         AddStaff = (EditText) findViewById(R.id.ET_Meeting_AdStaff);
         AddText = (EditText) findViewById(R.id.ET_Meeting_AdText);
         AddDate = (DatePicker) findViewById(R.id.meeting_datePicker);
-        AddTime = (TimePicker) findViewById(R.id.meeting_timePicker);
         AddReset = (Button) findViewById(R.id.BU_Meeting_AdReset);
         AddOk = (Button) findViewById(R.id.BU_Meeting_AdOk);
 
@@ -64,14 +57,6 @@ public class Meeting extends TabActivity {
                 // 获取一个日历对象，并初始化为当前选中的时间
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, monthOfYear, dayOfMonth);
-            }
-        });
-
-        AddTime.setIs24HourView(true);
-        AddTime.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay,
-                                      int minute) {
             }
         });
 
