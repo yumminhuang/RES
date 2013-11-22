@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.neu.pattern.Apartment;
 import edu.neu.res_clinet.R;
 import edu.neu.util.UserHandler;
 
@@ -21,30 +22,14 @@ import edu.neu.util.UserHandler;
  */
 public class ApartmentList extends ListActivity {
 
-    private final static int countMax = 1000;
-    private int count;
-    private String[] tmp = new String[10];
-    private String[] text = new String[countMax];
-    private String[] address = new String[countMax];
-    private String[] area = new String[countMax];
-    private String[] number = new String[countMax];
-    private String[] owner = new String[countMax];
+    private List<Apartment> apartments;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getIntent().getExtras();
-        count = bundle.getInt("count");
-        text = bundle.getStringArray("msg");
-
-        for (int i = 0; i < count; i++) {
-            tmp = text[i].split("#");
-            address[i] = tmp[0];
-            area[i] = tmp[1];
-            number[i] = tmp[2];
-            owner[i] = UserHandler.getNameFromID(Integer.parseInt(tmp[3]));
-        }
+        apartments = bundle.getParcelableArrayList("apts");
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
                 R.layout.resultlist, new String[]{"mainList", "subList"},
@@ -55,9 +40,10 @@ public class ApartmentList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
-        showDialog(R.string.address + address[pos] + "\n\n" +
-                R.string.number + number[pos] + "\n\n" +
-                R.string.area + area[pos] + "\n");
+        showDialog(R.string.address + apartments.get(pos).getAddress() + "\n\n" +
+                R.string.number + apartments.get(pos).getNumber() + "\n\n" +
+                R.string.area + apartments.get(pos).getArea() + "\n\n" +
+                R.string.owner + UserHandler.getNameFromID(apartments.get(pos).getOwner()));
     }
 
     /**
@@ -66,10 +52,10 @@ public class ApartmentList extends ListActivity {
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
-        for (int i = 0; i < count; i++) {
+        for (Apartment a : apartments) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.apt + (i + 1) + "：" + address[i]);
-            map.put("subList", R.string.number + number[i]);
+            map.put("mainList", R.string.apt + a.getAddress() + " " + a.getNumber());
+            map.put("subList", R.string.area + a.getArea());
             list.add(map);
         }
         return list;

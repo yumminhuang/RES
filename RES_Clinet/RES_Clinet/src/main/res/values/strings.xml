@@ -30,15 +30,16 @@
     <string name="identity">Identity: </string>
     <string name="date">Date: </string>
     <string name="time">Time: </string>
-    <string name="meeting">Meeting</string>
+    <string name="meeting">Meeting: </string>
     <string name="topic">Topic: </string>
     <string name="with">With: </string>
-    <string name="message">Message</string>
-    <string name="address">Address</string>
-    <string name="number">Number</string>
-    <string name="area">Area</string>
-    <string name="apt">Apartment</string>
+    <string name="message">Message: </string>
+    <string name="address">Address: </string>
+    <string name="number">Number: </string>
+    <string name="area">Area: </string>
+    <string name="apt">Apartment: </string>
     <string name="postby">Post by:</string>
+    <string name="owner">Owner: </string>
 
 
 </resources>

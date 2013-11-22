@@ -2,86 +2,88 @@ package edu.neu.pattern;
 
 import org.joda.time.LocalDateTime;
 
-public class Reply {
+import java.io.Serializable;
 
-	private int id;
+public class Reply  implements Serializable {
 
-	private String content;
+    private int id;
 
-	private String image1;
+    private String content;
 
-	private String image2;
-	
-	private LocalDateTime replytime;
+    private String image1;
 
-	private int topicId;
+    private String image2;
 
-	private int userId;
+    private LocalDateTime replytime;
 
-	public int getId() {
-		return this.id;
-	}
+    private int topicId;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private int userId;
 
-	public String getContent() {
-		return this.content;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getImage1() {
-		return this.image1;
-	}
+    public String getContent() {
+        return this.content;
+    }
 
-	public void setImage1(String image1) {
-		this.image1 = image1;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public String getImage2() {
-		return this.image2;
-	}
+    public String getImage1() {
+        return this.image1;
+    }
 
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
 
-	public LocalDateTime getReplytime() {
-		return this.replytime;
-	}
+    public String getImage2() {
+        return this.image2;
+    }
 
-	public void setReplytime(LocalDateTime replytime) {
-		this.replytime = replytime;
-	}
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
 
-	public int getTopicId() {
-		return this.topicId;
-	}
+    public LocalDateTime getReplytime() {
+        return this.replytime;
+    }
 
-	public void setTopicId(int topicId) {
-		this.topicId = topicId;
-	}
+    public void setReplytime(LocalDateTime replytime) {
+        this.replytime = replytime;
+    }
 
-	public int getUserId() {
-		return this.userId;
-	}
+    public int getTopicId() {
+        return this.topicId;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	
-	public String toString(){
-		StringBuffer sb = new StringBuffer();
-		sb.append("id:" + id + "\n")
-		.append("content:" + content + "\n")
-		.append("Topic:" + topicId + "\n")
-		.append("User:" + userId + "\n")
-		.append("Time:" + replytime + "\n");
-		return sb.toString();
-	}
+    public void setTopicId(int topicId) {
+        this.topicId = topicId;
+    }
+
+    public int getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("id:" + id + "\n")
+                .append("content:" + content + "\n")
+                .append("Topic:" + topicId + "\n")
+                .append("User:" + userId + "\n")
+                .append("Time:" + replytime + "\n");
+        return sb.toString();
+    }
 
 }

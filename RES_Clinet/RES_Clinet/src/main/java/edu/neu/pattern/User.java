@@ -1,6 +1,8 @@
 package edu.neu.pattern;
 
-public class User{
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private int id;
 
@@ -62,7 +64,7 @@ public class User{
         this.type = type;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("id:" + id + "\n")
                 .append("name:" + name + "\n")

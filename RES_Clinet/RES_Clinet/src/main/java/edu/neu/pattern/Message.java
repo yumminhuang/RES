@@ -2,66 +2,68 @@ package edu.neu.pattern;
 
 import org.joda.time.LocalDateTime;
 
-public class Message {
+import java.io.Serializable;
 
-	private int id;
+public class Message  implements Serializable {
 
-	private String content;
+    private int id;
 
-	private int messagefrom;
+    private String content;
 
-	private LocalDateTime messagetime;
+    private int messagefrom;
 
-	private int messageto;
+    private String messagetime;
 
-	public int getId() {
-		return this.id;
-	}
+    private int messageto;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public String getContent() {
-		return this.content;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public String getContent() {
+        return this.content;
+    }
 
-	public int getMessagefrom() {
-		return this.messagefrom;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setMessagefrom(int messagefrom) {
-		this.messagefrom = messagefrom;
-	}
+    public int getMessagefrom() {
+        return this.messagefrom;
+    }
 
-	public LocalDateTime getMessagetime() {
-		return this.messagetime;
-	}
+    public void setMessagefrom(int messagefrom) {
+        this.messagefrom = messagefrom;
+    }
 
-	public void setMessagetime(LocalDateTime messagetime) {
-		this.messagetime = messagetime;
-	}
+    public String getMessagetime() {
+        return this.messagetime;
+    }
 
-	public int getMessageto() {
-		return this.messageto;
-	}
+    public void setMessagetime(String messagetime) {
+        this.messagetime = messagetime;
+    }
 
-	public void setMessageto(int messageto) {
-		this.messageto = messageto;
-	}
-	
-	public String toString(){
-		StringBuffer sb = new StringBuffer();
-		sb.append("id:" + id + "\n")
-		.append("content:" + content + "\n")
-		.append("From:" + messagefrom + "\n")
-		.append("To:" + messageto + "\n")
-		.append("Time:" + messagetime + "\n");
-		return sb.toString();
-	}
+    public int getMessageto() {
+        return this.messageto;
+    }
+
+    public void setMessageto(int messageto) {
+        this.messageto = messageto;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("id:" + id + "\n")
+                .append("content:" + content + "\n")
+                .append("From:" + messagefrom + "\n")
+                .append("To:" + messageto + "\n")
+                .append("Time:" + messagetime + "\n");
+        return sb.toString();
+    }
 
 }

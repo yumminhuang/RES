@@ -1,67 +1,106 @@
 package edu.neu.pattern;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.joda.time.LocalDateTime;
 
-public class Schedule{
+public class Schedule  implements Parcelable{
 
-	private int id;
+    private static final long serialVersionUID = 1L;
 
-	private String content;
+    private int id;
 
-	private int schedulefrom;
+    private String content;
 
-	private LocalDateTime scheduletime;
+    private int schedulefrom;
 
-	private int scheduleto;
+    private String scheduletime;
 
-	public int getId() {
-		return this.id;
-	}
+    private int scheduleto;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public String getContent() {
-		return this.content;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public String getContent() {
+        return this.content;
+    }
 
-	public int getSchedulefrom() {
-		return this.schedulefrom;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setSchedulefrom(int schedulefrom) {
-		this.schedulefrom = schedulefrom;
-	}
+    public int getSchedulefrom() {
+        return this.schedulefrom;
+    }
 
-	public LocalDateTime getScheduletime() {
-		return this.scheduletime;
-	}
+    public void setSchedulefrom(int schedulefrom) {
+        this.schedulefrom = schedulefrom;
+    }
 
-	public void setScheduletime(LocalDateTime scheduletime) {
-		this.scheduletime = scheduletime;
-	}
+    public String getScheduletime() {
+        return this.scheduletime;
+    }
 
-	public int getScheduleto() {
-		return this.scheduleto;
-	}
+    public void setScheduletime(String scheduletime) {
+        this.scheduletime = scheduletime;
+    }
 
-	public void setScheduleto(int scheduleto) {
-		this.scheduleto = scheduleto;
-	}
-	
-	public String toString(){
-		StringBuffer sb = new StringBuffer();
-		sb.append("id:" + id + "\n")
-		.append("content:" + content + "\n")
-		.append("From:" + schedulefrom + "\n")
-		.append("To:" + scheduleto + "\n")
-		.append("Time:" + scheduletime + "\n");
-		return sb.toString();
-	}
+    public int getScheduleto() {
+        return this.scheduleto;
+    }
+
+    public void setScheduleto(int scheduleto) {
+        this.scheduleto = scheduleto;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("id:" + id + "\n")
+                .append("content:" + content + "\n")
+                .append("From:" + schedulefrom + "\n")
+                .append("To:" + scheduleto + "\n")
+                .append("Time:" + scheduletime + "\n");
+        return sb.toString();
+    }
+
+    private Schedule(Parcel in) {
+        id = in.readInt();
+        content = in.readString();
+        schedulefrom = in.readInt();
+        scheduleto = in.readInt();
+        scheduletime = in.readString();
+
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
+        out.writeString(content);
+        out.writeInt(schedulefrom);
+        out.writeInt(scheduleto);
+        out.writeString(scheduletime);
+    }
+
+    public static final Parcelable.Creator<Schedule> CREATOR
+            = new Parcelable.Creator<Schedule>() {
+
+        public Schedule createFromParcel(Parcel in) {
+            return new Schedule(in);
+        }
+
+        public Schedule[] newArray(int size) {
+            return new Schedule[size];
+        }
+    };
 
 }

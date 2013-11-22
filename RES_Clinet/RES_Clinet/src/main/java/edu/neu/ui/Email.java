@@ -13,12 +13,22 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.util.List;
+
+import edu.neu.pattern.Message;
 import edu.neu.res_clinet.R;
+import edu.neu.util.MessageHandler;
 
 public class Email extends TabActivity {
     private EditText SendReceiver, SendTopic, SendText;
     private Button SendReset, SendSend;
     private String strSendReceiver, strSendTopic, strSendText;
+
+    private final static String PrKPath = "/sdcard/oh!data/id.dat";
 
     /**
      * Called when the activity is first created.
@@ -65,14 +75,13 @@ public class Email extends TabActivity {
      *  初始化收信箱。
      */
     public Intent initInbox() {
+        int id = 1;//readID();
+        List<Message> messages = MessageHandler.getInbox(id);
+
         Intent intent = new Intent(Email.this, EmailInbox.class);
-
-        String t[] = new String[1];
         Bundle bundle = new Bundle();
-        bundle.putInt("count", 0);
-        bundle.putStringArray("msg", t);
+        bundle.putSerializable("inbox", (Serializable) messages);
         intent.putExtras(bundle);
-
         return intent;
     }
 
@@ -86,6 +95,21 @@ public class Email extends TabActivity {
         intent.putExtras(bundle);
 
         return intent;
+    }
+
+    /*
+	 *
+	 */
+    private int readID(){
+        File file = new File(PrKPath);
+        try {
+            InputStream in = new FileInputStream(file);
+            int id = in.read();
+            return id;
+        } catch (Exception e) {
+            showDialog(R.string.error);
+        }
+        return 0;
     }
 
     /*

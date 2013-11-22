@@ -61,6 +61,12 @@ public class Apartment extends TabActivity {
         // 设置确定按钮。
         SearchReset.setOnClickListener(new SearchResetListener());
         SearchOk.setOnClickListener(new SearchOkListener());
+
+//        Intent intent = Intent(Apartment.this, ApartmentList.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelableArrayList("apts", apartments);
+//        intent.putExtras(bundle);
+//        startActivity(intent);
     }
 
     /*

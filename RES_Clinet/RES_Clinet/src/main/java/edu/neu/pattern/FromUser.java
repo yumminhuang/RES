@@ -1,15 +1,17 @@
 package edu.neu.pattern;
 
-public class FromUser {;
+import java.io.Serializable;
 
-	private int id;
+public class FromUser {
 
-	public int getId() {
-		return this.id;
-	}
+    private int id;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 }

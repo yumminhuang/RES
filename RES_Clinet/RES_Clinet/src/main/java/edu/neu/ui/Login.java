@@ -142,41 +142,42 @@ public class Login extends Activity {
             // Get user's id and password。
             userId = id_Edit.getText().toString().trim();
             password = passw_Edit.getText().toString().trim();
+            /*
             // 判断账号密码是否完整。
-
-
-            //	if(userId.equals("") || password.equals("")){
-            //		Toast.makeText(Login.this, "请将您的账号密码填写完整", Toast.LENGTH_LONG).show();
-            //		return;
-            //	}
-            // 连接服务器。
-            //try{
-            //		Socket server = util.getCon();
-            //		BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            //		PrintWriter out = new PrintWriter(new BufferedWriter(
-            //				new OutputStreamWriter(server.getOutputStream())), true);
-            // 将登录信息发送到服务器。
-            //		out.println("login");
-            //		out.println(new String(Base64.encode(userId.getBytes())));
-            //		out.println(new String(Base64.encode(password.getBytes())));
-            // 接收处理服务器返回的信息。
-            //		String res = in.readLine();
-            //		if(res.equals("success")){
-            //			util.setUserId(userId);
-            Intent intent = new Intent();
-            intent.setClass(Login.this, HomePage.class);
-            startActivity(intent);
-            //} else {
-            //	showDialog("用户名或者密码错误，请重新输入！");
-            //	id_Edit.setText("");
-            //	passw_Edit.setText("");
-            //}
-            //out.close();
-            //in.close();
-            //server.close();
-            //} catch (Exception e){
-            //	showDialog("连接不上服务器！"+e);
-            //}
+            if (userId.equals("") || password.equals("")) {
+                Toast.makeText(Login.this, "请将您的账号密码填写完整", Toast.LENGTH_LONG).show();
+                return;
+            }
+            //连接服务器。
+            try {
+                Socket server = util.getCon();
+                BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
+                PrintWriter out = new PrintWriter(new BufferedWriter(
+                        new OutputStreamWriter(server.getOutputStream())), true);
+                //将登录信息发送到服务器。
+                out.println("login");
+                out.println(new String(Base64.encode(userId.getBytes())));
+                out.println(new String(Base64.encode(password.getBytes())));
+                //接收处理服务器返回的信息。
+                String res = in.readLine();
+                if (res.equals("success")) {
+                    util.setUserId(userId);
+                    */
+                    Intent intent = new Intent();
+                    intent.setClass(Login.this, HomePage.class);
+                    startActivity(intent);
+            /*
+                } else {
+                    showDialog("用户名或者密码错误，请重新输入！");
+                    id_Edit.setText("");
+                    passw_Edit.setText("");
+                }
+                out.close();
+                in.close();
+                server.close();
+            } catch (Exception e) {
+                showDialog("连接不上服务器！" + e);
+            }*/
         }
     }
 }

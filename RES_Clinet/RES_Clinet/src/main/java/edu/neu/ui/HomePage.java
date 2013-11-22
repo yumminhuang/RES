@@ -23,7 +23,7 @@ public class HomePage extends Activity {
             "Map", "Setting", "Favorites"};
     private Integer[] mIcons = {
             R.drawable.house, R.drawable.meeting, R.drawable.message,
-            R.drawable.calendar, R.drawable.user, R.drawable.search,
+            R.drawable.forum, R.drawable.user, R.drawable.search,
             R.drawable.map, R.drawable.setting, R.drawable.favorites};
 
     /**
@@ -45,7 +45,8 @@ public class HomePage extends Activity {
                                     int arg2, long arg3) {
                 // TODO Auto-generated method stub
                 if (arg2 == 0) {
-                    Toast.makeText(HomePage.this, "House", Toast.LENGTH_SHORT).show();
+                    Intent intent3 = new Intent(HomePage.this, Apartment.class);
+                    startActivity(intent3);
                 } else if (arg2 == 1) {
                     Intent intent0 = new Intent(HomePage.this, Meeting.class);
                     startActivity(intent0);
@@ -53,7 +54,8 @@ public class HomePage extends Activity {
                     Intent intent1 = new Intent(HomePage.this, Email.class);
                     startActivity(intent1);
                 } else if (arg2 == 3) {
-                    Toast.makeText(HomePage.this, "Forum", Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(HomePage.this, Forum.class);
+                    startActivity(intent2);
                 } else if (arg2 == 4) {
                     Toast.makeText(HomePage.this, "Account", Toast.LENGTH_SHORT).show();
                 } else if (arg2 == 5) {
@@ -67,11 +69,9 @@ public class HomePage extends Activity {
                 }
             }
         });
-        // marketMainView.setAdapter(new IconAdapter(this));
     }
 
     private List<Map<String, Object>> fillMap() {
-        // TODO Auto-generated method stub
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0, j = itemName.length; i < j; i++) {
             Map<String, Object> map = new HashMap<String, Object>();

@@ -1,64 +1,101 @@
 package edu.neu.pattern;
 
-public class Apartment {
-	
-	private int id;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-	private String address;
+public class Apartment implements Parcelable {
 
-	private int area;
+    private int id;
 
-	private String number;
+    private String address;
 
-	private int owner;
+    private int area;
 
-	public int getId() {
-		return this.id;
-	}
+    private String number;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    private int owner;
 
-	public String getAddress() {
-		return this.address;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getArea() {
-		return this.area;
-	}
+    public String getAddress() {
+        return this.address;
+    }
 
-	public void setArea(int area) {
-		this.area = area;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public String getNumber() {
-		return this.number;
-	}
+    public int getArea() {
+        return this.area;
+    }
 
-	public void setNumber(String number) {
-		this.number = number;
-	}
+    public void setArea(int area) {
+        this.area = area;
+    }
 
-	public int getOwner() {
-		return this.owner;
-	}
+    public String getNumber() {
+        return this.number;
+    }
 
-	public void setOwner(int owner) {
-		this.owner = owner;
-	}
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
-	public String toString(){
-		StringBuffer sb = new StringBuffer();
-		sb.append("id:" + id + "\n")
-		.append("Address:" + address + "\n")
-		.append("Area:" + area + "\n")
-		.append("number:" + number + "\n")
-		.append("owner:" + owner + "\n");
-		return sb.toString();
-	}
+    public int getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(int owner) {
+        this.owner = owner;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("id:" + id + "\n")
+                .append("Address:" + address + "\n")
+                .append("Area:" + area + "\n")
+                .append("number:" + number + "\n")
+                .append("owner:" + owner + "\n");
+        return sb.toString();
+    }
+
+    private Apartment(Parcel in) {
+        id = in.readInt();
+        address = in.readString();
+        area = in.readInt();
+        number = in.readString();
+        owner = in.readInt();
+
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
+        out.writeString(address);
+        out.writeInt(area);
+        out.writeString(number);
+        out.writeInt(owner);
+    }
+
+    public static final Parcelable.Creator<Apartment> CREATOR
+            = new Parcelable.Creator<Apartment>() {
+
+        public Apartment createFromParcel(Parcel in) {
+            return new Apartment(in);
+        }
+
+        public Apartment[] newArray(int size) {
+            return new Apartment[size];
+        }
+    };
 }

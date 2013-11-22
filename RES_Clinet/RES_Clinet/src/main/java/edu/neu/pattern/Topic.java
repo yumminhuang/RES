@@ -1,71 +1,73 @@
 package edu.neu.pattern;
 
-public class Topic {
+import java.io.Serializable;
 
-	private int id;
+public class Topic  implements Serializable {
 
-	private String content;
+    private int id;
 
-	private String image1;
+    private String content;
 
-	private String image2;
+    private String image1;
 
-	private int postby;
+    private String image2;
 
-	private String title;
+    private int postby;
 
-	public int getId() {
-		return this.id;
-	}
+    private String title;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return this.id;
+    }
 
-	public String getContent() {
-		return this.content;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public String getContent() {
+        return this.content;
+    }
 
-	public String getImage1() {
-		return this.image1;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setImage1(String image1) {
-		this.image1 = image1;
-	}
+    public String getImage1() {
+        return this.image1;
+    }
 
-	public String getImage2() {
-		return this.image2;
-	}
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
 
-	public void setImage2(String image2) {
-		this.image2 = image2;
-	}
+    public String getImage2() {
+        return this.image2;
+    }
 
-	public int getPostby() {
-		return this.postby;
-	}
+    public void setImage2(String image2) {
+        this.image2 = image2;
+    }
 
-	public void setPostby(int postby) {
-		this.postby = postby;
-	}
+    public int getPostby() {
+        return this.postby;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public void setPostby(int postby) {
+        this.postby = postby;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return this.title;
+    }
 
-	public String toString(){
-		StringBuffer sb = new StringBuffer();
-		sb.append("Topic ID:" + id).append("\nTitle:" + title).
-		append("\nContent:" + content).append("\nPostby:" + postby);
-		return sb.toString();
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append("Topic ID:" + id).append("\nTitle:" + title).
+                append("\nContent:" + content).append("\nPostby:" + postby);
+        return sb.toString();
+    }
 }

@@ -5,7 +5,7 @@
     android:layout_height="fill_parent">
 
     <Button
-        android:text="设置IP"
+        android:text="IP"
         android:id="@+id/BU_Login_setIp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

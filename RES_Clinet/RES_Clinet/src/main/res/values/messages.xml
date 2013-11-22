@@ -13,7 +13,7 @@
     <string name="message_error">Please complete the message.</string>
     <string name="record_error">Please complete the record.</string>
     <string name="search_error">Please provide at least one condition.</string>
-    <string name="ip_error">Please provide server's ip</string>
+    <string name="ip_error">Please provide server\'s ip</string>
 
     <string name="add_mesage">Add record successfully!</string>
 

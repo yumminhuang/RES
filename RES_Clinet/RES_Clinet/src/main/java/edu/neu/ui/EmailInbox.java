@@ -13,30 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.neu.pattern.Message;
 import edu.neu.res_clinet.R;
 
 public class EmailInbox extends ListActivity {
-    private final static int countMax = 1000;
-    private int count;
-    private String[] tmp = new String[10];
-    private String[] sender = new String[countMax];
-    private String[] topic = new String[countMax];
-    private String[] text = new String[countMax];
+
+    private List<Message> messages;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getIntent().getExtras();
-        count = bundle.getInt("count");
-        text = bundle.getStringArray("msg");
-
-        for (int i = 0; i < count; i++) {
-            tmp = text[i].split("#");
-            sender[i] = tmp[0];
-            topic[i] = tmp[2];
-            text[i] = tmp[3];
-        }
+        messages = (List<Message>) bundle.getSerializable("inbox");
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
                 R.layout.resultlist, new String[]{"mainList", "subList"},
@@ -48,18 +37,17 @@ public class EmailInbox extends ListActivity {
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
 
-        showDialog(R.string.topic + topic[pos] + "\n\n" +
-                R.string.from + sender[pos] + "\n\n" +
-                R.string.content + text[pos] + "\n");
+        showDialog(R.string.from + messages.get(pos).getMessagefrom() + "\n\n" +
+                   R.string.content + messages.get(pos).getContent() + "\n");
     }
 
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
-        for (int i = 0; i < count; i++) {
+        for (Message m : messages) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.message + (i + 1) + "：" + topic[i]);
-            map.put("subList", R.string.from + sender[i]);
+            map.put("mainList", R.string.from + m.getMessagefrom());
+            map.put("subList", R.string.time + m.getMessagetime().toString("MM/DD/YYYY"));
             list.add(map);
         }
         return list;
