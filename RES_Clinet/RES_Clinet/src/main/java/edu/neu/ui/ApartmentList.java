@@ -24,6 +24,10 @@ public class ApartmentList extends ListActivity {
 
     private List<Apartment> apartments;
 
+    private String display(int id) {
+        return (String) this.getResources().getString(id);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +44,10 @@ public class ApartmentList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
-        showDialog(R.string.address + apartments.get(pos).getAddress() + "\n\n" +
-                R.string.number + apartments.get(pos).getNumber() + "\n\n" +
-                R.string.area + apartments.get(pos).getArea() + "\n\n" +
-                R.string.owner + UserHandler.getNameFromID(apartments.get(pos).getOwner()));
+        showDialog(display(R.string.address) + apartments.get(pos).getAddress() + "\n\n" +
+                display(R.string.number) + apartments.get(pos).getNumber() + "\n\n" +
+                display(R.string.area) + apartments.get(pos).getArea() + "\n\n" +
+                display(R.string.owner) + UserHandler.getNameFromID(apartments.get(pos).getOwner()));
     }
 
     /**
@@ -54,8 +58,8 @@ public class ApartmentList extends ListActivity {
         Map<String, Object> map = new HashMap<String, Object>();
         for (Apartment a : apartments) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.apt + a.getAddress() + " " + a.getNumber());
-            map.put("subList", R.string.area + a.getArea());
+            map.put("mainList", display(R.string.apt) + a.getAddress() + " " + a.getNumber());
+            map.put("subList", display(R.string.area) + a.getArea());
             list.add(map);
         }
         return list;

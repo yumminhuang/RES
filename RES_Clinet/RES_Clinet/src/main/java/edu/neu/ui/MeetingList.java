@@ -8,37 +8,34 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.neu.pattern.Schedule;
 import edu.neu.res_clinet.R;
+import edu.neu.util.UserHandler;
 
 public class MeetingList extends ListActivity {
-    private final static int countMax = 1000;
-    private int count;
-    private String[] tmp = new String[10];
-    private String[] topic = new String[countMax];
-    private String[] staff = new String[countMax];
-    private String[] time = new String[countMax];
-    private String[] text = new String[countMax];
+
+    private List<Schedule> meetings;
+
+    private final static String PrKPath = "/sdcard/oh!data/id.dat";
+
+    private String display(int id) {
+        return (String) this.getResources().getString(id);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getIntent().getExtras();
-        count = bundle.getInt("count");
-        text = bundle.getStringArray("msg");
-
-        for (int i = 0; i < count; i++) {
-            tmp = text[i].split("#");
-            topic[i] = tmp[0];
-            staff[i] = tmp[1];
-            time[i] = tmp[2];
-            text[i] = tmp[3];
-        }
+        meetings = bundle.getParcelableArrayList("mymeeting");
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
                 R.layout.resultlist, new String[]{"mainList", "subList"},
@@ -49,19 +46,44 @@ public class MeetingList extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
-        showDialog(R.string.topic + topic[pos] + "\n\n" +
-                R.string.with + staff[pos] + "\n\n" +
-                R.string.time + staff[pos] + "\n\n" +
-                R.string.content + text[pos] + "\n");
+        showDialog(display(R.string.time) + meetings.get(pos).getScheduletime() + "\n\n" +
+                display(R.string.with) + getStaffName(meetings.get(pos).getSchedulefrom(),
+                meetings.get(pos).getScheduleto()) + "\n\n" +
+                display(R.string.content) + meetings.get(pos).getContent() + "\n");
+    }
+
+    /*
+     *
+	 */
+    private int readID() {
+        File file = new File(PrKPath);
+        try {
+            InputStream in = new FileInputStream(file);
+            int id = in.read();
+            return id;
+        } catch (Exception e) {
+            showDialog(R.string.error);
+        }
+        return 0;
+    }
+
+    private String getStaffName(int from, int to) {
+        int id = 6;
+        readID();
+        if (from != id)
+            return UserHandler.getNameFromID(from);
+        else if (to != id)
+            return UserHandler.getNameFromID(to);
+        return null;
     }
 
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
-        for (int i = 0; i < count; i++) {
+        for (Schedule s : meetings) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.meeting + (i + 1) + "：" + time[i]);
-            map.put("subList", R.string.with + staff[i]);
+            map.put("mainList", display(R.string.meeting) + s.getScheduletime());
+            map.put("subList", display(R.string.with) + getStaffName(s.getSchedulefrom(), s.getScheduleto()));
             list.add(map);
         }
         return list;

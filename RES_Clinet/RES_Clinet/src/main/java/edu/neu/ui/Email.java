@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,10 +15,7 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.pattern.Message;
@@ -28,7 +27,7 @@ public class Email extends TabActivity {
     private Button SendReset, SendSend;
     private String strSendReceiver, strSendTopic, strSendText;
 
-    private final static String PrKPath = "/sdcard/oh!data/id.dat";
+    private static final String PREFS_NAME = "Preference";
 
     /**
      * Called when the activity is first created.
@@ -40,14 +39,14 @@ public class Email extends TabActivity {
         LayoutInflater.from(this).inflate(R.layout.message, myTabhost.getTabContentView(), true);
 
 		/*
-		 * Inbox
+         * Inbox
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("One")
                 .setIndicator("Inbox", getResources().getDrawable(R.drawable.inbox))
                 .setContent(initInbox()));
-		
+
 		/*
-		 * Outbox
+         * Outbox
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Two")
                 .setIndicator("Outbox", getResources().getDrawable(R.drawable.outbox))
@@ -75,41 +74,25 @@ public class Email extends TabActivity {
      *  初始化收信箱。
      */
     public Intent initInbox() {
-        int id = 1;//readID();
+        int id = readID();
         List<Message> messages = MessageHandler.getInbox(id);
 
         Intent intent = new Intent(Email.this, EmailInbox.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("inbox", (Serializable) messages);
+        bundle.putParcelableArrayList("inbox", (ArrayList<? extends Parcelable>) messages);
         intent.putExtras(bundle);
         return intent;
     }
 
     public Intent initOutbox() {
+        int id = readID();
+        List<Message> messages = MessageHandler.getOutbox(id);
+
         Intent intent = new Intent(Email.this, EmailOutbox.class);
-
-        String t[] = new String[1];
         Bundle bundle = new Bundle();
-        bundle.putInt("count", 0);
-        bundle.putStringArray("msg", t);
+        bundle.putParcelableArrayList("outbox", (ArrayList<? extends Parcelable>) messages);
         intent.putExtras(bundle);
-
         return intent;
-    }
-
-    /*
-	 *
-	 */
-    private int readID(){
-        File file = new File(PrKPath);
-        try {
-            InputStream in = new FileInputStream(file);
-            int id = in.read();
-            return id;
-        } catch (Exception e) {
-            showDialog(R.string.error);
-        }
-        return 0;
     }
 
     /*
@@ -156,6 +139,14 @@ public class Email extends TabActivity {
                 return;
             }
         }
+    }
+
+    /**
+     * @return
+     */
+    private int readID() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        return settings.getInt("UserID", 0);
     }
 
 }

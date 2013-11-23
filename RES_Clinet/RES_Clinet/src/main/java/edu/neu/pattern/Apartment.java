@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 public class Apartment implements Parcelable {
 
+    public Apartment() {
+    }
+
     private int id;
 
     private String address;

@@ -1,8 +1,10 @@
 package edu.neu.pattern;
 
-import java.io.Serializable;
 
-public class Topic  implements Serializable {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Topic implements Parcelable {
 
     private int id;
 
@@ -15,6 +17,9 @@ public class Topic  implements Serializable {
     private int postby;
 
     private String title;
+
+    public Topic() {
+    }
 
     public int getId() {
         return this.id;
@@ -70,4 +75,40 @@ public class Topic  implements Serializable {
                 append("\nContent:" + content).append("\nPostby:" + postby);
         return sb.toString();
     }
+
+    private Topic(Parcel in) {
+        id = in.readInt();
+        content = in.readString();
+        image1 = in.readString();
+        image2 = in.readString();
+        postby = in.readInt();
+        title = in.readString();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
+        out.writeString(content);
+        out.writeString(image1);
+        out.writeString(image2);
+        out.writeInt(postby);
+        out.writeString(title);
+    }
+
+    public static final Parcelable.Creator<Topic> CREATOR
+            = new Parcelable.Creator<Topic>() {
+
+        public Topic createFromParcel(Parcel in) {
+            return new Topic(in);
+        }
+
+        public Topic[] newArray(int size) {
+            return new Topic[size];
+        }
+    };
+
 }

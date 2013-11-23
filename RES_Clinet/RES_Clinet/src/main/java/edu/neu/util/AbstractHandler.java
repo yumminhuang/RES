@@ -25,7 +25,7 @@ import org.odata4j.edm.EdmSimpleType;
  */
 public class AbstractHandler {
 
-    protected static final String serviceURL = "http://localhost:8866/res.svc/";
+    protected static final String serviceURL = "http://10.0.2.2:8886/res.svc/";
 
     protected static void report(String msg) {
         System.out.println(msg);

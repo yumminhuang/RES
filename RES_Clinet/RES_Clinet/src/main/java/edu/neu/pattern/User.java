@@ -1,8 +1,10 @@
 package edu.neu.pattern;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class User implements Serializable {
+
+public class User implements Parcelable {
 
     private int id;
 
@@ -15,6 +17,9 @@ public class User implements Serializable {
     private String phone;
 
     private String type;
+
+    public User() {
+    }
 
     public int getId() {
         return this.id;
@@ -74,5 +79,40 @@ public class User implements Serializable {
                 .append("type:" + type + "\n");
         return sb.toString();
     }
+
+    private User(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        address = in.readString();
+        email = in.readString();
+        phone = in.readString();
+        type = in.readString();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
+        out.writeString(address);
+        out.writeString(email);
+        out.writeString(name);
+        out.writeString(phone);
+        out.writeString(type);
+    }
+
+    public static final Parcelable.Creator<User> CREATOR
+            = new Parcelable.Creator<User>() {
+
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
 }

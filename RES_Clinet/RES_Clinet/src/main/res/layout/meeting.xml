@@ -93,48 +93,4 @@
             </TableRow>
         </TableLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/Meeting_layout_search"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TableRow>
-
-                <TextView
-                    android:text="With"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <EditText
-                    android:id="@+id/ET_Meeting_ShStaff"
-                    android:text=""
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:height="45px"
-                    android:width="220px" />
-            </TableRow>
-
-            <TableRow>
-
-                <Button
-                    android:text="@string/reset"
-                    android:id="@+id/BU_Meeting_ShReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <Button
-                    android:text="@string/search"
-                    android:id="@+id/BU_Meeting_ShOk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
 </FrameLayout>

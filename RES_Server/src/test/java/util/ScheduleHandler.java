@@ -50,11 +50,11 @@ public class ScheduleHandler extends AbstractExample{
 			Schedule s = new Schedule();
 			s.setId(id);
 			for (OProperty<?> p : e.getProperties()) {
-				if (p.getName().equals("schedulefrom"))
+				if (p.getName().equals("sfrom"))
 					s.setSchedulefrom((Integer) p.getValue());
-				else if (p.getName().equals("scheduleto"))
+				else if (p.getName().equals("sto"))
 					s.setScheduleto((Integer) p.getValue());
-				else if (p.getName().equals("scheduletime"))
+				else if (p.getName().equals("stime"))
 					s.setScheduletime((LocalDateTime) p.getValue());
 				else if (p.getName().equals("content"))
 					s.setContent((String) p.getValue());
@@ -92,9 +92,9 @@ public class ScheduleHandler extends AbstractExample{
 	}
 
 	public static void main(String[] args) {
-		//List<Schedule> inbox = getMeetingById(16);
-		System.out.println(new LocalDateTime().toString("YYYYMMDD"));
-		List<Schedule> inbox = getMeetingByTime(new LocalDateTime());
+		List<Schedule> inbox = getMeetingById(1);
+//		System.out.println(new LocalDateTime().toString("YYYYMMDD"));
+//		List<Schedule> inbox = getMeetingByTime(new LocalDateTime());
 		for(Schedule m : inbox)
 			System.out.println(m.toString());
 	}

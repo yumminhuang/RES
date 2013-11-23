@@ -1,10 +1,5 @@
 package edu.neu.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import edu.neu.pattern.Message;
-
 import org.core4j.Enumerable;
 import org.joda.time.LocalDateTime;
 import org.odata4j.consumer.ODataConsumer;
@@ -12,19 +7,24 @@ import org.odata4j.consumer.ODataConsumers;
 import org.odata4j.core.OEntity;
 import org.odata4j.core.OProperties;
 import org.odata4j.core.OProperty;
+import org.odata4j.exceptions.ServerErrorException;
 import org.odata4j.format.FormatType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.neu.pattern.Message;
 
 public class MessageHandler extends AbstractHandler {
 
-	private static String entitySet = "Message";
+    private static String entitySet = "Message";
 
     /**
-     *
      * @param from
      * @param to
      * @param content
      */
-    public static void addMessage(int from, int to, String content){
+    public static void addMessage(int from, int to, String content) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
         OEntity newMessage = c.createEntity(entitySet)
                 .properties(OProperties.int32("mfrom", from))
@@ -35,7 +35,6 @@ public class MessageHandler extends AbstractHandler {
     }
 
     /**
-     *
      * @param to
      * @return
      */
@@ -50,7 +49,7 @@ public class MessageHandler extends AbstractHandler {
                 if (p.getName().equals("mfrom")) {
                     m.setMessagefrom((Integer) p.getValue());
                 } else if (p.getName().equals("mtime")) {
-                    m.setMessagetime((LocalDateTime) p.getValue());
+                    m.setMessagetime(((LocalDateTime) p.getValue()).toString("MM/dd/yyyy"));
                 } else if (p.getName().equals("content")) {
                     m.setContent((String) p.getValue());
                 } else if (p.getName().equals("id"))
@@ -62,7 +61,6 @@ public class MessageHandler extends AbstractHandler {
     }
 
     /**
-     *
      * @param from
      * @return
      */
@@ -77,7 +75,7 @@ public class MessageHandler extends AbstractHandler {
                 if (p.getName().equals("mto")) {
                     m.setMessageto((Integer) p.getValue());
                 } else if (p.getName().equals("mtime")) {
-                    m.setMessagetime((LocalDateTime) p.getValue());
+                    m.setMessagetime(((LocalDateTime) p.getValue()).toString("MM/dd/yyyy"));
                 } else if (p.getName().equals("content")) {
                     m.setContent((String) p.getValue());
                 } else if (p.getName().equals("id"))
@@ -88,14 +86,14 @@ public class MessageHandler extends AbstractHandler {
         return mess;
     }
 
-	public static void main(String[] args) {
-		List<Message> inbox = getInbox(16);
-		List<Message> outbox = getOutbox(46);
-		for(Message m : inbox)
-			System.out.println(m.toString());
-		System.out.println("======");
-		for(Message m : outbox)
-			System.out.println(m.toString());
-	}
+    public static void main(String[] args) {
+        List<Message> inbox = getInbox(16);
+        List<Message> outbox = getOutbox(46);
+        for (Message m : inbox)
+            System.out.println(m.toString());
+        System.out.println("======");
+        for (Message m : outbox)
+            System.out.println(m.toString());
+    }
 
 }

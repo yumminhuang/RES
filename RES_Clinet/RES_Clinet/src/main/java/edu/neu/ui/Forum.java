@@ -1,90 +1,176 @@
 package edu.neu.ui;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.DialogInterface;
+import android.app.TabActivity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TabHost;
+import android.widget.Toast;
+
+import org.odata4j.exceptions.NotFoundException;
+import org.odata4j.exceptions.ServerErrorException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import edu.neu.pattern.Topic;
 import edu.neu.res_clinet.R;
+import edu.neu.util.TopicHandler;
 import edu.neu.util.UserHandler;
 
 /**
  * Created by yummin on 13-11-22.
  */
-public class Forum extends ListActivity {
+public class Forum extends TabActivity {
 
-    private final static int countMax = 1000;
-    private int count;
-    private String[] tmp = new String[10];
-    private String[] text = new String[countMax];
-    private String[] topic = new String[countMax];
-    private String[] user = new String[countMax];
+    private EditText addTopic, addContent, searchName, searchKeyword;
+    private Button addreset, addok, searchreset, searchok;
+    private static final String PREFS_NAME = "Preference";
 
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TabHost myTabhost = this.getTabHost();
+        LayoutInflater.from(this).inflate(R.layout.topic, myTabhost.getTabContentView(), true);
 
-        Bundle bundle = this.getIntent().getExtras();
-        count = bundle.getInt("count");
-        text = bundle.getStringArray("msg");
+		/*
+         * Read topics
+		 */
+        myTabhost.addTab(myTabhost.newTabSpec("One")
+                .setIndicator("Read", getResources().getDrawable(R.drawable.forum))
+                .setContent(allTopics()));
 
-        for (int i = 0; i < count; i++) {
-            tmp = text[i].split("#");
-            topic[i] = tmp[0];
-            user[i] = UserHandler.getNameFromID(Integer.parseInt(tmp[1]));
-        }
+		/*
+         * Post a topic
+		 */
+        myTabhost.addTab(myTabhost.newTabSpec("Two")
+                .setIndicator("Add", getResources().getDrawable(R.drawable.add))
+                .setContent(R.id.Topic_layout_add));
 
-        SimpleAdapter adapter = new SimpleAdapter(this, getData(),
-                R.layout.resultlist, new String[]{"mainList", "subList"},
-                new int[]{R.id.list_mainList, R.id.list_subList});
-        setListAdapter(adapter);
+        /*
+         * Search topics
+         */
+        myTabhost.addTab(myTabhost.newTabSpec("Three")
+                .setIndicator("Search", getResources().getDrawable(R.drawable.search))
+                .setContent(R.id.Topic_layout_search));
+
+        // 实例化添加界面的控件。
+        addTopic = (EditText) findViewById(R.id.ET_Topic_AdTopic);
+        addContent = (EditText) findViewById(R.id.ET_Topic_AddContent);
+        searchName = (EditText) findViewById(R.id.ET_Topic_ShName);
+        searchKeyword = (EditText) findViewById(R.id.ET_Topic_ShKeyword);
+
+        addreset = (Button) findViewById(R.id.BU_Topic_AdReset);
+        addok = (Button) findViewById(R.id.BU_Topic_AdOk);
+        searchreset = (Button) findViewById(R.id.BU_Topic_ShReset);
+        searchok = (Button) findViewById(R.id.BU_Topic_ShOk);
+        // 设置确定按钮。
+        addreset.setOnClickListener(new addresetListener());
+        addok.setOnClickListener(new addokListener());
+        searchreset.setOnClickListener(new searchresetListener());
+        searchok.setOnClickListener(new searchokListener());
     }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int pos, long id) {
-        super.onListItemClick(l, v, pos, id);
-        showDialog(R.string.topic + topic[pos] + "\n\n" +
-                   R.string.postby + user[pos] + "\n");
+    private Intent allTopics() {
+        List<Topic> topics = TopicHandler.findAllTopic();
+
+        Intent intent = new Intent(Forum.this, TopicList.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("topics", (ArrayList<? extends Parcelable>) topics);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+
+    private String display(int id) {
+        return (String) this.getResources().getString(id);
     }
 
     /**
      * @return
      */
-    private List<Map<String, Object>> getData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        Map<String, Object> map = new HashMap<String, Object>();
-        for (int i = 0; i < count; i++) {
-            map = new HashMap<String, Object>();
-            map.put("mainList", R.string.topic + (i + 1) + "：" + topic[i]);
-            map.put("subList", R.string.postby + user[i]);
-            list.add(map);
-        }
-        return list;
+    private int readID() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        return settings.getInt("UserID", 0);
     }
 
-    /**
-     * Show apartment information message
-     *
-     * @param msg
+    /*
+     *  Reset button
      */
-    private void showDialog(String msg) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(msg)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+    class addresetListener implements View.OnClickListener {
+        public void onClick(View v) {
+            addTopic.setText("");
+            addContent.setText("");
+        }
+    }
+
+    /*
+     *  响应添加记录按钮单击事件：
+     */
+    class addokListener implements View.OnClickListener {
+        public void onClick(View v) {
+            // Get input
+            String topic = addTopic.getText().toString().trim();
+            String content = addContent.getText().toString().trim();
+            int id = readID();
+            if (topic.equals("") || content.equals("")) {
+                Toast.makeText(Forum.this, R.string.record_error, Toast.LENGTH_LONG).show();
+                return;
+            }
+            try {
+                TopicHandler.addTopic(topic, content, id);
+            } catch (ServerErrorException e) {
+                showDialog(R.string.error);
+            }
+        }
+    }
+
+    /*
+     *  Reset button
+     */
+    class searchresetListener implements View.OnClickListener {
+        public void onClick(View v) {
+            searchName.setText("");
+            searchKeyword.setText("");
+        }
+    }
+
+    /*
+     *  Search button
+     */
+    class searchokListener implements View.OnClickListener {
+        public void onClick(View v) {
+            // 获取用户输入的关键字。
+            String name = searchName.getText().toString().trim();
+            String keyword = searchKeyword.getText().toString().trim();
+            List<Topic> topics = null;
+            // 判断输入的关键字是否为空。
+            if (name.equals("") && keyword.equals("")) {
+                Toast.makeText(Forum.this, R.string.search_error, Toast.LENGTH_LONG).show();
+                return;
+            } else if (name.equals("") && !keyword.equals("")) {
+                topics = TopicHandler.findTopic(keyword);
+            } else if (!name.equals("") && keyword.equals("")) {
+                try {
+                    int id = UserHandler.getIDFromName(name);
+                    topics = TopicHandler.findTopicByUser(id);
+                } catch (NotFoundException e) {
+                    showDialog(R.string.not_find_error);
+                }
+            }
+            Intent intent = new Intent(Forum.this, TopicList.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("topics", (ArrayList<? extends Parcelable>) topics);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 }

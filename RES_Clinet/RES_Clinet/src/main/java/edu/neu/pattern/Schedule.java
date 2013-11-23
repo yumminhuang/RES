@@ -3,9 +3,7 @@ package edu.neu.pattern;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import org.joda.time.LocalDateTime;
-
-public class Schedule  implements Parcelable{
+public class Schedule implements Parcelable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,6 +16,9 @@ public class Schedule  implements Parcelable{
     private String scheduletime;
 
     private int scheduleto;
+
+    public Schedule() {
+    }
 
     public int getId() {
         return this.id;

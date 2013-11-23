@@ -21,12 +21,15 @@
         </activity>
 
         <activity android:name="edu.neu.ui.HomePage"></activity>
+        <activity android:name="edu.neu.ui.Apartment"></activity>
+        <activity android:name="edu.neu.ui.ApartmentList"></activity>
         <activity android:name="edu.neu.ui.Register"></activity>
         <activity android:name="edu.neu.ui.Email"></activity>
         <activity android:name="edu.neu.ui.EmailInbox"></activity>
+        <activity android:name="edu.neu.ui.EmailOutbox"></activity>
         <activity android:name="edu.neu.ui.Meeting"></activity>
         <activity android:name="edu.neu.ui.MeetingList"></activity>
-        <activity android:name="edu.neu.ui.SetServerIp"></activity>
+        <activity android:name="edu.neu.ui.TopicList"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

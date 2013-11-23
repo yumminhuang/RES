@@ -15,17 +15,22 @@ import java.util.Map;
 
 import edu.neu.pattern.Message;
 import edu.neu.res_clinet.R;
+import edu.neu.util.UserHandler;
 
 public class EmailInbox extends ListActivity {
 
     private List<Message> messages;
+
+    private String display(int id) {
+        return (String) this.getResources().getString(id);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getIntent().getExtras();
-        messages = (List<Message>) bundle.getSerializable("inbox");
+        messages = bundle.getParcelableArrayList("inbox");
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
                 R.layout.resultlist, new String[]{"mainList", "subList"},
@@ -37,8 +42,8 @@ public class EmailInbox extends ListActivity {
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
 
-        showDialog(R.string.from + messages.get(pos).getMessagefrom() + "\n\n" +
-                   R.string.content + messages.get(pos).getContent() + "\n");
+        showDialog(display(R.string.from) + UserHandler.getNameFromID(messages.get(pos).getMessagefrom()) + "\n\n" +
+                display(R.string.content) + messages.get(pos).getContent() + "\n");
     }
 
     private List<Map<String, Object>> getData() {
@@ -46,8 +51,8 @@ public class EmailInbox extends ListActivity {
         Map<String, Object> map = new HashMap<String, Object>();
         for (Message m : messages) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.from + m.getMessagefrom());
-            map.put("subList", R.string.time + m.getMessagetime().toString("MM/DD/YYYY"));
+            map.put("mainList", display(R.string.from) + UserHandler.getNameFromID(m.getMessagefrom()));
+            map.put("subList", display(R.string.time) + m.getMessagetime());
             list.add(map);
         }
         return list;

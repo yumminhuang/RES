@@ -1,10 +1,9 @@
 package edu.neu.pattern;
 
-import org.joda.time.LocalDateTime;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
-
-public class Reply  implements Serializable {
+public class Reply implements Parcelable {
 
     private int id;
 
@@ -14,11 +13,14 @@ public class Reply  implements Serializable {
 
     private String image2;
 
-    private LocalDateTime replytime;
+    private String replytime;
 
     private int topicId;
 
     private int userId;
+
+    public Reply() {
+    }
 
     public int getId() {
         return this.id;
@@ -52,11 +54,11 @@ public class Reply  implements Serializable {
         this.image2 = image2;
     }
 
-    public LocalDateTime getReplytime() {
+    public String getReplytime() {
         return this.replytime;
     }
 
-    public void setReplytime(LocalDateTime replytime) {
+    public void setReplytime(String replytime) {
         this.replytime = replytime;
     }
 
@@ -85,5 +87,42 @@ public class Reply  implements Serializable {
                 .append("Time:" + replytime + "\n");
         return sb.toString();
     }
+
+    private Reply(Parcel in) {
+        id = in.readInt();
+        topicId = in.readInt();
+        userId = in.readInt();
+        content = in.readString();
+        replytime = in.readString();
+        image1 = in.readString();
+        image2 = in.readString();
+    }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int i) {
+        out.writeInt(id);
+        out.writeInt(userId);
+        out.writeInt(topicId);
+        out.writeString(content);
+        out.writeString(replytime);
+        out.writeString(image1);
+        out.writeString(image2);
+    }
+
+    public static final Parcelable.Creator<Reply> CREATOR
+            = new Parcelable.Creator<Reply>() {
+
+        public Reply createFromParcel(Parcel in) {
+            return new Reply(in);
+        }
+
+        public Reply[] newArray(int size) {
+            return new Reply[size];
+        }
+    };
 
 }

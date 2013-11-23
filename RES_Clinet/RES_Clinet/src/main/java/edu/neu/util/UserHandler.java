@@ -5,16 +5,19 @@ import org.odata4j.consumer.ODataConsumers;
 import org.odata4j.core.OEntity;
 import org.odata4j.core.OProperties;
 import org.odata4j.core.OProperty;
+import org.odata4j.exceptions.NotFoundException;
+import org.odata4j.exceptions.ServerErrorException;
 import org.odata4j.format.FormatType;
 
 import edu.neu.pattern.User;
 
 public class UserHandler extends AbstractHandler {
 
-	private static String entitySet = "User";
+    private static String entitySet = "User";
 
     /**
      * TODO fix
+     *
      * @param name
      * @param address
      * @param phone
@@ -22,7 +25,7 @@ public class UserHandler extends AbstractHandler {
      * @param type
      */
     public static void addUser(String name, String address, String phone,
-                               String email, String type) {
+                               String email, String type) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
         OEntity newUser = c.createEntity(entitySet)
                 .properties(OProperties.string("name", name))
@@ -35,7 +38,6 @@ public class UserHandler extends AbstractHandler {
     }
 
     /**
-     *
      * @param id
      * @param name
      * @param address
@@ -44,7 +46,7 @@ public class UserHandler extends AbstractHandler {
      * @param type
      */
     public static void updateUser(int id, String name, String address,
-                                  String phone, String email, String type) {
+                                  String phone, String email, String type) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
         c.mergeEntity(entitySet, id).properties(OProperties.string("name", name))
                 .properties(OProperties.string("phone", phone))
@@ -55,7 +57,6 @@ public class UserHandler extends AbstractHandler {
     }
 
     /**
-     *
      * @param id
      * @return
      */
@@ -81,28 +82,27 @@ public class UserHandler extends AbstractHandler {
     }
 
     /**
-     *
      * @param name
      * @return
      */
-    public static int getIDFromName(String name) {
+    public static int getIDFromName(String name) throws NotFoundException {
         ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
         OEntity id = c.getEntities(entitySet).filter("name eq '" + name + "'").select("id").execute().first();
         return (Integer) id.getProperties().get(0).getValue();
     }
 
 
-    public static String getNameFromID(int id){
+    public static String getNameFromID(int id) {
         ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
         OEntity userEntity = c.getEntity(entitySet, id).execute();
         return (String) userEntity.getProperty("name").getValue();
     }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 //		User u = findUser(17);
 //		System.out.println(u.toString());
 //		System.out.println("Johnson's ID is" + getIDFromName("Johnson"));
-		addUser("name", "address", "110", "a@m", "T");
-	}
+        addUser("name", "address", "110", "a@m", "T");
+    }
 
 }

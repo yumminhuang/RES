@@ -40,6 +40,7 @@
     <string name="apt">Apartment: </string>
     <string name="postby">Post by:</string>
     <string name="owner">Owner: </string>
+    <string name="image">Image</string>
 
 
 </resources>

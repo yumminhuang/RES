@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,12 +16,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import org.odata4j.exceptions.ServerErrorException;
 
 import edu.neu.res_clinet.R;
+import edu.neu.util.UserHandler;
 
 public class Register extends Activity {
     private EditText name_Edit, email_Edit, phone_Edit, pw_Edit;
@@ -29,7 +28,8 @@ public class Register extends Activity {
     private ArrayAdapter<String> adapter1;
     private static final String[] job_Str = {"Agent", "Landlord", "Tenant"};
     private String name, password, email, phone, identity;
-    private final static String PrKPath = "/sdcard/oh!data/id.dat";
+
+    private static final String PREFS_NAME = "Preference";
 
     /**
      * Called when the activity is first created.
@@ -94,29 +94,22 @@ public class Register extends Activity {
                 Toast.makeText(Register.this, R.string.record_error, Toast.LENGTH_LONG).show();
                 return;
             }
+            try {
+                UserHandler.addUser(name, "", phone, email, identity);
+            } catch (ServerErrorException e) {
+                showDialog(R.string.add_error);
+            }
         }
     }
 
-    /*
-     *  Write id to a file。
+    /**
+     * @param id
      */
-    private void writeID(int uid) {
-        try {
-            File path = new File(PrKPath);
-            File file = new File(PrKPath);
-            if (!path.exists()) {
-                path.mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            OutputStreamWriter fos = new OutputStreamWriter(
-                    new FileOutputStream(file));
-            fos.write(uid);
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void saveID(int id) {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("UserID", id);
+        editor.commit();
     }
 
     /*

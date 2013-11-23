@@ -13,34 +13,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import edu.neu.pattern.Message;
 import edu.neu.res_clinet.R;
+import edu.neu.util.UserHandler;
 
 /**
  * Created by yummin on 13-11-22.
  */
 public class EmailOutbox extends ListActivity {
 
-    private final static int countMax = 1000;
-    private int count;
-    private String[] tmp = new String[10];
-    private String[] receiver = new String[countMax];
-    private String[] topic = new String[countMax];
-    private String[] text = new String[countMax];
+    private List<Message> messages;
+
+    private String display(int id) {
+        return (String) this.getResources().getString(id);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Bundle bundle = this.getIntent().getExtras();
-        count = bundle.getInt("count");
-        text = bundle.getStringArray("msg");
-
-        for (int i = 0; i < count; i++) {
-            tmp = text[i].split("#");
-            receiver[i] = tmp[0];
-            topic[i] = tmp[2];
-            text[i] = tmp[3];
-        }
+        messages = bundle.getParcelableArrayList("outbox");
 
         SimpleAdapter adapter = new SimpleAdapter(this, getData(),
                 R.layout.resultlist, new String[]{"mainList", "subList"},
@@ -52,18 +45,17 @@ public class EmailOutbox extends ListActivity {
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
 
-        showDialog(R.string.topic + topic[pos] + "\n\n" +
-                R.string.to + receiver[pos] + "\n\n" +
-                R.string.content + text[pos] + "\n");
+        showDialog(display(R.string.to) + UserHandler.getNameFromID(messages.get(pos).getMessageto()) + "\n\n" +
+                display(R.string.content) + messages.get(pos).getContent() + "\n");
     }
 
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
-        for (int i = 0; i < count; i++) {
+        for (Message m : messages) {
             map = new HashMap<String, Object>();
-            map.put("mainList", R.string.message + (i + 1) + "：" + topic[i]);
-            map.put("subList", R.string.to + receiver[i]);
+            map.put("mainList", display(R.string.to) + UserHandler.getNameFromID(m.getMessagefrom()));
+            map.put("subList", display(R.string.time) + m.getMessagetime());
             list.add(map);
         }
         return list;

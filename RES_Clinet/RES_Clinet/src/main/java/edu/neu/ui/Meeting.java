@@ -3,7 +3,10 @@ package edu.neu.ui;
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,17 +17,23 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import edu.neu.pattern.Schedule;
 import edu.neu.res_clinet.R;
+import edu.neu.util.ScheduleHandler;
 
 
 public class Meeting extends TabActivity {
-    private EditText AddTopic, AddStaff, AddText, SearchStaff;
+    private EditText AddTopic, AddStaff, AddText;
     private DatePicker AddDate;
-    private Button AddReset, AddOk, SearchReset, SearchOk;
-    private String strAddTopic, strAddStaff, strAddText, strSearchKey;
+    private Button AddReset, AddOk;
+    private String strAddTopic, strAddStaff, strAddText;
     private Date date;
+
+    private static final String PREFS_NAME = "Preference";
 
     /**
      * Called when the activity is first created.
@@ -65,18 +74,30 @@ public class Meeting extends TabActivity {
         AddOk.setOnClickListener(new AddOkListener());
 
 		/*
-		 *  Search meeting
+         *  all my meeting
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Two")
-                .setIndicator("Search", getResources().getDrawable(R.drawable.search))
-                .setContent(R.id.Meeting_layout_search));
-        // 实例化搜索界面的控件。
-        SearchStaff = (EditText) findViewById(R.id.ET_Meeting_ShStaff);
-        SearchReset = (Button) findViewById(R.id.BU_Meeting_ShReset);
-        SearchOk = (Button) findViewById(R.id.BU_Meeting_ShOk);
-        // 设置确定按钮。
-        SearchReset.setOnClickListener(new SearchResetListener());
-        SearchOk.setOnClickListener(new SearchOkListener());
+                .setIndicator("Search", getResources().getDrawable(R.drawable.meeting))
+                .setContent(myMeeting()));
+    }
+
+    /**
+     * @return
+     */
+    private int readID() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        return settings.getInt("UserID", 0);
+    }
+
+    private Intent myMeeting() {
+        int id = readID();
+        List<Schedule> meetings = ScheduleHandler.getMeetingById(id);
+
+        Intent intent = new Intent(Meeting.this, MeetingList.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("mymeeting", (ArrayList<? extends Parcelable>) meetings);
+        intent.putExtras(bundle);
+        return intent;
     }
 
     /*
@@ -122,30 +143,6 @@ public class Meeting extends TabActivity {
             // 判断输入信息是否完整。
             if (strAddTopic.equals("") || strAddStaff.equals("") || strAddText.equals("")) {
                 Toast.makeText(Meeting.this, "请将会议记录填写完整", Toast.LENGTH_LONG).show();
-                return;
-            }
-        }
-    }
-
-    /*
-     *  响应重置信息按钮(search)单击事件：
-     */
-    class SearchResetListener implements OnClickListener {
-        public void onClick(View v) {
-            SearchStaff.setText("");
-        }
-    }
-
-    /*
-     *  响应搜索按钮单击事件：
-     */
-    class SearchOkListener implements OnClickListener {
-        public void onClick(View v) {
-            // 获取用户输入的关键字。
-            strSearchKey = SearchStaff.getText().toString().trim();
-            // 判断输入的关键字是否为空。
-            if (strSearchKey.equals("")) {
-                Toast.makeText(Meeting.this, "请填写关键字", Toast.LENGTH_LONG).show();
                 return;
             }
         }

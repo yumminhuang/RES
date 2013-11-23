@@ -1,7 +1,5 @@
 package edu.neu.pattern;
 
-import java.io.Serializable;
-
 public class FromUser {
 
     private int id;

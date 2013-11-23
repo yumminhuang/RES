@@ -3,7 +3,9 @@ package edu.neu.ui;
 import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,7 +14,11 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.neu.res_clinet.R;
+import edu.neu.util.ApartmentHandler;
 
 
 public class Apartment extends TabActivity {
@@ -48,11 +54,11 @@ public class Apartment extends TabActivity {
         AddOk.setOnClickListener(new AddOkListener());
 
 		/*
-		 *  Widgets in UI for searching an apartment
+         *  Widgets in UI for searching an apartment
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Two")
                 .setIndicator("Search", getResources().getDrawable(R.drawable.search))
-                .setContent(R.id.Meeting_layout_search));
+                .setContent(R.id.Apartment_layout_search));
         // 实例化搜索界面的控件。
         SearchAddress = (EditText) findViewById(R.id.ET_Apartment_ShAddress);
         SearchArea = (EditText) findViewById(R.id.ET_Apartment_ShArea);
@@ -61,12 +67,6 @@ public class Apartment extends TabActivity {
         // 设置确定按钮。
         SearchReset.setOnClickListener(new SearchResetListener());
         SearchOk.setOnClickListener(new SearchOkListener());
-
-//        Intent intent = Intent(Apartment.this, ApartmentList.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelableArrayList("apts", apartments);
-//        intent.putExtras(bundle);
-//        startActivity(intent);
     }
 
     /*
@@ -97,6 +97,7 @@ public class Apartment extends TabActivity {
     }
 
     /*
+     *  TODO: Implement later
      *  响应添加记录按钮单击事件：
      */
     class AddOkListener implements OnClickListener {
@@ -110,6 +111,7 @@ public class Apartment extends TabActivity {
                 Toast.makeText(Apartment.this, R.string.record_error, Toast.LENGTH_LONG).show();
                 return;
             }
+            Toast.makeText(Apartment.this, "Not suport yet", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -131,12 +133,23 @@ public class Apartment extends TabActivity {
             // 获取用户输入的关键字。
             strSearchAddress = SearchAddress.getText().toString().trim();
             strSearchArea = SearchArea.getText().toString().trim();
+            List<edu.neu.pattern.Apartment> apartments = null;
             // 判断输入的关键字是否为空。
             if (strSearchAddress.equals("") && strSearchArea.equals("")) {
                 Toast.makeText(Apartment.this, R.string.search_error, Toast.LENGTH_LONG).show();
-                //TODO integrate search
                 return;
+            } else if (strSearchAddress.equals("") && !strSearchArea.equals("")) {
+                apartments = ApartmentHandler.findApartments(Integer.parseInt(strSearchArea));
+            } else if (!strSearchAddress.equals("") && strSearchArea.equals("")) {
+                apartments = ApartmentHandler.findApartments(strSearchAddress);
+            } else {
+                apartments = ApartmentHandler.findApartments(strSearchAddress, Integer.parseInt(strAddArea));
             }
+            Intent intent = new Intent(Apartment.this, ApartmentList.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("apts", (ArrayList<? extends Parcelable>) apartments);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 }

@@ -6,6 +6,7 @@ import org.odata4j.core.OEntity;
 import org.odata4j.core.OProperties;
 import org.odata4j.core.OProperty;
 import org.odata4j.examples.AbstractExample;
+import org.odata4j.exceptions.ServerErrorException;
 import org.odata4j.format.FormatType;
 
 import pattern.User;
@@ -24,7 +25,7 @@ public class UserHandler extends AbstractExample {
 	 * @param type
 	 */
 	public static void addUser(String name, String address, String phone,
-			String email, String type) {
+			String email, String type) throws ServerErrorException{
 		ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
 		OEntity newUser = c.createEntity(entitySet)
 				.properties(OProperties.string("name", name))
@@ -97,7 +98,11 @@ public class UserHandler extends AbstractExample {
 //		User u = findUser(17);
 //		System.out.println(u.toString());
 //		System.out.println("Allen's ID is " + getIDFromName("Allen"));
-		addUser("name", "address", "110", "a@m", "T");
+		try{
+			addUser("name", "address", "110", "a@m", "T");
+		}catch(ServerErrorException e){
+			System.out.println("Server Error");
+		}
 	}
 
 }

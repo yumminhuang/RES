@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +12,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import org.odata4j.exceptions.NotFoundException;
 
 import edu.neu.res_clinet.R;
+import edu.neu.util.UserHandler;
 
 /**
  * Created by yummin on 13-11-6.
@@ -20,8 +25,10 @@ import edu.neu.res_clinet.R;
 public class Login extends Activity {
 
     private EditText id_Edit, passw_Edit;
-    private Button register, login, setIp;
-    private String userId, password;
+    private Button register, login;
+    private String userName, password;
+
+    public static final String PREFS_NAME = "Preference";
 
     /**
      * Called when the activity is first created.
@@ -31,13 +38,11 @@ public class Login extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         // 实例化各个控件。
-        setIp = (Button) findViewById(R.id.BU_Login_setIp);
         id_Edit = (EditText) findViewById(R.id.ET_Login_userId);
         passw_Edit = (EditText) findViewById(R.id.ET_Login_password);
         login = (Button) findViewById(R.id.BU_Login_login);
         register = (Button) findViewById(R.id.BU_Login_register);
         // Set sign-up and login button
-        setIp.setOnClickListener(new SetIpListener());
         register.setOnClickListener(new RegisterListener());
         login.setOnClickListener(new LoginListener());
     }
@@ -113,17 +118,6 @@ public class Login extends Activity {
     }
 
     /*
-     *  响应设置IP按钮单击事件。
-     */
-    class SetIpListener implements OnClickListener {
-        public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(Login.this, SetServerIp.class);
-            startActivity(intent);
-        }
-    }
-
-    /*
      *  响应注册按钮单击事件：跳转到注册页面。
      */
     class RegisterListener implements OnClickListener {
@@ -140,14 +134,23 @@ public class Login extends Activity {
     class LoginListener implements OnClickListener {
         public void onClick(View v) {
             // Get user's id and password。
-            userId = id_Edit.getText().toString().trim();
+            userName = id_Edit.getText().toString().trim();
             password = passw_Edit.getText().toString().trim();
-            /*
             // 判断账号密码是否完整。
-            if (userId.equals("") || password.equals("")) {
-                Toast.makeText(Login.this, "请将您的账号密码填写完整", Toast.LENGTH_LONG).show();
+            if (userName.equals("") || password.equals("")) {
+                Toast.makeText(Login.this, R.string.record_error, Toast.LENGTH_LONG).show();
                 return;
             }
+            try {
+                int id = UserHandler.getIDFromName(userName);
+                saveID(id);
+                Intent intent = new Intent();
+                intent.setClass(Login.this, HomePage.class);
+                startActivity(intent);
+            } catch (NotFoundException e) {
+                showDialog("Please sign up first");
+            }
+            /*
             //连接服务器。
             try {
                 Socket server = util.getCon();
@@ -163,9 +166,6 @@ public class Login extends Activity {
                 if (res.equals("success")) {
                     util.setUserId(userId);
                     */
-                    Intent intent = new Intent();
-                    intent.setClass(Login.this, HomePage.class);
-                    startActivity(intent);
             /*
                 } else {
                     showDialog("用户名或者密码错误，请重新输入！");
@@ -179,5 +179,15 @@ public class Login extends Activity {
                 showDialog("连接不上服务器！" + e);
             }*/
         }
+    }
+
+    /**
+     * @param id
+     */
+    private void saveID(int id) {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("UserID", id);
+        editor.commit();
     }
 }
