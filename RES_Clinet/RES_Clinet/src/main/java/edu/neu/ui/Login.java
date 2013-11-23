@@ -88,7 +88,6 @@ public class Login extends Activity {
 
     // 定义“关于”选项。
     private void aboutOptionDialog() {
-        // TODO Auto-generated method stub
         new AlertDialog.Builder(Login.this).setTitle(R.string.about).setMessage(R.string.app_about)
                 .setPositiveButton(R.string.ok,
                         new DialogInterface.OnClickListener() {
@@ -101,7 +100,6 @@ public class Login extends Activity {
 
     // 定义“退出”选项。
     private void exitOptionDialog() {
-        // TODO Auto-generated method stub
         new AlertDialog.Builder(Login.this).setTitle(R.string.exit)
                 .setMessage(R.string.app_menu_surequit).setPositiveButton(R.string.yes,
                 new DialogInterface.OnClickListener() {

@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
 import java.util.Date;
 
 
@@ -30,12 +28,9 @@ public class Reply implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date rtime;
 
-	private int uid;
+	private int tid;
 
-	//bi-directional many-to-one association to Topic
-	@ManyToOne
-	@JoinColumn(name="tid")
-	private Topic topic;
+	private int uid;
 
 	public Reply() {
 	}
@@ -80,20 +75,20 @@ public class Reply implements Serializable {
 		this.rtime = rtime;
 	}
 
+	public int getTid() {
+		return this.tid;
+	}
+
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
+
 	public int getUid() {
 		return this.uid;
 	}
 
 	public void setUid(int uid) {
 		this.uid = uid;
-	}
-
-	public Topic getTopic() {
-		return this.topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
 	}
 
 }

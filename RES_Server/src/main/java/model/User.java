@@ -1,10 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import java.util.Set;
 
 
 /**
@@ -30,10 +27,6 @@ public class User implements Serializable {
 
 	private String type;
 
-	//bi-directional many-to-one association to Apartment
-	@OneToMany(mappedBy="user")
-	private Set<Apartment> apartments;
-
 	//bi-directional one-to-one association to FromUser
 	@OneToOne(mappedBy="user")
 	private FromUser fromUser;
@@ -41,10 +34,6 @@ public class User implements Serializable {
 	//bi-directional one-to-one association to ToUser
 	@OneToOne(mappedBy="user")
 	private ToUser toUser;
-
-	//bi-directional many-to-one association to Topic
-	@OneToMany(mappedBy="user")
-	private Set<Topic> topics;
 
 	public User() {
 	}
@@ -97,28 +86,6 @@ public class User implements Serializable {
 		this.type = type;
 	}
 
-	public Set<Apartment> getApartments() {
-		return this.apartments;
-	}
-
-	public void setApartments(Set<Apartment> apartments) {
-		this.apartments = apartments;
-	}
-
-	public Apartment addApartment(Apartment apartment) {
-		getApartments().add(apartment);
-		apartment.setUser(this);
-
-		return apartment;
-	}
-
-	public Apartment removeApartment(Apartment apartment) {
-		getApartments().remove(apartment);
-		apartment.setUser(null);
-
-		return apartment;
-	}
-
 	public FromUser getFromUser() {
 		return this.fromUser;
 	}
@@ -133,28 +100,6 @@ public class User implements Serializable {
 
 	public void setToUser(ToUser toUser) {
 		this.toUser = toUser;
-	}
-
-	public Set<Topic> getTopics() {
-		return this.topics;
-	}
-
-	public void setTopics(Set<Topic> topics) {
-		this.topics = topics;
-	}
-
-	public Topic addTopic(Topic topic) {
-		getTopics().add(topic);
-		topic.setUser(this);
-
-		return topic;
-	}
-
-	public Topic removeTopic(Topic topic) {
-		getTopics().remove(topic);
-		topic.setUser(null);
-
-		return topic;
 	}
 
 }

@@ -79,7 +79,6 @@ public class Register extends Activity {
     }
 
     /*
-     *  TODO: implement this later
      *  响应注册按钮单击事件：
      */
     class RegisterListener implements OnClickListener {

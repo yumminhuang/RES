@@ -1,7 +1,5 @@
 package pattern;
 
-import org.joda.time.LocalDateTime;
-
 public class Reply {
 
 	private int id;
@@ -12,7 +10,7 @@ public class Reply {
 
 	private String image2;
 	
-	private LocalDateTime replytime;
+	private String replytime;
 
 	private int topicId;
 
@@ -50,11 +48,11 @@ public class Reply {
 		this.image2 = image2;
 	}
 
-	public LocalDateTime getReplytime() {
+	public String getReplytime() {
 		return this.replytime;
 	}
 
-	public void setReplytime(LocalDateTime replytime) {
+	public void setReplytime(String replytime) {
 		this.replytime = replytime;
 	}
 

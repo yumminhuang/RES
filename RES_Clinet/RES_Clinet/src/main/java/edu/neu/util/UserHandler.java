@@ -16,8 +16,7 @@ public class UserHandler extends AbstractHandler {
     private static String entitySet = "User";
 
     /**
-     * TODO fix
-     *
+     * TODO Fix
      * @param name
      * @param address
      * @param phone

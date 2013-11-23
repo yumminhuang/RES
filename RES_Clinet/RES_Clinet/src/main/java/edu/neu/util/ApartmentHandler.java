@@ -23,7 +23,7 @@ public class ApartmentHandler extends AbstractHandler {
      * @param owner
      */
     public static void addApartment(String number, String address, int area, int owner) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        ODataConsumer c = ODataConsumers.create(serviceURL);
         OEntity newApartment = c.createEntity(entitySet)
                 .properties(OProperties.string("number", number))
                 .properties(OProperties.string("address", address))
@@ -142,8 +142,11 @@ public class ApartmentHandler extends AbstractHandler {
     public static List<Apartment> findApartments(String address, int area) {
         List<Apartment> apartments = findApartments(area);
         for (int i = 0, len = apartments.size(); i < len; ++i) {
-            if (!apartments.get(i).getAddress().contains(address))
+            if (!apartments.get(i).getAddress().contains(address)){
                 apartments.remove(i);
+                --len;
+                --i;
+            }
         }
         return apartments;
     }

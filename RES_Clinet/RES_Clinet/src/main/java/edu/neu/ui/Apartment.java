@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+import org.odata4j.exceptions.ServerErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,8 @@ public class Apartment extends TabActivity {
     private EditText AddAddress, AddNumber, AddArea, SearchAddress, SearchArea;
     private Button AddReset, AddOk, SearchReset, SearchOk;
     private String strAddAddress, strAddNumber, strAddArea, strSearchAddress, strSearchArea;
+
+    private static final String PREFS_NAME = "Preference";
 
     /**
      * Called when the activity is first created.
@@ -96,8 +101,15 @@ public class Apartment extends TabActivity {
         }
     }
 
+    /**
+     * @return
+     */
+    private int readID() {
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        return settings.getInt("UserID", 0);
+    }
+
     /*
-     *  TODO: Implement later
      *  响应添加记录按钮单击事件：
      */
     class AddOkListener implements OnClickListener {
@@ -111,7 +123,11 @@ public class Apartment extends TabActivity {
                 Toast.makeText(Apartment.this, R.string.record_error, Toast.LENGTH_LONG).show();
                 return;
             }
-            Toast.makeText(Apartment.this, "Not suport yet", Toast.LENGTH_LONG).show();
+            try {
+                ApartmentHandler.addApartment(strAddNumber, strSearchAddress, Integer.parseInt(strAddArea), readID());
+            } catch (ServerErrorException e) {
+                showDialog(R.string.error);
+            }
         }
     }
 
@@ -143,7 +159,7 @@ public class Apartment extends TabActivity {
             } else if (!strSearchAddress.equals("") && strSearchArea.equals("")) {
                 apartments = ApartmentHandler.findApartments(strSearchAddress);
             } else {
-                apartments = ApartmentHandler.findApartments(strSearchAddress, Integer.parseInt(strAddArea));
+                apartments = ApartmentHandler.findApartments(strSearchAddress, Integer.parseInt(strSearchArea));
             }
             Intent intent = new Intent(Apartment.this, ApartmentList.class);
             Bundle bundle = new Bundle();

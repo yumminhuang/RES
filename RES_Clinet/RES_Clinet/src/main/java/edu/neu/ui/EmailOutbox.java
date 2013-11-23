@@ -54,7 +54,7 @@ public class EmailOutbox extends ListActivity {
         Map<String, Object> map = new HashMap<String, Object>();
         for (Message m : messages) {
             map = new HashMap<String, Object>();
-            map.put("mainList", display(R.string.to) + UserHandler.getNameFromID(m.getMessagefrom()));
+            map.put("mainList", display(R.string.to) + UserHandler.getNameFromID(m.getMessageto()));
             map.put("subList", display(R.string.time) + m.getMessagetime());
             list.add(map);
         }

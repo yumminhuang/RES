@@ -27,6 +27,7 @@
         <activity android:name="edu.neu.ui.Email"></activity>
         <activity android:name="edu.neu.ui.EmailInbox"></activity>
         <activity android:name="edu.neu.ui.EmailOutbox"></activity>
+        <activity android:name="edu.neu.ui.Forum"></activity>
         <activity android:name="edu.neu.ui.Meeting"></activity>
         <activity android:name="edu.neu.ui.MeetingList"></activity>
         <activity android:name="edu.neu.ui.TopicList"></activity>

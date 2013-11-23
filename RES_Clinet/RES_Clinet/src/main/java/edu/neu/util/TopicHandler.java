@@ -45,8 +45,6 @@ public class TopicHandler extends AbstractHandler {
                     t.setContent((String) p.getValue());
                 else if (p.getName().equals("id"))
                     t.setId((Integer) p.getValue());
-                else if (p.getName().equals("content"))
-                    t.setContent((String) p.getValue());
                 else if (p.getName().equals("uid"))
                     t.setPostby((Integer) p.getValue());
                 else if (p.getName().equals("image1"))
@@ -55,12 +53,12 @@ public class TopicHandler extends AbstractHandler {
                     t.setImage2((String) p.getValue());
             }
             topics.add(t);
+            System.out.println(t.toString());
         }
         return topics;
     }
 
     /**
-     * TODO: Fix the problem
      *
      * @param keyword
      * @return
@@ -68,8 +66,11 @@ public class TopicHandler extends AbstractHandler {
     public static List<Topic> findTopic(String keyword) {
         List<Topic> topics = findAllTopic();
         for (int i = 0, len = topics.size(); i < len; ++i) {
-            if (!topics.get(i).getContent().contains(keyword))
+            if (!topics.get(i).getContent().contains(keyword)){
                 topics.remove(i);
+                --len;
+                --i;
+            }
         }
         return topics;
     }
@@ -104,7 +105,8 @@ public class TopicHandler extends AbstractHandler {
 
     public static void main(String[] args) {
         //List<Topic> topics = findTopicByUser(20);
-        List<Topic> topics = findTopic("B0BvjhFSMH1Qlv");
+        //List<Topic> topics = findTopic("B0BvjhFSMH1Qlv");
+        List<Topic> topics = findAllTopic();
         for (Topic t : topics)
             System.out.println(t.toString());
     }

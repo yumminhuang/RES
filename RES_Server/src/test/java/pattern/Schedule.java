@@ -10,7 +10,7 @@ public class Schedule{
 
 	private int schedulefrom;
 
-	private LocalDateTime scheduletime;
+	private String scheduletime;
 
 	private int scheduleto;
 
@@ -38,11 +38,11 @@ public class Schedule{
 		this.schedulefrom = schedulefrom;
 	}
 
-	public LocalDateTime getScheduletime() {
+	public String getScheduletime() {
 		return this.scheduletime;
 	}
 
-	public void setScheduletime(LocalDateTime scheduletime) {
+	public void setScheduletime(String scheduletime) {
 		this.scheduletime = scheduletime;
 	}
 

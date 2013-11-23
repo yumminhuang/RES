@@ -15,17 +15,21 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import org.odata4j.exceptions.NotFoundException;
+import org.odata4j.exceptions.ServerErrorException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.neu.pattern.Message;
 import edu.neu.res_clinet.R;
 import edu.neu.util.MessageHandler;
+import edu.neu.util.UserHandler;
 
 public class Email extends TabActivity {
     private EditText SendReceiver, SendTopic, SendText;
     private Button SendReset, SendSend;
-    private String strSendReceiver, strSendTopic, strSendText;
+    private String strSendReceiver, strSendText;
 
     private static final String PREFS_NAME = "Preference";
 
@@ -70,7 +74,6 @@ public class Email extends TabActivity {
     }
 
     /*
-     *  TODO : implement this
      *  初始化收信箱。
      */
     public Intent initInbox() {
@@ -130,13 +133,20 @@ public class Email extends TabActivity {
         public void onClick(View v) {
             // 获取用户输入信息。
             strSendReceiver = SendReceiver.getText().toString().trim();
-            strSendTopic = SendTopic.getText().toString().trim();
             strSendText = SendText.getText().toString().trim();
 
-            if (strSendReceiver.equals("") || strSendTopic.equals("")
-                    || strSendText.equals("")) {
+            if (strSendReceiver.equals("") || strSendText.equals("")) {
                 Toast.makeText(Email.this, R.string.message_error, Toast.LENGTH_LONG).show();
                 return;
+            }
+            try {
+                int from = readID();
+                int to = UserHandler.getIDFromName(strSendReceiver);
+                MessageHandler.addMessage(from, to, strSendText);
+            } catch (NotFoundException e) {
+                showDialog(R.string.not_find_error);
+            } catch (ServerErrorException e) {
+                showDialog(R.string.error);
             }
         }
     }

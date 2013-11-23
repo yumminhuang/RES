@@ -1,10 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import java.util.Set;
 
 
 /**
@@ -29,14 +26,7 @@ public class Topic implements Serializable {
 
 	private String title;
 
-	//bi-directional many-to-one association to Reply
-	@OneToMany(mappedBy="topic")
-	private Set<Reply> replies;
-
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="uid")
-	private User user;
+	private int uid;
 
 	public Topic() {
 	}
@@ -81,34 +71,12 @@ public class Topic implements Serializable {
 		this.title = title;
 	}
 
-	public Set<Reply> getReplies() {
-		return this.replies;
+	public int getUid() {
+		return this.uid;
 	}
 
-	public void setReplies(Set<Reply> replies) {
-		this.replies = replies;
-	}
-
-	public Reply addReply(Reply reply) {
-		getReplies().add(reply);
-		reply.setTopic(this);
-
-		return reply;
-	}
-
-	public Reply removeReply(Reply reply) {
-		getReplies().remove(reply);
-		reply.setTopic(null);
-
-		return reply;
-	}
-
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 
 }

@@ -23,10 +23,7 @@ public class Apartment implements Serializable {
 
 	private String number;
 
-	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="owner")
-	private User user;
+	private int owner;
 
 	public Apartment() {
 	}
@@ -63,12 +60,12 @@ public class Apartment implements Serializable {
 		this.number = number;
 	}
 
-	public User getUser() {
-		return this.user;
+	public int getOwner() {
+		return this.owner;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 
 }
