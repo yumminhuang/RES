@@ -3,14 +3,12 @@ package edu.neu.ui;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +22,7 @@ public class MeetingList extends ListActivity {
 
     private List<Schedule> meetings;
 
-    private final static String PrKPath = "/sdcard/oh!data/id.dat";
+    private static final String PREFS_NAME = "Preference";
 
     private String display(int id) {
         return (String) this.getResources().getString(id);
@@ -52,24 +50,16 @@ public class MeetingList extends ListActivity {
                 display(R.string.content) + meetings.get(pos).getContent() + "\n");
     }
 
-    /*
-     *
-	 */
+    /**
+     * @return
+     */
     private int readID() {
-        File file = new File(PrKPath);
-        try {
-            InputStream in = new FileInputStream(file);
-            int id = in.read();
-            return id;
-        } catch (Exception e) {
-            showDialog(R.string.error);
-        }
-        return 0;
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        return settings.getInt("UserID", 0);
     }
 
     private String getStaffName(int from, int to) {
-        int id = 6;
-        readID();
+        int id = readID();
         if (from != id)
             return UserHandler.getNameFromID(from);
         else if (to != id)

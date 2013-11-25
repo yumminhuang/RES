@@ -62,7 +62,7 @@ public class Meeting extends TabActivity {
         AddReset = (Button) findViewById(R.id.BU_Meeting_AdReset);
         AddOk = (Button) findViewById(R.id.BU_Meeting_AdOk);
 
-        AddDate.init(2013, 8, 20, new DatePicker.OnDateChangedListener() {
+        AddDate.init(2013, 11, 5, new DatePicker.OnDateChangedListener() {
 
             @Override
             public void onDateChanged(DatePicker view, int year,
@@ -81,7 +81,7 @@ public class Meeting extends TabActivity {
          *  all my meeting
 		 */
         myTabhost.addTab(myTabhost.newTabSpec("Two")
-                .setIndicator("Search", getResources().getDrawable(R.drawable.meeting))
+                .setIndicator("My Meeting", getResources().getDrawable(R.drawable.meeting))
                 .setContent(myMeeting()));
     }
 
@@ -143,7 +143,6 @@ public class Meeting extends TabActivity {
             int year = AddDate.getYear();
             int month = AddDate.getMonth();
             int day = AddDate.getDayOfMonth();
-            date = new Date(year, month, day);
             // 判断输入信息是否完整。
             if (strAddTopic.equals("") || strAddStaff.equals("") || strAddText.equals("")) {
                 Toast.makeText(Meeting.this, R.string.record_error, Toast.LENGTH_LONG).show();
@@ -151,7 +150,7 @@ public class Meeting extends TabActivity {
             }
             try {
                 int to = UserHandler.getIDFromName(strAddStaff);
-                ScheduleHandler.addMeeting(readID(), to, strAddText, new LocalDateTime(date));
+                ScheduleHandler.addMeeting(readID(), to, strAddText, new LocalDateTime(year, month, day, 0, 0));
                 Toast.makeText(Meeting.this, R.string.add_mesage, Toast.LENGTH_LONG).show();
             } catch (ServerErrorException e) {
                 showDialog(R.string.error);

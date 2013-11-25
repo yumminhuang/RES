@@ -11,7 +11,6 @@ import org.odata4j.exceptions.ServerErrorException;
 import org.odata4j.format.FormatType;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import edu.neu.pattern.Schedule;

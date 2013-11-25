@@ -80,7 +80,7 @@ public class Forum extends TabActivity {
     }
 
     private Intent allTopics() {
-        List<Topic> topics = TopicHandler.findAllTopic();
+        List<Topic> topics = TopicHandler.findSomeTopic(20);
 
         Intent intent = new Intent(Forum.this, TopicList.class);
         Bundle bundle = new Bundle();

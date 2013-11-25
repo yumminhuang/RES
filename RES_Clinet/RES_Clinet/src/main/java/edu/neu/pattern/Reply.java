@@ -19,9 +19,6 @@ public class Reply implements Parcelable {
 
     private int userId;
 
-    public Reply() {
-    }
-
     public int getId() {
         return this.id;
     }
@@ -86,6 +83,9 @@ public class Reply implements Parcelable {
                 .append("User:" + userId + "\n")
                 .append("Time:" + replytime + "\n");
         return sb.toString();
+    }
+
+    public Reply() {
     }
 
     private Reply(Parcel in) {

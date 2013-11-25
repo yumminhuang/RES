@@ -5,8 +5,6 @@ import android.os.Parcelable;
 
 public class Schedule implements Parcelable {
 
-    private static final long serialVersionUID = 1L;
-
     private int id;
 
     private String content;
@@ -16,9 +14,6 @@ public class Schedule implements Parcelable {
     private String scheduletime;
 
     private int scheduleto;
-
-    public Schedule() {
-    }
 
     public int getId() {
         return this.id;
@@ -68,6 +63,9 @@ public class Schedule implements Parcelable {
                 .append("To:" + scheduleto + "\n")
                 .append("Time:" + scheduletime + "\n");
         return sb.toString();
+    }
+
+    public Schedule() {
     }
 
     private Schedule(Parcel in) {

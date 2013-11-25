@@ -59,15 +59,39 @@ public class TopicHandler extends AbstractHandler {
         return topics;
     }
 
+    public static List<Topic> findSomeTopic(int num) {
+        List<Topic> topics = new ArrayList<Topic>();
+        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        Enumerable<OEntity> topicEntities = c.getEntities(entitySet).top(num).execute();
+        for (OEntity e : topicEntities) {
+            Topic t = new Topic();
+            for (OProperty<?> p : e.getProperties()) {
+                if (p.getName().equals("title"))
+                    t.setTitle((String) p.getValue());
+                else if (p.getName().equals("content"))
+                    t.setContent((String) p.getValue());
+                else if (p.getName().equals("id"))
+                    t.setId((Integer) p.getValue());
+                else if (p.getName().equals("uid"))
+                    t.setPostby((Integer) p.getValue());
+                else if (p.getName().equals("image1"))
+                    t.setImage1((String) p.getValue());
+                else if (p.getName().equals("image2"))
+                    t.setImage2((String) p.getValue());
+            }
+            topics.add(t);
+        }
+        return topics;
+    }
+
     /**
-     *
      * @param keyword
      * @return
      */
     public static List<Topic> findTopic(String keyword) {
         List<Topic> topics = findAllTopic();
         for (int i = 0, len = topics.size(); i < len; ++i) {
-            if (!topics.get(i).getContent().contains(keyword)){
+            if (!topics.get(i).getContent().contains(keyword)) {
                 topics.remove(i);
                 --len;
                 --i;

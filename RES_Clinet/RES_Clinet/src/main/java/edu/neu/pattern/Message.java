@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class Message implements Parcelable {
 
+
     private int id;
 
     private String content;
@@ -14,9 +15,6 @@ public class Message implements Parcelable {
     private String messagetime;
 
     private int messageto;
-
-    public Message() {
-    }
 
     public int getId() {
         return this.id;
@@ -66,6 +64,9 @@ public class Message implements Parcelable {
                 .append("To:" + messageto + "\n")
                 .append("Time:" + messagetime + "\n");
         return sb.toString();
+    }
+
+    public Message() {
     }
 
     private Message(Parcel in) {

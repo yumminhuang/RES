@@ -22,7 +22,6 @@
                     android:layout_height="wrap_content" />
 
                 <EditText
-                    android:text="admin"
                     android:id="@+id/ET_Email_SdReceiver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

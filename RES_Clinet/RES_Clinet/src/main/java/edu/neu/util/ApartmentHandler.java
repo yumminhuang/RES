@@ -144,7 +144,7 @@ public class ApartmentHandler extends AbstractHandler {
     public static List<Apartment> findApartments(String address, int area) {
         List<Apartment> apartments = findApartments(area);
         for (int i = 0, len = apartments.size(); i < len; ++i) {
-            if (!apartments.get(i).getAddress().contains(address)){
+            if (!apartments.get(i).getAddress().contains(address)) {
                 apartments.remove(i);
                 --len;
                 --i;

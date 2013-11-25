@@ -18,9 +18,6 @@ public class Topic implements Parcelable {
 
     private String title;
 
-    public Topic() {
-    }
-
     public int getId() {
         return this.id;
     }
@@ -71,9 +68,11 @@ public class Topic implements Parcelable {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("Topic ID:" + id).append("\nTitle:" + title).
-                append("\nContent:" + content).append("\nPostby:" + postby);
+        sb.append("Topic ID:" + id).append("\nTitle:" + title).append("\nContent:" + content).append("\nPostby:" + postby);
         return sb.toString();
+    }
+
+    public Topic() {
     }
 
     private Topic(Parcel in) {

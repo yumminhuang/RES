@@ -11,11 +11,15 @@ Group Member of Oh!Data:
 * Yaming Huang
 * Zhaoze Zhou
 
-College of Computer and Information Science, Northeastern University
+from College of Computer and Information Science, Northeastern University
+
+Our project includes two parts: client and server. Client is an Android application, which is also a Odata consumer. Server is the back end of our system. It includes a MySQL database and a Odata producer which can provide a Odata endpoint to handle requests from mobile clients.
 
 ## Configuration
 
 * Platform: Android 2.3.3
+* Language: Java 1.6
 * Database: MySQL
 * IDE: Eclipse Kepler, Android Studio
-* [OData4J](https://code.google.com/p/odata4j/)
+* [OData4J 0.7](https://code.google.com/p/odata4j/)
+* [OpenJPA 2.2.2](http://openjpa.apache.org/)

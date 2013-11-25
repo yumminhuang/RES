@@ -18,9 +18,6 @@ public class User implements Parcelable {
 
     private String type;
 
-    public User() {
-    }
-
     public int getId() {
         return this.id;
     }
@@ -78,6 +75,9 @@ public class User implements Parcelable {
                 .append("email:" + email + "\n")
                 .append("type:" + type + "\n");
         return sb.toString();
+    }
+
+    public User() {
     }
 
     private User(Parcel in) {

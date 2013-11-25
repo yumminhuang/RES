@@ -7,60 +7,56 @@
         android:id="@+id/Topic_layout_add"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:stretchColumns="1">
+        android:gravity="center">
 
         <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow>
 
                 <TextView
                     android:text="@string/topic"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/ET_Topic_AdTopic"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:height="45px"
-                    android:width="220px" />
+                    android:height="30dp"
+                    android:width="146dp" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow>
 
                 <TextView
                     android:text="@string/content"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/ET_Topic_AddContent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:height="30dp"
+                    android:width="146dp" />
             </TableRow>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TableRow>
 
                 <TextView
                     android:text="@string/image"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <EditText
                     android:id="@+id/ET_Topic_AdImage"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:height="45px"
-                    android:width="220px" />
+                    android:height="30dp"
+                    android:width="146dp" />
             </TableRow>
 
             <TableRow>
@@ -89,7 +85,8 @@
 
         <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
 
             <TableRow>
 
@@ -100,11 +97,10 @@
 
                 <EditText
                     android:id="@+id/ET_Topic_ShName"
-                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:height="45px"
-                    android:width="220px" />
+                    android:height="30dp"
+                    android:width="146dp" />
             </TableRow>
 
             <TableRow>
@@ -116,11 +112,10 @@
 
                 <EditText
                     android:id="@+id/ET_Topic_ShKeyword"
-                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:height="45px"
-                    android:width="220px" />
+                    android:height="30dp"
+                    android:width="146dp" />
             </TableRow>
 
             <TableRow>
