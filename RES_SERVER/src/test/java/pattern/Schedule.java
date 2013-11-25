@@ -1,7 +1,5 @@
 package pattern;
 
-import org.joda.time.LocalDateTime;
-
 public class Schedule{
 
 	private int id;

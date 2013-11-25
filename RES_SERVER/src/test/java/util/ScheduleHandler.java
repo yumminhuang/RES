@@ -13,7 +13,6 @@ import org.odata4j.format.FormatType;
 import pattern.Schedule;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ScheduleHandler extends AbstractHandler {
