@@ -53,19 +53,24 @@ public class GenerateTopic {
 			for (int i = 0; i < num; i++) {
 				stm = con.createStatement();
 				String title = generateContent(10), content = generateContent(20), image_path = "./image.jpg";
-				String sql = "insert into Topic (title, content, image1, image2, uid) values ('"
+				String sql = "insert into Topic (id,title, content, image1, image2, uid) values ("
+						+ (i + 1)
+						+ ",'"
 						+ title
 						+ "', '"
 						+ content
 						+ "', '"
 						+ image_path
-						+ "', '" + image_path + "', " + getUserID() + ");";
+						+ "', '"
+						+ image_path
+						+ "', "
+						+ getUserID() + ");";
 				// System.out.println(sql);
 				stm.executeUpdate(sql);
 			}
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 		}
 	}
 

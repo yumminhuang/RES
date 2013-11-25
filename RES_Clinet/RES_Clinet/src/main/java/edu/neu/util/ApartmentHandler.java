@@ -24,7 +24,9 @@ public class ApartmentHandler extends AbstractHandler {
      */
     public static void addApartment(String number, String address, int area, int owner) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newApartment = c.createEntity(entitySet)
+                .properties(OProperties.int32("id", id))
                 .properties(OProperties.string("number", number))
                 .properties(OProperties.string("address", address))
                 .properties(OProperties.int32("area", area))

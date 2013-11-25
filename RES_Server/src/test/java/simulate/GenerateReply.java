@@ -81,7 +81,9 @@ public class GenerateReply {
 			for (int i = 0; i < num; i++) {
 				Statement stm = con.createStatement();
 				String content = generateContent(20), image_path = "./image.jpg";
-				String sql = "insert into Reply (uid, tid, content, rtime, image1, image2) values ('"
+				String sql = "insert into Reply (id,uid, tid, content, rtime, image1, image2) values ("
+						+ (i + 1)
+						+ ",'"
 						+ getUserID()
 						+ "', '"
 						+ getTopicID()
@@ -91,7 +93,7 @@ public class GenerateReply {
 						+ generateDate()
 						+ "', '"
 						+ image_path + "', '" + image_path + "');";
-				//System.out.println(sql);
+				// System.out.println(sql);
 				stm.executeUpdate(sql);
 			}
 			con.close();

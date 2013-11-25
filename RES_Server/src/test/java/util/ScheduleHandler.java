@@ -26,9 +26,11 @@ public class ScheduleHandler extends AbstractHandler {
      * @param content
      * @param time
      */
-    public static void addMeeting(int from, int to, String content, Date time) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+    public static void addMeeting(int from, int to, String content, LocalDateTime time) throws ServerErrorException {
+        ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newMeeting = c.createEntity(entitySet)
+        		.properties(OProperties.int32("id", id))
                 .properties(OProperties.int32("sfrom", from))
                 .properties(OProperties.int32("sto", to))
                 .properties(OProperties.datetime("stime", time))
@@ -91,11 +93,10 @@ public class ScheduleHandler extends AbstractHandler {
     }
 
     public static void main(String[] args) {
-        //List<Schedule> inbox = getMeetingById(16);
-        System.out.println(new LocalDateTime().toString("mm/dd/yyyy"));
-        List<Schedule> inbox = getMeetingByTime(new LocalDateTime());
-        for (Schedule m : inbox)
-            System.out.println(m.toString());
+//        List<Schedule> inbox = getMeetingById(16);
+//        for (Schedule m : inbox)
+//            System.out.println(m.toString());
+    	addMeeting(1, 2, "ABC", new LocalDateTime());
     }
 
 }

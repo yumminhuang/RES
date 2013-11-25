@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import org.joda.time.LocalDateTime;
+import org.odata4j.exceptions.ServerErrorException;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,6 +27,7 @@ import java.util.List;
 import edu.neu.pattern.Schedule;
 import edu.neu.res_clinet.R;
 import edu.neu.util.ScheduleHandler;
+import edu.neu.util.UserHandler;
 
 
 public class Meeting extends TabActivity {
@@ -142,8 +146,15 @@ public class Meeting extends TabActivity {
             date = new Date(year, month, day);
             // 判断输入信息是否完整。
             if (strAddTopic.equals("") || strAddStaff.equals("") || strAddText.equals("")) {
-                Toast.makeText(Meeting.this, "请将会议记录填写完整", Toast.LENGTH_LONG).show();
+                Toast.makeText(Meeting.this, R.string.record_error, Toast.LENGTH_LONG).show();
                 return;
+            }
+            try {
+                int to = UserHandler.getIDFromName(strAddStaff);
+                ScheduleHandler.addMeeting(readID(), to, strAddText, new LocalDateTime(date));
+                Toast.makeText(Meeting.this, R.string.add_mesage, Toast.LENGTH_LONG).show();
+            } catch (ServerErrorException e) {
+                showDialog(R.string.error);
             }
         }
     }

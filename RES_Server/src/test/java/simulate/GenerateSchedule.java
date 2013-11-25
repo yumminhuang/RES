@@ -69,21 +69,20 @@ public class GenerateSchedule {
 				do {
 					to = getUserID();
 				} while (from == to);
-				String sql = "insert into Schedule (sfrom, sto, stime, content) values ("
+				String sql = "insert into Schedule (id, sfrom, sto, stime, content) values ("
+						+ (i + 1)
+						+ ", "
 						+ from
 						+ ", "
 						+ to
 						+ ", '"
-						+ generateDate()
-						+ "', '"
-						+ generateContent() + "');";
+						+ generateDate() + "', '" + generateContent() + "');";
 				// System.out.println(sql);
 				stm.executeUpdate(sql);
 			}
 			con.close();
 		} catch (SQLException e) {
-			e.printStackTrace(); // To change body of catch statement use File |
-									// Settings | File Templates.
+			e.printStackTrace(); 
 		}
 	}
 }

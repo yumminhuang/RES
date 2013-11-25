@@ -75,14 +75,14 @@ public class GenerateMessage {
 				do {
 					to = getUserID();
 				} while (from == to);
-				String sql = "insert into Message (mfrom, mto, content, mtime) values ("
+				String sql = "insert into Message (id,mfrom, mto, content, mtime) values ("
+						+ (i + 1)
+						+ ","
 						+ from
 						+ ", "
 						+ to
 						+ ", '"
-						+ generateContent()
-						+ "', '"
-						+ generateDate() + "');";
+						+ generateContent() + "', '" + generateDate() + "');";
 				// System.out.println(sql);
 				stm.executeUpdate(sql);
 			}

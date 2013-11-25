@@ -126,7 +126,6 @@ public class Email extends TabActivity {
     }
 
     /*
-     *  TODO : implement this
      *  响应发送按钮单击事件：
      */
     class SendSendListener implements OnClickListener {
@@ -143,6 +142,7 @@ public class Email extends TabActivity {
                 int from = readID();
                 int to = UserHandler.getIDFromName(strSendReceiver);
                 MessageHandler.addMessage(from, to, strSendText);
+                Toast.makeText(Email.this, R.string.add_mesage, Toast.LENGTH_LONG).show();
             } catch (NotFoundException e) {
                 showDialog(R.string.not_find_error);
             } catch (ServerErrorException e) {

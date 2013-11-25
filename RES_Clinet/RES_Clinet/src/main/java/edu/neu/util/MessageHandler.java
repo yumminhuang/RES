@@ -25,8 +25,10 @@ public class MessageHandler extends AbstractHandler {
      * @param content
      */
     public static void addMessage(int from, int to, String content) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newMessage = c.createEntity(entitySet)
+                .properties(OProperties.int32("id", id))
                 .properties(OProperties.int32("mfrom", from))
                 .properties(OProperties.int32("mto", to))
                 .properties(OProperties.string("content", content))

@@ -127,6 +127,7 @@ public class Forum extends TabActivity {
             }
             try {
                 TopicHandler.addTopic(topic, content, id);
+                Toast.makeText(Forum.this, R.string.add_mesage, Toast.LENGTH_LONG).show();
             } catch (ServerErrorException e) {
                 showDialog(R.string.error);
             }

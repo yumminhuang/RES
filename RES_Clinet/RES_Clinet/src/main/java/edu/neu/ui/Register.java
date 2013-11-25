@@ -94,7 +94,13 @@ public class Register extends Activity {
                 return;
             }
             try {
-                UserHandler.addUser(name, "", phone, email, identity);
+                UserHandler.addUser(name, password, phone, email, identity);//password should be address actually.
+                Toast.makeText(Register.this, R.string.add_mesage, Toast.LENGTH_LONG).show();
+                int id = UserHandler.getIDFromName(name);
+                saveID(id);
+                Intent intent = new Intent();
+                intent.setClass(Register.this, HomePage.class);
+                startActivity(intent);
             } catch (ServerErrorException e) {
                 showDialog(R.string.add_error);
             }

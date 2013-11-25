@@ -24,8 +24,10 @@ public class TopicHandler extends AbstractHandler {
      * @param uid
      */
     public static void addTopic(String titles, String content, int uid) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newTopic = c.createEntity(entitySet)
+                .properties(OProperties.int32("id", id))
                 .properties(OProperties.string("title", titles))
                 .properties(OProperties.string("content", content))
                 .properties(OProperties.int32("uid", uid)).execute();
@@ -53,7 +55,6 @@ public class TopicHandler extends AbstractHandler {
                     t.setImage2((String) p.getValue());
             }
             topics.add(t);
-            System.out.println(t.toString());
         }
         return topics;
     }

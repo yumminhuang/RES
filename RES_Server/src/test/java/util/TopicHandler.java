@@ -11,7 +11,6 @@ import org.odata4j.format.FormatType;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import pattern.Topic;
 
 public class TopicHandler extends AbstractHandler {
@@ -24,11 +23,14 @@ public class TopicHandler extends AbstractHandler {
      * @param uid
      */
     public static void addTopic(String titles, String content, int uid) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newTopic = c.createEntity(entitySet)
+        		.properties(OProperties.int32("id", id))
                 .properties(OProperties.string("title", titles))
                 .properties(OProperties.string("content", content))
-                .properties(OProperties.int32("uid", uid)).execute();
+                .properties(OProperties.int32("uid", uid))
+                .execute();
         reportEntity("created", newTopic);
     }
 
@@ -104,11 +106,12 @@ public class TopicHandler extends AbstractHandler {
     }
 
     public static void main(String[] args) {
-        //List<Topic> topics = findTopicByUser(20);
-        List<Topic> topics = findTopic("k5v");
-        //List<Topic> topics = findAllTopic();
-        for (Topic t : topics)
-            System.out.println(t.toString());
+        //List<Topic> topics = findTopicByUser(10);
+        //List<Topic> topics = findTopic("GjD");
+//        List<Topic> topics = findAllTopic();
+//        for (Topic t : topics)
+//            System.out.println(t.toString());
+    	addTopic("T", "C", 1);
     }
 
 }

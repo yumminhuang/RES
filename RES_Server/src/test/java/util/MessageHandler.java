@@ -25,8 +25,10 @@ public class MessageHandler extends AbstractHandler {
      * @param content
      */
     public static void addMessage(int from, int to, String content) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newMessage = c.createEntity(entitySet)
+                .properties(OProperties.int32("id", id))
                 .properties(OProperties.int32("mfrom", from))
                 .properties(OProperties.int32("mto", to))
                 .properties(OProperties.string("content", content))
@@ -87,13 +89,14 @@ public class MessageHandler extends AbstractHandler {
     }
 
     public static void main(String[] args) {
-        List<Message> inbox = getInbox(16);
-        List<Message> outbox = getOutbox(46);
-        for (Message m : inbox)
-            System.out.println(m.toString());
-        System.out.println("======");
-        for (Message m : outbox)
-            System.out.println(m.toString());
+//        List<Message> inbox = getInbox(6);
+//        List<Message> outbox = getOutbox(41);
+//        for (Message m : inbox)
+//            System.out.println(m.toString());
+//        System.out.println("======");
+//        for (Message m : outbox)
+//            System.out.println(m.toString());
+    	addMessage(1, 2, "ABC");
     }
 
 }

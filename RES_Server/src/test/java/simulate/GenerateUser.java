@@ -32,7 +32,7 @@ public class GenerateUser {
 
 	public static void main(String[] args) {
 		GenerateUser gu = new GenerateUser();
-		gu.Insert(49);
+		gu.Insert(50);
 	}
 
 	public String generateName() {
@@ -109,16 +109,16 @@ public class GenerateUser {
 		try {
 			for (int i = 0; i < num; i++) {
 				stm = con.createStatement();
-				String sql = "insert into User (name, phone, address, email, type) values ('"
+				String sql = "insert into User (id,name, phone, address, email, type) values ("
+						+ (i + 1)
+						+ ",'"
 						+ generateName()
 						+ "', "
 						+ generatePhone()
 						+ ", '"
 						+ generateAdd()
 						+ "', '"
-						+ generateEmail()
-						+ "', '"
-						+ getType() + "');";
+						+ generateEmail() + "', '" + getType() + "');";
 				// System.out.print(sql);
 				stm.executeUpdate(sql);
 			}

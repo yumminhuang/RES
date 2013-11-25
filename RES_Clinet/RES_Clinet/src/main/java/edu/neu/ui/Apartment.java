@@ -118,13 +118,16 @@ public class Apartment extends TabActivity {
             strAddAddress = AddAddress.getText().toString().trim();
             strAddArea = AddArea.getText().toString().trim();
             strAddNumber = AddNumber.getText().toString().trim();
-            //TODO integrate add
             if (strAddAddress.equals("") || strAddArea.equals("") || strAddNumber.equals("")) {
                 Toast.makeText(Apartment.this, R.string.record_error, Toast.LENGTH_LONG).show();
                 return;
             }
             try {
-                ApartmentHandler.addApartment(strAddNumber, strSearchAddress, Integer.parseInt(strAddArea), readID());
+                ApartmentHandler.addApartment(strAddNumber, strAddAddress, Integer.parseInt(strAddArea), readID());
+                Toast.makeText(Apartment.this, R.string.add_mesage, Toast.LENGTH_LONG).show();
+                AddAddress.setText("");
+                AddArea.setText("");
+                AddNumber.setText("");
             } catch (ServerErrorException e) {
                 showDialog(R.string.error);
             }

@@ -14,7 +14,6 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String address;
@@ -27,13 +26,13 @@ public class User implements Serializable {
 
 	private String type;
 
-	//bi-directional one-to-one association to FromUser
-	@OneToOne(mappedBy="user")
-	private FromUser fromUser;
-
 	//bi-directional one-to-one association to ToUser
 	@OneToOne(mappedBy="user")
 	private ToUser toUser;
+
+	//bi-directional one-to-one association to FromUser
+	@OneToOne(mappedBy="user")
+	private FromUser fromUser;
 
 	public User() {
 	}
@@ -86,20 +85,20 @@ public class User implements Serializable {
 		this.type = type;
 	}
 
-	public FromUser getFromUser() {
-		return this.fromUser;
-	}
-
-	public void setFromUser(FromUser fromUser) {
-		this.fromUser = fromUser;
-	}
-
 	public ToUser getToUser() {
 		return this.toUser;
 	}
 
 	public void setToUser(ToUser toUser) {
 		this.toUser = toUser;
+	}
+
+	public FromUser getFromUser() {
+		return this.fromUser;
+	}
+
+	public void setFromUser(FromUser fromUser) {
+		this.fromUser = fromUser;
 	}
 
 }

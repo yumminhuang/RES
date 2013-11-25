@@ -16,7 +16,6 @@ public class UserHandler extends AbstractHandler {
     private static String entitySet = "User";
 
     /**
-     * TODO Fix
      * @param name
      * @param address
      * @param phone
@@ -26,7 +25,9 @@ public class UserHandler extends AbstractHandler {
     public static void addUser(String name, String address, String phone,
                                String email, String type) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.create(serviceURL);
-        OEntity newUser = c.createEntity(entitySet).properties(OProperties.int32("id", 50))
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
+        OEntity newUser = c.createEntity(entitySet)
+        		.properties(OProperties.int32("id", id))
                 .properties(OProperties.string("name", name))
                 .properties(OProperties.string("phone", phone))
                 .properties(OProperties.string("address", address))

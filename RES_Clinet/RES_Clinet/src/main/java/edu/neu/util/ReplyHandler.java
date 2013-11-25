@@ -20,8 +20,10 @@ public class ReplyHandler extends AbstractHandler {
     private static String entitySet = "Reply";
 
     public static void addReply(int uid, int topic, String content) throws ServerErrorException {
-        ODataConsumer c = ODataConsumers.newBuilder(serviceURL).setFormatType(FormatType.JSON).build();
+        ODataConsumer c = ODataConsumers.create(serviceURL);
+        int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
         OEntity newReply = c.createEntity(entitySet)
+                .properties(OProperties.int32("id", id))
                 .properties(OProperties.int32("uid", uid))
                 .properties(OProperties.int32("tid", topic))
                 .properties(OProperties.string("content", content))
