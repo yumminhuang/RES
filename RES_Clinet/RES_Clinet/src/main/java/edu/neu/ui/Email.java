@@ -42,33 +42,25 @@ public class Email extends TabActivity {
         TabHost myTabhost = this.getTabHost();
         LayoutInflater.from(this).inflate(R.layout.message, myTabhost.getTabContentView(), true);
 
-		/*
-         * Inbox
-		 */
+		// Inbox
         myTabhost.addTab(myTabhost.newTabSpec("One")
                 .setIndicator("Inbox", getResources().getDrawable(R.drawable.inbox))
                 .setContent(initInbox()));
 
-		/*
-         * Outbox
-		 */
+        // Outbox
         myTabhost.addTab(myTabhost.newTabSpec("Two")
                 .setIndicator("Outbox", getResources().getDrawable(R.drawable.outbox))
                 .setContent(initOutbox())); 
 
-        /*
-         * Edit a message
-         */
+        //Edit a message
         myTabhost.addTab(myTabhost.newTabSpec("Three")
                 .setIndicator("Send", getResources().getDrawable(R.drawable.message))
                 .setContent(R.id.Email_layout_send));
-        // 实例化添加界面的控件。
         SendReceiver = (EditText) findViewById(R.id.ET_Email_SdReceiver);
         SendTopic = (EditText) findViewById(R.id.ET_Email_SdTopic);
         SendText = (EditText) findViewById(R.id.ET_Email_SdText);
         SendReset = (Button) findViewById(R.id.BU_Email_SdReset);
         SendSend = (Button) findViewById(R.id.BU_Email_SdSend);
-        // 设置确定按钮。
         SendReset.setOnClickListener(new SendResetListener());
         SendSend.setOnClickListener(new SendSendListener());
     }
@@ -98,8 +90,9 @@ public class Email extends TabActivity {
         return intent;
     }
 
-    /*
-     *  提示信息msg。
+    /**
+     *
+     * @param msg
      */
     private void showDialog(String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -114,8 +107,8 @@ public class Email extends TabActivity {
         alert.show();
     }
 
-    /*
-     *  响应重置信息按钮(outbox)单击事件：
+    /**
+     *
      */
     class SendResetListener implements OnClickListener {
         public void onClick(View v) {
@@ -125,12 +118,11 @@ public class Email extends TabActivity {
         }
     }
 
-    /*
-     *  响应发送按钮单击事件：
+    /**
+     *
      */
     class SendSendListener implements OnClickListener {
         public void onClick(View v) {
-            // 获取用户输入信息。
             strSendReceiver = SendReceiver.getText().toString().trim();
             strSendText = SendText.getText().toString().trim();
 

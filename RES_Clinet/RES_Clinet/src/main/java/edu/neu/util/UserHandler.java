@@ -26,7 +26,7 @@ public class UserHandler extends AbstractHandler {
                                String email, String type) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.create(serviceURL);
         int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
-        OEntity newUser = c.createEntity(entitySet)
+        c.createEntity(entitySet)
                 .properties(OProperties.int32("id", id))
                 .properties(OProperties.string("name", name))
                 .properties(OProperties.string("phone", phone))
@@ -34,7 +34,6 @@ public class UserHandler extends AbstractHandler {
                 .properties(OProperties.string("email", email))
                 .properties(OProperties.string("type", type))
                 .execute();
-        reportEntity("created", newUser);
     }
 
     /**
@@ -97,12 +96,4 @@ public class UserHandler extends AbstractHandler {
         OEntity userEntity = c.getEntity(entitySet, id).execute();
         return (String) userEntity.getProperty("name").getValue();
     }
-
-    public static void main(String[] args) {
-//		User u = findUser(17);
-//		System.out.println(u.toString());
-//		System.out.println("Johnson's ID is" + getIDFromName("Johnson"));
-        addUser("name", "address", "110", "a@m", "Tenant");
-    }
-
 }

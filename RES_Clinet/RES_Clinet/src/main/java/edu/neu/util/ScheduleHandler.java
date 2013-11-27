@@ -28,13 +28,12 @@ public class ScheduleHandler extends AbstractHandler {
     public static void addMeeting(int from, int to, String content, LocalDateTime time) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.create(serviceURL);
         int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
-        OEntity newMeeting = c.createEntity(entitySet)
+        c.createEntity(entitySet)
                 .properties(OProperties.int32("id", id))
                 .properties(OProperties.int32("sfrom", from))
                 .properties(OProperties.int32("sto", to))
                 .properties(OProperties.datetime("stime", time))
                 .properties(OProperties.string("content", content)).execute();
-        reportEntity("created", newMeeting);
     }
 
     /**
@@ -64,8 +63,6 @@ public class ScheduleHandler extends AbstractHandler {
     }
 
     /**
-     * TODO: problem caused by seconds compare with date
-     *
      * @param date
      * @return
      */
@@ -90,13 +87,4 @@ public class ScheduleHandler extends AbstractHandler {
         }
         return schedule;
     }
-
-    public static void main(String[] args) {
-        //List<Schedule> inbox = getMeetingById(16);
-        System.out.println(new LocalDateTime().toString("mm/dd/yyyy"));
-        List<Schedule> inbox = getMeetingByTime(new LocalDateTime());
-        for (Schedule m : inbox)
-            System.out.println(m.toString());
-    }
-
 }

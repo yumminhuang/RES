@@ -30,17 +30,31 @@ public class TopicList extends ListActivity {
 
     private static final String PREFS_NAME = "Preference";
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     private String display(int id) {
-        return (String) this.getResources().getString(id);
+        return this.getResources().getString(id);
     }
 
+    /**
+     *
+     * @param replies
+     * @return
+     */
     private String showReplies(List<Reply> replies) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (Reply r : replies)
             sb.append(UserHandler.getNameFromID(r.getUserId()) + ": " + r.getContent() + "\n");
         return sb.toString();
     }
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +68,13 @@ public class TopicList extends ListActivity {
         setListAdapter(adapter);
     }
 
+    /**
+     *
+     * @param l
+     * @param v
+     * @param pos
+     * @param id
+     */
     @Override
     protected void onListItemClick(ListView l, View v, int pos, long id) {
         super.onListItemClick(l, v, pos, id);
@@ -89,7 +110,8 @@ public class TopicList extends ListActivity {
     }
 
     /**
-     * Show apartment information message
+     * TODO: Implement adding reply
+     * Show topic information
      *
      * @param msg
      */
@@ -106,8 +128,9 @@ public class TopicList extends ListActivity {
                 .setNeutralButton(R.string.reply, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-//                       int user = readID();
-//                       ReplyHandler.addReply(user, tid, strReply);
+                       int user = readID();
+                       String strReply = null;
+                       ReplyHandler.addReply(user, tid, strReply);
                     }
                 });
         AlertDialog alert = builder.create();

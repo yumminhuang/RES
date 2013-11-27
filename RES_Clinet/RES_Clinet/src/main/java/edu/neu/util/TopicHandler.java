@@ -26,12 +26,11 @@ public class TopicHandler extends AbstractHandler {
     public static void addTopic(String titles, String content, int uid) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.create(serviceURL);
         int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
-        OEntity newTopic = c.createEntity(entitySet)
+        c.createEntity(entitySet)
                 .properties(OProperties.int32("id", id))
                 .properties(OProperties.string("title", titles))
                 .properties(OProperties.string("content", content))
                 .properties(OProperties.int32("uid", uid)).execute();
-        reportEntity("created", newTopic);
     }
 
     public static List<Topic> findAllTopic() {
@@ -127,13 +126,4 @@ public class TopicHandler extends AbstractHandler {
         }
         return topics;
     }
-
-    public static void main(String[] args) {
-        //List<Topic> topics = findTopicByUser(20);
-        //List<Topic> topics = findTopic("B0BvjhFSMH1Qlv");
-        List<Topic> topics = findAllTopic();
-        for (Topic t : topics)
-            System.out.println(t.toString());
-    }
-
 }

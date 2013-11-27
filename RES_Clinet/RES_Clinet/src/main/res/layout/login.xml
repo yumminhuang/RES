@@ -4,12 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <Button
-        android:text="IP"
-        android:id="@+id/BU_Login_setIp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
     <ImageView
         android:src="@drawable/login"
         android:layout_width="wrap_content"

@@ -27,13 +27,12 @@ public class MessageHandler extends AbstractHandler {
     public static void addMessage(int from, int to, String content) throws ServerErrorException {
         ODataConsumer c = ODataConsumers.create(serviceURL);
         int id = c.getEntities(entitySet).execute().toList().size() + 1;// Get current count and plus 1
-        OEntity newMessage = c.createEntity(entitySet)
+        c.createEntity(entitySet)
                 .properties(OProperties.int32("id", id))
                 .properties(OProperties.int32("mfrom", from))
                 .properties(OProperties.int32("mto", to))
                 .properties(OProperties.string("content", content))
                 .properties(OProperties.datetime("mtime", new LocalDateTime())).execute();
-        reportEntity("created", newMessage);
     }
 
     /**
@@ -86,16 +85,6 @@ public class MessageHandler extends AbstractHandler {
             mess.add(m);
         }
         return mess;
-    }
-
-    public static void main(String[] args) {
-        List<Message> inbox = getInbox(16);
-        List<Message> outbox = getOutbox(46);
-        for (Message m : inbox)
-            System.out.println(m.toString());
-        System.out.println("======");
-        for (Message m : outbox)
-            System.out.println(m.toString());
     }
 
 }
