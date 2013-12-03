@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="auxfiles/styleowl.xsl"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns="http://www.ccs.neu.edu/home/kenb/ontologies/usecases#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xml:base="http://www.ccs.neu.edu/home/kenb/ontologies/usecases#"
+    >
+
+    <!-- RES Use Case Instance Data -->
+
+    <owl:Ontology rdf:about="">
+        <owl:versionInfo>v 0.1 2013/10/09 14:15:58 Oh!Data
+        </owl:versionInfo>
+        <rdfs:comment>RES Use Case Descriptions</rdfs:comment>
+        <owl:imports rdf:resource="http://www.ccs.neu.edu/home/kenb/ontologies/ucdo.owl"/>
+    </owl:Ontology>
+
+    <System rdf:ID="RES">
+        <name>Build a MySQL database and an Android application for Real Estate System</name>
+        <author>Shuyi Zhang</author>
+        <author>Yaming Huang</author>
+        <author>Zhaoze Zhou</author>
+        <exposition>
+            RES is a comprehensive system of interactive tool on the forefront of technology designed to attract landlord, tenant, agent and all others who eager to find a comfortable place. Since it works on the Android application which is used worldwide, all the information relating to real estate is closely knit together and also provide immediate visibility into the real estate market. In addition, this interface for managing customer interactions is customizable to meet the needs of real estate agents or firms of all size.
+        </exposition>
+        <version>0.1</version>
+        <organization>Northeastern University</organization>
+        <organization>CCIS</organization>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+            Oct. 9, 2013</creationDate>
+    </System>
+
+    <!-- Use Case Descriptions -->
+    <UseCase rdf:ID="uploadPost" system="#RES">
+        <name>Upload Post</name>
+        <author>Zhaoze Zhou</author>
+        <exposition>
+            Any kind of users of the system can post a new information to the
+            RES system.
+        </exposition>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+            Oct. 7, 2013</creationDate>
+        <first>
+            <Step>
+                <stepInitiator rdf:resource="#User"/>
+                <specification>
+                    A user requests to post a new information.
+                    (Any kind of user can post information.)
+                </specification>
+                <next>
+                    <Step>
+                        <stepInitiator rdf:resource="#RES"/>
+                        <specification>
+                            The system catch the request and then informs the
+                            system authority.
+                        </specification>
+                        <next>
+                            <Step>
+                                <stepInitiator rdf:resource="#Background System"/>
+                                <specification>
+                                    The background System receive the information,
+                                    and check if the information is appropriate.
+                                    And grants to post the information of the
+                                    requesting user.
+                                </specification>
+                                <next>
+                                    <Step>
+                                        <stepInitiator rdf:resource="#RES"/>
+                                        <specification>
+                                            The system notifies the user that
+                                            the request was accepted.
+                                        </specification>
+                                        <next>
+                                            <Step>
+                                                <stepInitiator rdf:resource="#User"/>
+                                                <specification>
+                                                    The user receives the notification.
+                                                </specification>
+                                            </Step>
+                                        </next>
+                                    </Step>
+                                </next>
+                            </Step>
+                        </next>
+                    </Step>
+                </next>
+            </Step>
+        </first>
+    </UseCase>
+
+    <UseCase rdf:ID="updatePost" system="#RES">
+        <name>Update Post</name>
+        <author>Zhaoze Zhou</author>
+        <exposition>
+            Any kind of users can update his/her post.
+        </exposition>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+            Oct. 7, 2013</creationDate>
+        <first>
+            <Step>
+                <includes rdf:resource="#queryOwnPosts"/>
+                <next>
+                    <Step>
+                        <stepInitiator rdf:resource="#User"/>
+                        <specification>
+                            The user places the request to update his own post
+                        </specification>
+                        <next>
+                            <Step>
+                                <stepInitiator rdf:resource="#RES"/>
+                                <specification>
+                                    The system notifies the background system
+                                    that a user want to update his own post
+                                </specification>
+                                <next>
+                                    <Step>
+                                        <stepInitiator rdf:resource="#Background System"/>
+                                        <specification>
+                                            The background system approves the request.
+                                        </specification>
+                                        <next>
+                                            <Step>
+                                                <stepInitiator rdf:resource="#RES"/>
+                                                <specification>
+                                                    The system notifies the user.
+                                                </specification>
+                                                <next>
+                                                    <Step>
+                                                        <stepInitiator rdf:resource="#User"/>
+                                                        <specification>
+                                                            The user receives the notification.
+                                                        </specification>
+                                                    </Step></next>
+                                            </Step></next></Step></next></Step></next></Step></next></Step>
+        </first>
+    </UseCase>
+
+    <UseCase rdf:ID="queryOwnPosts" system="#RES">
+        <name>Query Own Posts</name>
+        <author>Zhaoze Zhou</author>
+        <exposition>
+            Any kind of users want to query its own posts
+        </exposition>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">Oct 7, 2013</creationDate>
+        <first>
+            <Step>
+                <stepInitiator rdf:resource="#User"/>
+                <specification>
+                    The user wants to query the information that he posted.
+                </specification>
+                <next>
+                    <Step>
+                        <stepInitiator rdf:resource="#RES"/>
+                        <specification>
+                            The system notifies the background system that a
+                            request has been made for the user to query his own
+                            posts.
+                        </specification>
+                        <next>
+                            <Step>
+                                <stepInitiator rdf:resource="#Bakcground System"/>
+                                <specification>
+                                    The background system approves the request.
+                                </specification>
+                                <next>
+                                    <Step>
+                                        <stepInitiator rdf:resource="#RES"/>
+                                        <specification>
+                                            The system notifies the user that
+                                            the request has been accepted, then
+                                            show the query results.
+                                        </specification>
+                                    </Step></next></Step></next></Step></next></Step>
+        </first>
+    </UseCase>
+
+    <UseCase rdf:ID="queryPosts" system="#RES">
+        <name>Query Posts</name>
+        <author>Zhaoze Zhou</author>
+        <exposition>
+            Any kind of users can queries the system to obtain information.
+        </exposition>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">Oct. 7, 2013</creationDate>
+        <first>
+            <Step>
+                <stepInitiator rdf:resource="#User"/>
+                <specification>
+                    A user requests information that satisfy some specified
+                    criteria.
+                </specification>
+                <next>
+                    <Step>
+                        <stepInitiator rdf:resource="#RES"/>
+                        <specification>
+                            The system notifies the background system that a
+                            request has been made for the user to query the
+                            information that needed.
+                        </specification>
+                        <next>
+                            <Step>
+                                <stepInitiator rdf:resource="#Background System"/>
+                                <specification>
+                                    The background system accept the request,
+                                    then send the query result to the RES system.
+                                </specification>
+                                <next>
+                                    <Step>
+                                        <stepInitiator rdf:resource="#RES"/>
+                                        <specification>
+                                            the RES present the information that
+                                            the user need.
+                                        </specification>
+                                    </Step></next>
+                            </Step></next> </Step></next></Step>
+        </first>
+    </UseCase>
+
+    <UseCase rdf:ID="scheduleMeet" system="#RES">
+        <name>Schedule Meet</name>
+        <author>Zhaoze Zhou</author>
+        <exposition>
+            Tenant can schedule a meet with landlord or agent to see the
+            house or apartment.
+        </exposition>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+            Oct. 7, 2013</creationDate>
+        <first>
+
+            <Step>
+                <stepInitiator rdf:resource="#Renter"/>
+                <specification>
+                    The tenant want make a schedule to look around the house or
+                    apartment.
+                </specification>
+                <next>
+                    <Step>
+                        <stepInitiator rdf:resource="#RES"/>
+                        <specification>
+                            the system send the request to the background system
+                        </specification>
+                        <next>
+                            <Step>
+                                <stepInitiator rdf:resource="#Background System"/>
+                                <specification>
+                                    The background system accept the request.
+                                </specification>
+                                <next>
+                                    <Step>
+                                        <stepInitiator rdf:resource="#RES"/>
+                                        <specification>
+                                            the system will send notification to
+                                            the users that the tenant want to meet.
+                                        </specification>
+                                        <next>
+                                            <Step>
+                                                <stepInitiator rdf:resource="#User"/>
+                                                <specification>
+                                                    the user get notification.
+                                                </specification>
+                                            </Step></next>
+                                    </Step></next></Step></next></Step></next></Step>
+        </first>
+    </UseCase>
+
+    <UseCase rdf:ID="Register" system="#RES">
+        <name>User Registration</name>
+        <author>Yaming Huang</author>
+        <exposition>
+            A user wants a registration authority.
+        </exposition>
+        <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+            Oct. 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <includes rdf:resource="#queryUser"/>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#User"/>
+                            <specification>
+                                The user places the request to become a register member for a
+                                particular identification(tenant, landlord or agent).
+                            </specification>
+                            <next>
+                                <Step>
+                                    <stepInitiator rdf:resource="#RES"/>
+                                    <specification>
+                                        The system notifies the system the request has been made for the
+                                        user to become a register member.
+                                    </specification>
+                                    <next>
+                                        <Step>
+                                            <stepInitiator rdf:resource="#Background System"/>
+                                            <specification>
+                                                The back end of system approves the request.
+                                            </specification>
+                                            <next>
+                                                <Step>
+                                                    <stepInitiator rdf:resource="#RES"/>
+                                                    <specification>
+                                                        The system notifies the user that the request has been accepted.
+                                                    </specification>
+                                                </Step>
+                                            </next>
+                                        </Step>
+                                    </next>
+                                </Step>
+                            </next>
+                        </Step>
+                    </next>
+                </Step>
+            </first>
+        </UseCase>
+
+        <UseCase rdf:ID="login" system="#RES">
+            <name>Log in RES</name>
+            <author>Yaming Huang</author>
+            <exposition>
+                The user log in RES. The accreditation authority decides whether
+                to include a registration authority.
+            </exposition>
+            <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+                Oct 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <stepInitiator rdf:resource="#User"/>
+                    <specification>
+                        A user input his login name and password.
+                    </specification>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#RES"/>
+                            <specification>
+                                The system check user name and password. If user
+                                name and password are match, the system will
+                                authorize user. Otherwise, the system notifies the
+                                user that username or password is wrong.
+                            </specification>
+                            <next>
+                                <Step>
+                                    <stepInitiator rdf:resource="#User"/>
+                                    <specification>
+                                        The user receives the notification.
+                                    </specification>
+                                </Step></next></Step></next></Step>
+            </first>
+        </UseCase>
+
+        <UseCase rdf:ID="logout" system="#RES">
+            <name>Log out RES</name>
+            <author>Yaming Huang</author>
+            <exposition>
+                The user log out RES.
+            </exposition>
+            <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+                Oct 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <stepInitiator rdf:resource="#User"/>
+                    <specification>
+                        A user press the button to log out.
+                    </specification>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#RES"/>
+                            <specification>
+                                The system notifies the user has logged out.
+                            </specification>
+                            <next>
+                                <Step>
+                                    <stepInitiator rdf:resource="#User"/>
+                                    <specification>
+                                        The user receives the notification.
+                                    </specification>
+                                </Step></next></Step></next></Step>
+            </first>
+        </UseCase>
+
+        <UseCase rdf:ID="uploadContact" system="#RES">
+            <name>Upload Contact Information</name>
+            <author>Yaming Huang</author>
+            <exposition>
+                A user upload contact information. This can include phone number,
+                email address and so on.
+            </exposition>
+            <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+                Oct 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <stepInitiator rdf:resource="#User"/>
+                    <specification>
+                        The user submits new contact information
+                        (i.e., email address, name or surname).
+                    </specification>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#RES"/>
+                            <specification>
+                                The system returns a confirmation message.
+                            </specification>
+                        </Step></next></Step>
+            </first>
+        </UseCase>
+
+        <UseCase rdf:ID="updateContact" system="#RES">
+            <name>Update Contact Information</name>
+            <author>Yaming Huang</author>
+            <exposition>
+                A user changes contact information.
+            </exposition>
+            <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+                Oct. 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <includes rdf:resource="#queryContact"/>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#User"/>
+                            <specification>
+                                The user submits new contact information
+                                (i.e., email address, name or surname).
+                            </specification>
+                            <next>
+                                <Step>
+                                    <stepInitiator rdf:resource="#RES"/>
+                                    <specification>
+                                        The system returns a confirmation message.
+                                    </specification>
+                                </Step></next></Step></next></Step>
+            </first>
+        </UseCase>
+
+        <UseCase rdf:ID="queryContact" system="#RES">
+            <name>Query Contact Information</name>
+            <author>Yaming Huang</author>
+            <exposition>
+                The user wants to retrieve contact information for users. This
+                information is normally confidential so access constraints will be
+                enforced.
+            </exposition>
+            <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+                Oct. 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <stepInitiator rdf:resource="#User"/>
+                    <specification>
+                        The user submits a request for the contact information of
+                        users satisfying search criteria.
+                    </specification>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#RES"/>
+                            <specification>
+                                The system returns contact information relevant to
+                                the query and satisfying access constraints.
+                            </specification>
+                        </Step></next></Step>
+            </first>
+        </UseCase>
+
+        <UseCase rdf:ID="queryUser" system="#RES">
+            <name>Query User</name>
+            <author>Yaming Huang</author>
+            <exposition>
+                The user wants to retrieve information for users, such as user
+                profile, housing information.
+            </exposition>
+            <creationDate rdf:type="http://www.w3.org/2001/XMLSchema#date">
+                Oct. 7, 2013</creationDate>
+            <first>
+                <Step>
+                    <stepInitiator rdf:resource="#User"/>
+                    <specification>
+                        The user submits a request for the information of users
+                        satisfying search criteria.
+                    </specification>
+                    <next>
+                        <Step>
+                            <stepInitiator rdf:resource="#RES"/>
+                            <specification>
+                                The system returns user information relevant to the
+                                query and satisfying access constraints.
+                            </specification>
+                        </Step></next></Step>
+            </first>
+        </UseCase>
+
+        <!-- Actors -->
+
+        <Actor rdf:ID="#Background System">
+            <name>System Authority</name>
+            <exposition>
+                The system authority is a backend of RES. It will response to the
+                request from all the users. The system authority will check whether
+                the requests can be satisfied.
+            </exposition>
+            <kindOf rdf:resource="#Background System"/>
+        </Actor>
+
+        <Actor rdf:ID="Landlord">
+            <name>Landlord</name>
+            <exposition>
+                A user participantes in an RES process who wish to sell or lease
+                house. Landlord can post information, upload his profile, update the
+                information that he posted.
+            </exposition>
+            <kindOf rdf:resource="#User"/>
+        </Actor>
+
+        <Actor rdf:ID="Tenant">
+            <name>Tenant</name>
+            <exposition>
+                A user participantes in an RES process who is looking for an
+                apartment. Tenant can upload his contact information, post wanted
+                information and query housing information.
+            </exposition>
+            <kindOf rdf:resource="#User"/>
+        </Actor>
+
+        <Actor rdf:ID="Agent">
+            <name>Agent</name>
+            <exposition>
+                A user participantes in an RES process who acts as an intermediary
+                between landlords and tenants, and attempts to find sellers who wish
+                to sell and buyers who wish to buy. Agent can upload his contact
+                information, post housing information.
+            </exposition>
+            <kindOf rdf:resource="#User"/>
+        </Actor>
+
+        <Actor rdf:ID="User">
+            <name>General User</name>
+            <exposition>
+                A general description of users in RES.
+            </exposition>
+        </Actor>
+    </rdf:RDF>
