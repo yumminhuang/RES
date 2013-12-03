@@ -40,11 +40,13 @@ The UML diagram of database
 The UML diagram of software
 
 ##Implementation
+You can get source code from our project's [Github page](https://github.com/yumminhuang/RES).
+
 This is our project's framework. On client-side, we run an Android application as a OData consumer. OData consumers are simply applications that consume data exposed using the OData protocol. On server side, we put a MySQL database and a Java program as a OData producer. And OData producers are programs that running on server which can produce OData service and repsond to consumers.
 
-We use Odata4J to implement both Odata producer (server-side) and Odata consumer (client-side). OData4J is a Java framework that implements the OData protocol for both consumers and producers.
-
 ![image](./Document_Attachments/Framework.png)
+
+We use Odata4J to implement both Odata producer (server-side) and Odata consumer (client-side). OData4J is a Java framework that implements the OData protocol for both consumers and producers.
 
 ### Database Implementation
 User Table:
@@ -135,10 +137,26 @@ To implement our Android application, we devide it into two parts. One part is A
 2. Use the odata4j consumer api to talk to an existing OData service
 
 ##Discussion
-
-This section explains the results of the project in detail.
+In this section, we will show our project's import functions by display following examples.
 
 Examples of how the software is used are important. This section should establish that the requirements were met. The Discussion section is actually several sections, each showing one example in detail. Each section should have a title appropriate to the example in that section.
+###1. Signup a New User
+![image](./Document_Attachments/RESScreenCapture/Signup.png)
+###2. Login
+![image](./Document_Attachments/RESScreenCapture/Login.png)
+###3. Add a Apartment
+###4. Find Apartments
+![image](./Document_Attachments/RESScreenCapture/SearchApt.png)
+###5. Schedule a Meeting
+![image](./Document_Attachments/RESScreenCapture/AddMeeting.png)
+###6. Get All My Meetings
+###7. Send a Message
+###8. Get All My Messages
+![image](./Document_Attachments/RESScreenCapture/Message.png)
+###9. Read All Topic
+![image](./Document_Attachments/RESScreenCapture/Forum.png)
+###10. Find Topics
+
 
 ##Conclusion
 ### Summary
