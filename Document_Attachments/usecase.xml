@@ -20,7 +20,7 @@
     </owl:Ontology>
 
     <System rdf:ID="RES">
-        <name>Build a MySQL database and an Android application for Real Estate System</name>
+        <name>Real Estate System: An Android application based on Odata protocal with MySQL database</name>
         <author>Shuyi Zhang</author>
         <author>Yaming Huang</author>
         <author>Zhaoze Zhou</author>

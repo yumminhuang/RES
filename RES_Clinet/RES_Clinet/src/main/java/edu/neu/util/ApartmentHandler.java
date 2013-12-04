@@ -74,7 +74,6 @@ public class ApartmentHandler extends AbstractHandler {
     }
 
     /**
-     *
      * @param address
      * @return
      */
