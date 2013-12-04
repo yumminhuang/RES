@@ -14,9 +14,7 @@ Group: Oh!Data
 from College of Computer and Information Science, Northeastern University
 
 ##Abstract
-Succinct summary of the report.
-
-It should never have citations or footnotes, and it should minimize the use of technical terminology.
+This article deals with the overall and detailed introduction of the Real State System Application on Android based on the OData Protocol, of which the idea is motivated by getting rid of hash time struggling with finding suitable place to live in. As a full-service real estate application it offers the first hand knowledge of housing information. Whether the user is a first time buyer, interested in trading, relocating, renting, the platform will provide with exceptional service such as scheduling meetings, finding related information, adding records and posting topics. The framework of the application consists of the server-side constructed by ODdata producer and the MySQL database and the client-side operated by Android application. The method implemented to solve the problem of mapping relation is to take advantage of OData4J which acts as a Java framework that implements the OData protocol for both the consumer and the producer. The article goes through all points above in several parts, including introduction, requirement, design, implementation, discussion and conclusion. 
 
 ##Introduction
 ### Background
@@ -194,9 +192,9 @@ User can also post a new topic. He need to enter topic's title and content. Afte
 
 ##Conclusion
 ### Summary
-Summarize the results of the project and the extent to which the goals (in the Introduction) were achieved.
-### Future Work
-One can also mention further work suggested by this project.
+To conclude, the project provides us with great opportunity to get in-depth knowledge of what OData is and strengthened the understanding of database system and how it works. In retrospect, it takes long time from barely knowing anything about the idea of OData to the implementing the idea into real project. In the beginning, we set up our own subject we were all interested in with a draft of the goal we were going to achieve. With the project going on, problems came in continuously. Therefore we focused on how to build odata endpoint, the server side. After information gathering and discussion, we decided to use JPA to map relation and Java objects, which is provided by the ODdata4J. 
+Compared with original proposal, we reconstructed the database for the sake of satisfying the prefect mapping and function realization. 
+
 
 ##References
 1. [How to expose a MySQL database as OData](http://stackoverflow.com/questions/16990252/how-to-expose-a-mysql-database-as-odata) Stackoverflow.com Jun. 7 2013
