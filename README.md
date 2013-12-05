@@ -13,12 +13,12 @@ Real Estate System(RES) is the Oh!Data’s project of [CS5200: Introduction to D
 Group: Oh!Data from College of Computer and Information Science, Northeastern University
 
 ##Abstract
-This article deals with the overall and detailed introduction of the Real State System Application on Android based on the OData Protocol, of which the idea is motivated by getting rid of hash time struggling with finding suitable place to live in. As a full-service real estate application it offers the first hand knowledge of housing information. Whether the user is a first time buyer, interested in trading, relocating, renting, the platform will provide with exceptional service such as scheduling meetings, finding related information, adding records and posting topics. The framework of the application consists of the server-side constructed by ODdata producer and the MySQL database and the client-side operated by Android application. The method implemented to solve the problem of mapping relation is to take advantage of OData4J which acts as a Java framework that implements the OData protocol for both the consumer and the producer. The article goes through all points above in several parts, including introduction, requirement, design, implementation, discussion and conclusion. 
+This article deals with the overall and detailed introduction of the Real State System Application on Android, which is based on the OData Protocol. The idea is motivated by getting rid of hash time struggling with finding suitable place to live in. As a full-service real estate application, it offers first hand housing information. No matter the user is a first-time buyer, or one interested in trading, relocating, and renting, the platform will always provide exceptional service: scheduling meetings, finding related information, adding records and posting topics. The framework of the application consists of the server-side constructed by ODdata producer, the MySQL database and the client-side operated by Android application. The method implemented to solve the problem of mapping relation is to take advantage of OData4J, which acts as a Java framework implementing the OData protocol for both the consumer and the producer. The article goes through all above in consecutive parts as follow. 
 
 ##Introduction
 ### Background
 
-When people, especially for some international students, come to live in a new city, the first problem they have to deal with is where to live. As fresh men to a new city, people find them hard to find an available house or apartment. Our team members suffered the same situation, so we want to help people solve this problem. 
+When people, especially international students, come to live in a new city, the first problem they have to deal with is probably where to live. New residents always find it hard to find an ideal house or apartment. Having suffered from the same situation, our team members want to help people solve this problem. 
 ### Project Goal
 
 * To obtain all the available house and apartment for the users.
@@ -36,7 +36,7 @@ The UML diagram of database
 ##Implementation
 You can get source code from our project’s [Github page](https://github.com/yumminhuang/RES).
 
-This is our project’s framework. On client-side, we run an Android application as a OData consumer. OData consumers are simply applications that consume data exposed using the OData protocol. On server side, we put a MySQL database and a Java program as a OData producer. And OData producers are programs that running on server which can produce OData service and respond to consumers.
+This is our project’s framework. On client-side, we run an Android application as a OData consumer. OData consumers are simply applications that consume data exposed using the OData protocol. On server side, we put a MySQL database and a Java program as a OData producer. OData producers are programs that running on server which can produce OData service and respond to consumers.
 
 ![image](./Document_Attachments/Framework.png)
 
@@ -53,7 +53,7 @@ User Table
        email varchar(255),
        type enum(‘Landlord’,’Tenant’,’Agent’));
       
-The `User` table is one of the most important table in our database, it stored all personal information of the user of our system. We choose id as the primary key, and force the name and phone field to be not null. Therefore, our system allows different person have the same name. The phone number could not be null so that everyone could get connected. We have three types of users : Landlord,Tenant and Agent, which is the corresponding to the real life.
+The `User` table is one of the most important tables in our database, it stores all personal information of the user of our system. We choose id as the primary key, and force the name and phone field to be not null. Therefore, our system allows different people to have the same name. The phone number can not be null so that everyone can get connected. We have three types of users : Landlord,Tenant and Agent, corresponding to the real life.
  
 Apartment Table:
  
@@ -64,7 +64,7 @@ Apartment Table:
         area int not null,
         owner int references User(id));
  
-The `Apartment` table stored the entire house and apartment’s information, every apartment has an id as the identifier. We force the area to be not null, because when we looking for some houses, how large the apartment or house is a big concern. We have a foreign key owner, which references from the User’s id.
+The `Apartment` table stores the entire house and apartment’s information. Each apartment has an id as the identifier. We force the area to be not null, because when we looking for some houses, the area of the apartment is a big concern. We have a foreign key owner referencing to the User’s id.
  
 Topic Table:
  
@@ -75,7 +75,7 @@ Topic Table:
        content text,
        image1 varchar(255),
        image2 varchar(255));
-Our system is helping people to rent or lease houses. The `Topic` table is also important. In this table, we store all the rent or lease information. We use a id as the primary key, and force the title of the rent or lease information to be not null. It is much better to use image to show parts of the house, we allow users to put some image to the database, and store the URL address of the image. The Topic table has a foreign, `uid`, which can identify who post the information of the house.
+Our system helps people to rent or lease houses. In the "Topic" table, we store all the rent or lease information. We use a id as the primary key, and force the title of the rent or lease information to be not null. It is much better to use image to show parts of the house, so we allow users to put some image to the database and store the URL address of the image. The Topic table has a foreign, `uid`, which can identify the poster of the information of the house.
  
 Reply Table:      
       
@@ -87,7 +87,7 @@ Reply Table:
        rtime date not null,
        image1 varchar(255),
        image2 varchar(255));
-`Reply` is a part the topic. After the user posting information about the house or apartment, some other users may be interested in the information, so we introduce a reply to allow user to ask or answer some question of the topic. We have id as the primary key, `uid` and `tid` are foreign keys. The `uid` can identify which user post this reply and `tid` can specify which topic the reply belongs to. In this table, we introduce the reply time. As the same from the Topic table, we encourage users to put some images to make the reply more interesting.
+After the user posts information about the house or apartment, other users may be interested in the information, so we introduce a "Reply" table to allow user to reply to topics. We have id as the primary key, and `uid` and `tid` are foreign keys. The `uid` can identify which user post this reply and `tid` can specify which topic the reply belongs to. We also introduce the reply time. As the same with the Topic table, we encourage users to put some images to make the reply more interesting.
  
 Message Table:
  
@@ -97,7 +97,7 @@ Message Table:
        mto  int references ToUser(id),
        content text not null,
        mtime date not null);
-The `Message` enables our users to communicate with each others. Each message has its own identity, id. A message must have a user who send the message, and also should have the user whom receives the message. When sending the message, we add the message time which will make the user more comfortable with our message system
+The `Message` enables our users to communicate with each others. Each message has its own id as an identity. A message must contain informations of the sender and receiver. When sending the message, we add the message time so it feels more comfortable with our message system.
  
 Schedule Table:
  
@@ -108,7 +108,7 @@ Schedule Table:
        content text not null,
        stime date not null);
  
-Our system enable users make an appointment to see the house in the real world. The major function of the `Schedule` is helping to store the appointment information. A schedule should contain two users, Agent or Landlord will invite Tenant to see the house, or Tenant ask the Agent or Landlord whether can see the house or not.
+Our system enables users to make an appointment to see the house in the real world. The major function of the `Schedule` is to help store the appointment information. A schedule should contain two users: Agent or Landlord may invite Tenant to see the house, and Tenant may ask the Agent or Landlord whether and when they can see the house.
  
 FromUser Table and ToUser Table:
       
@@ -134,14 +134,14 @@ Whenever create a new user, the database system would help us to insert the same
 ### Build OData Endpoint
 Building our OData endpoint includes two steps:
 
-1. We use JPA to map relation and Java objects. To do this, we use some JPA tools such as EclipseLink.
-2. We use methods provide by OData4J to build OData endpoint and provide OData service. Detailedly,
+1. We use JPA to map relation and Java objects. To achieve this, we use JPA tools such as EclipseLink.
+2. We use methods provide by OData4J to build OData endpoint and provide OData service as follow:
    1. Add `OData4j-bundle-0.7.jar` from OData4J distribution archive to build path
    2. Choose or implement an ODataProducer using the OData4j producer api. In our project, we use `JPAProducer` to expose an existing JPA 2.0 entity model.
  
 ### Android Application
 
-To implement our Android application, we divide it into two parts. One part is Android UI framework, including pictures, widgets and so on. We use Android SDK to build our application.
+To implement our Android application, we divide it into two parts. One part is Android UI framework, including pictures, widgets, etc.. We use Android SDK to build our application.
 
 Another part is utility, including a OData consumer, which use OData protocol to connect with server and access to database.
 
@@ -149,54 +149,53 @@ Another part is utility, including a OData consumer, which use OData protocol to
 2. Use the OData4j consumer api to talk to an existing OData service
 
 ##Discussion
-In this section, we will show our project’s import functions by display following examples.
+In this section, we will show our project’s imported functions by displaying following examples.
 
-To test our project, we 
+To test our project, we wrote programs to generate information randomly and insert these records into database.
 ###1. Signup a New User
-When user want to signup, he has to input his basic information, including username, email address, password and so on. After pressing “Sign Up” button, system will add this user to `User` table. If user press “Reset” button, application will remove all text, so user can input again. If user leaves some blanks, application will remind user to input enough information.
+When an user wants to sign up, one has to enter one's basic information, including username, email address, password and so on. After the “Sign Up” button is pressed, system will add this user to `User` table. All texts will be removed upon the "Reset" button, the user is hence able to re-enter. Besides, the application will remind the user to enter enough information if there are any blanks left.
 
 ![image](./Document_Attachments/RESScreenCapture/Signup.png)
 ###2. Login
-Users have to input username and password, then press “Login” button to login the application.
+Users have to enter username and password, then press “Login” button to login the application.
 
 ![image](./Document_Attachments/RESScreenCapture/Login.png)
 ###3. Add a Apartment
-Users can add apartments for himself. He has to provide apartment’s information then press “Add” button. System will add this apartment to `Apartment` table.
+An user can add apartments according to his/her needs. One has to provide information of the apartment and then press the “Add” button. By doing so, system will add this apartment to `Apartment` table.
 ###4. Find Apartments
-User can find apartments he interested in. He can enter conditions, such as address (we support approximate query), area or both address and area, and press “Search” button. System will search all apartments in database and return a list of qualified apartments. User can press any item in list to view more information about this apartment.
+An user can find apartments that he/she is interested in. To find an apartment, one needs to enter conditions such as address (we support approximate query), area or both address and area, and then press the “Search” button. System will search all apartments in database and return a list of qualified apartments. The user can press any specific apartment in the list to view more information about it.
 
 ![image](./Document_Attachments/RESScreenCapture/SearchApt.png)
 ###5. Schedule a Meeting
-User can schedule a meeting with other users. He has to enter username who he want to meet with, meeting time and brief content then press “Add” button. System will add meeting information to `Schedule` table.
+An user can schedule a meeting with other users. To schedule a meeting, one has to enter username of the user he/she wants to meet with, along with the expected time and brief content, and then press the “Add” button. System will add meeting information to `Schedule` table.
 
 ![image](./Document_Attachments/RESScreenCapture/AddMeeting.png)
 ###6. Get All My Meetings
-User can view all his meetings, including meetings he invite and meetings scheduled by other users. User can click any item in list to view more information about this meeting.
+An user can view all his/her meetings, including meetings he/she initiated and those scheduled by other users. One can click on any specific meeting in the list to view more information about it.
 ###7. Send a Message
-User can send message to other user. He need to provide receiver’s username and enter message’s content. After pressing “Send” button, system will add this message into `Message` table.
+An user can send messages to other users. To send a message, one needs to provide username of the receiver as well as the content of the message. After “Send” button is pressed, system will add this message into `Message` table.
 ###8. Get All My Messages
-User can view all his messages, including messages he sends and messages he receives. User can click any item in message list to view more information about this message.
+An user can view all his/her messages, both the sent ones and received ones. One can click on any specific message in the message list to view more information about it.
 
 ![image](./Document_Attachments/RESScreenCapture/Message.png)
 ###9. Read All Topic
-User can view all topics in system.If user is interested in any topic, he can click it to view more information about this topic, including the name of user who post this topic and all replies post by other users.
+An user can view all topics posted in the forum. If one is interested in any of them, he/she can click on it to view more information about it, including name of the poster and all corresponding replies.
 
 ![image](./Document_Attachments/RESScreenCapture/Forum.png)
 ###10. Find Topics
-User can find topics he interested in. He can enter conditions, such as topic (we support approximate query), or username who post topic, and press “Search” button. System will search all topics in database and return a list of qualified topics. User can press any item in list to view more information about this topic.
+An user can find topics that he/she is interested in by entering conditions such as topic (we support approximate query) or username of the poster, and then pressing the “Search” button. System will search all topics in database and return a list of qualified topics. User can click on any pacific topic in the list to view more information it.
 ###11. Post a Topic
-User can also post a new topic. He need to enter topic’s title and content. After pressing “Add” button, system will save this topic in `Topic` table.
+An user is also free to post a new topic. To post a new topic, one needs to enter title and content of the topic. After the “Add” button is pressed, system will save this topic in `Topic` table.
 
 ##Conclusion
 ### Summary
-To conclude, the project provides us with great opportunity to get in-depth knowledge of what OData is and strengthened the understanding of database system and how it works. In retrospect, it takes long time from barely knowing anything about the idea of OData to the implementing the idea into real project. In the beginning, we set up our own subject we were all interested in with a draft of the goal we were going to achieve. With the project going on, problems came in continuously. Therefore we focused on how to build OData endpoint, the server side. After information gathering and discussion, we decided to use JPA to map relation and Java objects, which is provided by the ODdata4J. 
-
-Compared with original proposal, we reconstructed the database for the sake of satisfying the prefect mapping and function implementation. We also removed some functions, such as update user information, update apartment information and so on, due to limited time. Besides that, we have implemented the major part of our requirements.
+We proposed a powerful new tool for Real Estate System, a platform for users find.  After  information gathering and discussion, we decided to use JPA to map relation and Java objects and use ODdata4J to construct OData producer and consumer.
+Compared with original proposal, we reconstructed the database for the sake of satisfying the perfect mapping and function implementation. We also removed some functions, such as updating user information and apartment information, due to limited time. Besides, we have implemented the major part of our requirements.
 ### Future Work
-We can improve our project in the following point:
+We can improve our project in the following ways:
 
-1. Provide more functions, including update information, search apartments based on Android Location-Based Service;
-2. Improve security(Encryption and Access control);
+1. Provide more functions, including updating information and searching apartments based on Android Location-Based Service;
+2. Enhance security (Encryption and Access control);
 3. Improve UI;
 4. Optimize database and improve response time.
 
